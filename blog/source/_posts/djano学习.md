@@ -5,7 +5,7 @@ tags: python django
 ---
 
 # django学习
-python=3.4.3,django=1.9.7,参考官网[Writing your first Django app](https://docs.djangoproject.com/en/1.9/intro/tutorial01/),希望能对django有一个初步的了解。
+python=3.4.3,django=1.9.7,参考官网 [Writing your first Django app](https://docs.djangoproject.com/en/1.9/intro/tutorial01/) 希望能对django有一个初步的了解。
 
 ## 第一部分
 1 创建项目`django-admin startproject projectname`
@@ -34,7 +34,8 @@ python=3.4.3,django=1.9.7,参考官网[Writing your first Django app](https://do
 - mysite/\__init__.py: 空文件，告诉python此目录是一个python程序包
 - mysite/settings.py： django项目的配置文件。[工作原理](https://docs.djangoproject.com/en/1.9/topics/settings/)
 - mysite/urls.py: url配置
-- mysite/wsgi.py:为项目服务的一个WSGI-compatible web服务器的入口点。[详情](https://docs.djangoproject.com/en/1.9/howto/deployment/wsgi/)
+- mysite/wsgi.py:为项目服务的一个WSGI-compatible web服务器的入口点。 [详情](https://docs.djangoproject.com/en/1.9/howto/deployment/wsgi/)
+
 
 2 启动`python manage.py runserver`
 
@@ -70,7 +71,7 @@ python=3.4.3,django=1.9.7,参考官网[Writing your first Django app](https://do
 
 -	显示效果`localhost:8000/polls`
 
-&ensp;&ensp;&ensp;url()有四个参数，两个必须（正则表达式--匹配URl和视图--确定视图函数）,两个可选（关键字参数--用字典的形式传递到指定视图和name--命名式路由）
+&ensp;&ensp;&ensp;url有四个参数，两个必须（正则表达式--匹配URl和视图--确定视图函数）,两个可选（关键字参数--用字典的形式传递到指定视图和name--命名式路由）
 
 ## 第二部分--数据库
 数据库的配置在mysite/setting.py的DATABASES中，默认使用db.sqlite3。INSTALLED_APP中包含了django 项目中激活的实例。默认包含如下app
@@ -190,7 +191,7 @@ class Choice(models.Model):
 	    url(r'^(?P<id>[0-9]+)/vote/$', views.vote, name='vote'),
 	]
 ```
-- 在管理界面添加测试数据，打开http://localhost:8000/polls/1/,http://localhost:8000/polls/1/results,http://localhost:8000/polls/1/vote查看显示效果。
+- 在管理界面添加测试数据，打开`http://localhost:8000/polls/1/`,`http://localhost:8000/polls/1/results`,`http://localhost:8000/polls/1/vote`查看显示效果。
 视图中的id来自Url正则表达式中的id。使用括号包含内容，捕获和传递参数到视图函数
 P<id>定义匹配模式参数的名称。
 - 修改视图让它自动做一些事情
@@ -207,13 +208,13 @@ P<id>定义匹配模式参数的名称。
 
 ```
 	{% if latest_question_list %}
-	    <ul>
+	    <	ul>
 	    {% for question in latest_question_list %}
-	        <li><a href="/polls/{{ question.id }}/">{{ question.question_text }}</a></li>
+	        <	li><	a href="/polls/{{ question.id }}/">{{ question.question_text }}</a></li>
 	    {% endfor %}
-	    </ul>
+	    <	/ul>
 	{% else %}
-	    <p>No polls are available.</p>
+	    <	p>No polls are available.<	/p>
 	{% endif %}
 ```
 - 修改视图函数，使用loader加载模板
@@ -282,7 +283,9 @@ P<id>定义匹配模式参数的名称。
 ```
 - 修改模板中的硬编码url
 
-`<li><a href="{% url 'detail' question.id %}">{{ question.question_text }}</a></li>`
+<pre><code>
+<li><a href="{% url 'detail' question.id %}">{{ question.question_text }}</a></li>
+</code></pre>
 
 好处:方便路由管理
 
@@ -290,7 +293,7 @@ P<id>定义匹配模式参数的名称。
 
 1    在polls/urls.py中添加app_name="polls"
 
-2    修改`<li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></li>`
+2    修改<pre><code><li>&lt;a href="{% url 'polls:detail' question.id %}"&gt;{{ question.question_text }}&lt;	/a&gt;</li></code></pre>
 
 ## 第四部分
 
@@ -298,7 +301,7 @@ P<id>定义匹配模式参数的名称。
 ```
 <h1>{{ question.question_text }}</h1>
 
-{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+{% if error_message %}<	p><	strong>{{ error_message }}<	/strong><	/p>{% endif %}
 
 < form action="{% url 'polls:vote' question.id %}" method="post">
 {% csrf_token %}
