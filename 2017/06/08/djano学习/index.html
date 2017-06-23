@@ -1,0 +1,826 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="python django," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="django学习python=3.4.3,django=1.9.7,参考官网 Writing your first Django app 希望能对django有一个初步的了解。 第一部分1 创建项目django-admin startproject projectname 目录结构如下 — mysite/ —— mysite/ ————  init .py ———— setting.py ————">
+<meta name="keywords" content="python django">
+<meta property="og:type" content="article">
+<meta property="og:title" content="djano学习">
+<meta property="og:url" content="http://yoursite.com/2017/06/08/djano学习/index.html">
+<meta property="og:site_name" content="我的博客">
+<meta property="og:description" content="django学习python=3.4.3,django=1.9.7,参考官网 Writing your first Django app 希望能对django有一个初步的了解。 第一部分1 创建项目django-admin startproject projectname 目录结构如下 — mysite/ —— mysite/ ————  init .py ———— setting.py ————">
+<meta property="og:updated_time" content="2017-06-17T08:48:39.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="djano学习">
+<meta name="twitter:description" content="django学习python=3.4.3,django=1.9.7,参考官网 Writing your first Django app 希望能对django有一个初步的了解。 第一部分1 创建项目django-admin startproject projectname 目录结构如下 — mysite/ —— mysite/ ————  init .py ———— setting.py ————">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/06/08/djano学习/"/>
+
+
+
+
+
+  <title>djano学习 | 我的博客</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">我的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/08/djano学习/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="newbornhsir">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="我的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">djano学习</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-08T17:07:31+08:00">
+                2017-06-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="django学习"><a href="#django学习" class="headerlink" title="django学习"></a>django学习</h1><p>python=3.4.3,django=1.9.7,参考官网 <a href="https://docs.djangoproject.com/en/1.9/intro/tutorial01/" target="_blank" rel="external">Writing your first Django app</a> 希望能对django有一个初步的了解。</p>
+<h2 id="第一部分"><a href="#第一部分" class="headerlink" title="第一部分"></a>第一部分</h2><p>1 创建项目<code>django-admin startproject projectname</code></p>
+<p>目录结构如下</p>
+<p>— mysite/</p>
+<p>—— mysite/</p>
+<p>———— <strong> init </strong>.py</p>
+<p>———— setting.py</p>
+<p>———— urls.py</p>
+<p>———— wsgi.py</p>
+<p>— manage.py</p>
+<p>这些文件是：</p>
+<ul>
+<li>外层mysite/根目录只是项目的容器，你可以重新命名</li>
+<li>manage.py 提供了使用命令行和django项目交互的功能，详情在<a href="https://docs.djangoproject.com/en/1.9/ref/django-admin/" target="_blank" rel="external">adango-admin and manage.py</a></li>
+<li>内层mysite/目录是项目实际意义的python程序包，通过程序包的名称import其中的内容。eg:mysite.urls</li>
+<li>mysite/__init__.py: 空文件，告诉python此目录是一个python程序包</li>
+<li>mysite/settings.py： django项目的配置文件。<a href="https://docs.djangoproject.com/en/1.9/topics/settings/" target="_blank" rel="external">工作原理</a></li>
+<li>mysite/urls.py: url配置</li>
+<li>mysite/wsgi.py:为项目服务的一个WSGI-compatible web服务器的入口点。 <a href="https://docs.djangoproject.com/en/1.9/howto/deployment/wsgi/" target="_blank" rel="external">详情</a></li>
+</ul>
+<p>2 启动<code>python manage.py runserver</code></p>
+<p>3 新建polls app<code>python manage.py startapp polls</code>,执行命令后会在项目下创建polls目录</p>
+<ul>
+<li><p>编写第一个视图,polls/views.py</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">from django.http import HttpResponse</div><div class="line"></div><div class="line">def hello(request):</div><div class="line">	return HttpResponse(&quot;hello,worls&quot;)</div></pre></td></tr></table></figure>
+</li>
+<li><p>编写urls,polls/urls.py</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">from django.conf.urls import url</div><div class="line">from . import views</div><div class="line">urlpatterns = [</div><div class="line">	url(r&apos;^$&apos;,views.hello,name=&quot;hello&quot;),</div><div class="line">]</div></pre></td></tr></table></figure>
+</li>
+<li><p>将根目录的URLconf指向polls.urls，mysite/urls.py</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">from django.conf.urls import include, url</div><div class="line">from django.contrib import admin</div><div class="line">urlpatterns = [</div><div class="line">	url(r&apos;^polls/&apos;, include(&apos;polls.urls&apos;)),//include()函数可以连接其它URLconf</div><div class="line">	url(r&apos;^admin/&apos;, admin.site.urls),</div><div class="line">]</div></pre></td></tr></table></figure>
+</li>
+<li><p>显示效果<code>localhost:8000/polls</code></p>
+</li>
+</ul>
+<p>&ensp;&ensp;&ensp;url有四个参数，两个必须（正则表达式–匹配URl和视图–确定视图函数）,两个可选（关键字参数–用字典的形式传递到指定视图和name–命名式路由）</p>
+<h2 id="第二部分–数据库"><a href="#第二部分–数据库" class="headerlink" title="第二部分–数据库"></a>第二部分–数据库</h2><p>数据库的配置在mysite/setting.py的DATABASES中，默认使用db.sqlite3。INSTALLED_APP中包含了django 项目中激活的实例。默认包含如下app</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">INSTALLED_APPS = [</div><div class="line">    &apos;django.contrib.admin&apos;,# admin site</div><div class="line">    &apos;django.contrib.auth&apos;, # 验证</div><div class="line">    &apos;django.contrib.contenttypes&apos;, # 内容类型框架</div><div class="line">    &apos;django.contrib.sessions&apos;, # session框架</div><div class="line">    &apos;django.contrib.messages&apos;, # messageing framework</div><div class="line">    &apos;django.contrib.staticfiles&apos;, # 静态文件管理框架</div><div class="line">]</div></pre></td></tr></table></figure>
+<p>需要运行命令为这些数据建立数据表<code>python manage.py migrate</code>。这个命令会查找INSTALLED_APPS设置，创建所需的数据表</p>
+<ul>
+<li>创建数据模型polls/models.py</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">from django.db import models</div><div class="line"></div><div class="line"># Create your models here.</div><div class="line"></div><div class="line">class Question(models.Model):</div><div class="line">	def __str__(self): #打印对象的字符串表达</div><div class="line">		return self.question_text</div><div class="line">	question_text = models.CharField(max_length=200)</div><div class="line">	pub_date = models.DateTimeField(&apos;date published&apos;)</div><div class="line"></div><div class="line">class Choice(models.Model):</div><div class="line">	def __Str__(self):</div><div class="line">		return self.choice_text</div><div class="line">	#ForeignKey(Class_Name, limit_choices_to=&#123;‘key_name’: value&#125;, on_delete=models.SET_NULL)</div><div class="line">	#绑定一个其他类的元素(类名、可以是 ‘self’, 对于目标的属性的限制条件，关联目标被删除时的操作)</div><div class="line">	question = models.ForeignKey(Question, on_delete=models.CASCADE)</div><div class="line">	choice_text = models.CharField(max_length=200)</div><div class="line">	votes = models.IntegerField(default=0)</div></pre></td></tr></table></figure>
+<ul>
+<li>将polls添加到INSTALLED_APPS中，在polls/apps.py中有pollsConfig，将polls.apps.pollsConfig添加到INSTALLED_APPS中，执行<code>python manage.py makemigrations polls</code>创建模型。<code>执行python manage.py sqlmigrate polls 0001</code>查看上述操作返回的SQL语句</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">C:\Users\Administrator\Desktop\online\mysite&gt;python manage.py makemigrations polls</div><div class="line">Migrations for &apos;polls&apos;:</div><div class="line">  0001_initial.py:</div><div class="line">    - Create model Choice</div><div class="line">    - Create model Question</div><div class="line">    - Add field question to choice</div><div class="line"></div><div class="line">C:\Users\Administrator\Desktop\online\mysite&gt;python manage.py sqlmigrate polls 0001</div><div class="line">BEGIN;</div><div class="line">--</div><div class="line">-- Create model Choice</div><div class="line">--</div><div class="line">CREATE TABLE &quot;polls_choice&quot; (</div><div class="line">	&quot;id&quot; integer NOT NULL PRIMARY KEY AUTOINCREMENT, </div><div class="line">	&quot;choice_text&quot; varchar(200) NOT NULL, </div><div class="line">	&quot;votes&quot; integer NOT NULL);</div><div class="line">--</div><div class="line">-- Create model Question</div><div class="line">--</div><div class="line">CREATE TABLE &quot;polls_question&quot; (</div><div class="line">	&quot;id&quot; integer NOT NULL PRIMARY KEY AUTOINCREMENT, </div><div class="line">	&quot;question_text&quot; varchar(200) NOT NULL, </div><div class="line">	&quot;pub_date&quot; datetime NOT NULL);</div><div class="line">--</div><div class="line">-- Add field question to choice</div><div class="line">--</div><div class="line">ALTER TABLE &quot;polls_choice&quot; RENAME TO &quot;polls_choice__old&quot;;</div><div class="line">CREATE TABLE &quot;polls_choice&quot; (&quot;id&quot; integer NOT NULL PRIMARY KEY AUTOINCREMENT, &quot;choice_text&quot; varchar(200) NOT NULL, &quot;votes&quot; integer NOT NULL, &quot;question_id&quot; integer NOT NULL REFERENCES &quot;polls_question&quot; (&quot;id&quot;));</div><div class="line">INSERT INTO &quot;polls_choice&quot; (&quot;choice_text&quot;, &quot;question_id&quot;, &quot;votes&quot;, &quot;id&quot;) SELECT &quot;choice_text&quot;, NULL, &quot;votes&quot;, &quot;id&quot; FROM &quot;polls_choice__old&quot;;</div><div class="line">DROP TABLE &quot;polls_choice__old&quot;;</div><div class="line">CREATE INDEX &quot;polls_choice_7aa0f6ee&quot; ON &quot;polls_choice&quot; (&quot;question_id&quot;);</div><div class="line"></div><div class="line">COMMIT;</div></pre></td></tr></table></figure>
+<ul>
+<li><code>python manage.py migrate</code>更新</li>
+<li><p>使用python shell操作数据库<code>python manage.py shell</code></p>
+</li>
+<li><p><code>python manage.py createsuperuser</code>创建登录用户，<code>http://localhost:8000/admin/</code>登录系统，发现并没有创建的Questiob和Choice</p>
+</li>
+<li><p>注册所创建的模型polls/admin.py,刷新页面，出现Question和Choice</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">from django.contrib import admin</div><div class="line">from .models import Question, Choice</div><div class="line"># Register your models here.</div><div class="line"></div><div class="line">admin.site.register(Question)</div><div class="line">admin.site.register(Choice)</div></pre></td></tr></table></figure>
+<h2 id="第三部分-视图"><a href="#第三部分-视图" class="headerlink" title="第三部分-视图"></a>第三部分-视图</h2><ul>
+<li>添加视图函数polls/views.py</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">def detail(request,id):</div><div class="line">	return HttpResponse(&quot;you are looking at %s&quot; %id)</div><div class="line"></div><div class="line">def results(request,id):</div><div class="line">	res = &quot;your are looking at the results of question %s&quot;</div><div class="line">	return HttpResponse(res % id)</div><div class="line"></div><div class="line">def vote(request,id):</div><div class="line">	return HttpResponse(&quot;you are voting on question %s&quot; % id)</div></pre></td></tr></table></figure>
+<ul>
+<li>添加路由</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">urlpatterns = [</div><div class="line">	url(r&apos;^$&apos;,views.hello,name=&quot;hello&quot;),</div><div class="line">	url(r&apos;^(?P&lt;id&gt;[0-9]+)/$&apos;, views.detail, name=&apos;detail&apos;),</div><div class="line">    # ex: /polls/5/results/</div><div class="line">    url(r&apos;^(?P&lt;id&gt;[0-9]+)/results/$&apos;, views.results, name=&apos;results&apos;),</div><div class="line">    # ex: /polls/5/vote/</div><div class="line">    url(r&apos;^(?P&lt;id&gt;[0-9]+)/vote/$&apos;, views.vote, name=&apos;vote&apos;),</div><div class="line">]</div></pre></td></tr></table></figure>
+<ul>
+<li>在管理界面添加测试数据，打开<code>http://localhost:8000/polls/1/</code>,<code>http://localhost:8000/polls/1/results</code>,<code>http://localhost:8000/polls/1/vote</code>查看显示效果。<br>视图中的id来自Url正则表达式中的id。使用括号包含内容，捕获和传递参数到视图函数<br>P<id>定义匹配模式参数的名称。</id></li>
+<li>修改视图让它自动做一些事情<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">from .models import Question</div><div class="line">def hello(request):</div><div class="line">	latest_question_list = Question.objects.order_by(&apos;-pub_date&apos;)[:5]</div><div class="line">	output = &quot;, &quot;.join([q.question_text for q in latest_question_list])</div><div class="line">	return HttpResponse(output)</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>这种做法的缺点是页面硬编码在视图函数中，页面不易修改。改善方法—使用模板加载</p>
+<ul>
+<li>新建模板polls/templates/polls/index.html</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&#123;% if latest_question_list %&#125;</div><div class="line">    &lt;	ul&gt;</div><div class="line">    &#123;% for question in latest_question_list %&#125;</div><div class="line">        &lt;	li&gt;&lt;	a href=&quot;/polls/&#123;&#123; question.id &#125;&#125;/&quot;&gt;&#123;&#123; question.question_text &#125;&#125;&lt;/a&gt;&lt;/li&gt;</div><div class="line">    &#123;% endfor %&#125;</div><div class="line">    &lt;	/ul&gt;</div><div class="line">&#123;% else %&#125;</div><div class="line">    &lt;	p&gt;No polls are available.&lt;	/p&gt;</div><div class="line">&#123;% endif %&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li><p>修改视图函数，使用loader加载模板</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">def hello(request):</div><div class="line">	latest_question_list = Question.objects.order_by(&apos;-pub_date&apos;)[:5]</div><div class="line">	# output = &quot;, &quot;.join([q.question_text for q in latest_question_list])</div><div class="line">	# return HttpResponse(output)</div><div class="line">	template = loader.get_template(&apos;polls/index.html&apos;)</div><div class="line">	context = &#123;</div><div class="line">		&apos;latest_question_list&apos;: latest_question_list</div><div class="line">	&#125;</div><div class="line">	return HttpResponse(template.render(context,request))</div></pre></td></tr></table></figure>
+</li>
+<li><p>更简便的方法：render()</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">from django.shortcuts import render</div><div class="line">from django.http import HttpResponse</div><div class="line">from django.template import loader</div><div class="line"># Create your views here.</div><div class="line">from .models import Question</div><div class="line">def hello(request):</div><div class="line">	latest_question_list = Question.objects.order_by(&apos;-pub_date&apos;)[:5]</div><div class="line">	# output = &quot;, &quot;.join([q.question_text for q in latest_question_list])</div><div class="line">	# return HttpResponse(output)</div><div class="line">	# template = loader.get_template(&apos;polls/index.html&apos;)</div><div class="line">	context = &#123;</div><div class="line">		&apos;latest_question_list&apos;: latest_question_list</div><div class="line">	&#125;</div><div class="line">	# return HttpResponse(template.render(context,request))</div><div class="line">	return render(request,&apos;polls/index.html&apos;,context)#三个参数，请求对象，模板，字典（可选）</div></pre></td></tr></table></figure>
+</li>
+<li><p>处理404，修改视图函数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">from django.http import Http404</div><div class="line">def detail(request,id):</div><div class="line">	try:</div><div class="line">		question = Question.objects.get(pk=id)</div><div class="line">	except Question.DoesNotExist:</div><div class="line">		raise Http404(&quot;question does not exist&quot;)</div><div class="line">	return HttpResponse(&quot;you are looking at %s&quot; %id)</div></pre></td></tr></table></figure>
+</li>
+<li><p>更简便的方法：get_object_or_404()</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">from django.shortcuts import render,get_object_or_404</div><div class="line">def detail(request,id):</div><div class="line">	# try:</div><div class="line">	# 	question = Question.objects.get(pk=id)</div><div class="line">	# except Question.DoesNotExist:</div><div class="line">	# 	raise Http404(&quot;question does not exist&quot;)</div><div class="line">	question = get_object_or_404(Question,pk=id)</div><div class="line">	return HttpResponse(&quot;you are looking at %s&quot; %question)</div></pre></td></tr></table></figure>
+</li>
+<li><p>使用模板 polls/templates/polls/detail.html,修改detail的视图函数</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt; h1&gt;&#123;&#123; question.question_text &#125;&#125;&lt; /h1&gt;</div><div class="line">&lt; ul&gt;</div><div class="line">&#123;% for choice in question.choice_set.all %&#125;</div><div class="line">    &lt; li&gt;&#123;&#123; choice.choice_text &#125;&#125;&lt;/ li&gt;</div><div class="line">&#123;% endfor %&#125;</div><div class="line">&lt;/ ul&gt;</div><div class="line">--</div></pre></td></tr></table></figure>
+<ul>
+<li>修改模板中的硬编码url</li>
+</ul>
+<pre><code>
+<li><a href="{% url 'detail' question.id %}">{{ question.question_text }}</a></li>
+</code></pre>
+
+<p>好处:方便路由管理</p>
+<ul>
+<li>添加命名空间，区分url</li>
+</ul>
+<p>1    在polls/urls.py中添加app_name=”polls”</p>
+<p>2    修改<pre><code><li>&lt;a href=”{% url 'polls:detail' question.id %}“&gt;{{ question.question_text }}&lt;    /a&gt;</li></code></pre></p>
+<h2 id="第四部分"><a href="#第四部分" class="headerlink" title="第四部分"></a>第四部分</h2><ul>
+<li><p>处理表单,polls/templates/polls/detail.html</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">&lt;h1&gt;&#123;&#123; question.question_text &#125;&#125;&lt;/h1&gt;</div><div class="line"></div><div class="line">&#123;% if error_message %&#125;&lt;	p&gt;&lt;	strong&gt;&#123;&#123; error_message &#125;&#125;&lt;	/strong&gt;&lt;	/p&gt;&#123;% endif %&#125;</div><div class="line"></div><div class="line">&lt; form action=&quot;&#123;% url &apos;polls:vote&apos; question.id %&#125;&quot; method=&quot;post&quot;&gt;</div><div class="line">&#123;% csrf_token %&#125;</div><div class="line">&#123;% for choice in question.choice_set.all %&#125;</div><div class="line">    &lt; input type=&quot;radio&quot; name=&quot;choice&quot; id=&quot;choice&#123;&#123; forloop.counter &#125;&#125;&quot; value=&quot;&#123;&#123; choice.id &#125;&#125;&quot; /&gt;</div><div class="line">    &lt; label for=&quot;choice&#123;&#123; forloop.counter &#125;&#125;&quot;&gt;&#123;&#123; choice.choice_text &#125;&#125;&lt; /label&gt;&lt; br /&gt;</div><div class="line">&#123;% endfor %&#125;</div><div class="line">&lt; input type=&quot;submit&quot; value=&quot;Vote&quot; /&gt;</div><div class="line">&lt; /form&gt;</div></pre></td></tr></table></figure>
+</li>
+<li><p>修改视图函数vote</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">from django.shortcuts import get_object_or_404, render</div><div class="line">from django.http import HttpResponseRedirect, HttpResponse</div><div class="line">from django.core.urlresolvers import reverse</div><div class="line"></div><div class="line">from .models import Choice, Question</div><div class="line"># ...</div><div class="line">def vote(request, id):</div><div class="line">    question = get_object_or_404(Question, pk=id)</div><div class="line">    try:</div><div class="line">        selected_choice = question.choice_set.get(pk=request.POST[&apos;choice&apos;])</div><div class="line">    except (KeyError, Choice.DoesNotExist):</div><div class="line">        # Redisplay the question voting form.</div><div class="line">        return render(request, &apos;polls/detail.html&apos;, &#123;</div><div class="line">            &apos;question&apos;: question,</div><div class="line">            &apos;error_message&apos;: &quot;You didn&apos;t select a choice.&quot;,</div><div class="line">        &#125;)</div><div class="line">    else:</div><div class="line">        selected_choice.votes += 1</div><div class="line">        selected_choice.save()</div><div class="line">        # Always return an HttpResponseRedirect after successfully dealing</div><div class="line">        # with POST data. This prevents data from being posted twice if a</div><div class="line">        # user hits the Back button.</div><div class="line">        return HttpResponseRedirect(reverse(&apos;polls:results&apos;, args=(question.id,)))</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="第五部分–编写测试文件"><a href="#第五部分–编写测试文件" class="headerlink" title="第五部分–编写测试文件"></a>第五部分–编写测试文件</h2><h2 id="第六部分–定制app样式"><a href="#第六部分–定制app样式" class="headerlink" title="第六部分–定制app样式"></a>第六部分–定制app样式</h2><p>写在页面或者link加载<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&#123;% load staticfiles %&#125;</div><div class="line"></div><div class="line">&lt; link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;&#123;% static &apos;polls/style.css&apos; %&#125;&quot; /&gt;</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python-django/" rel="tag"># python django</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/06/05/postgres/" rel="next" title="postgres">
+                <i class="fa fa-chevron-left"></i> postgres
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/06/09/django学习之Models-and-database/" rel="prev" title="django学习之Models-and-database">
+                django学习之Models-and-database <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="newbornhsir" />
+          <p class="site-author-name" itemprop="name">newbornhsir</p>
+           
+              <p class="site-description motion-element" itemprop="description">择一城终老</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#django学习"><span class="nav-number">1.</span> <span class="nav-text">django学习</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#第一部分"><span class="nav-number">1.1.</span> <span class="nav-text">第一部分</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第二部分–数据库"><span class="nav-number">1.2.</span> <span class="nav-text">第二部分–数据库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第三部分-视图"><span class="nav-number">1.3.</span> <span class="nav-text">第三部分-视图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第四部分"><span class="nav-number">1.4.</span> <span class="nav-text">第四部分</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第五部分–编写测试文件"><span class="nav-number">1.5.</span> <span class="nav-text">第五部分–编写测试文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第六部分–定制app样式"><span class="nav-number">1.6.</span> <span class="nav-text">第六部分–定制app样式</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">newbornhsir</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
