@@ -2,6 +2,7 @@
 title: postgres
 date: 2017-06-05 18:30:46
 tags: postgresql
+categories: postgresql
 ---
 
 # postgresql学习

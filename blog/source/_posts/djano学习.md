@@ -2,6 +2,7 @@
 title: djano学习
 date: 2017-06-08 17:07:31
 tags: python django
+categories: python
 ---
 
 # django学习

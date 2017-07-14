@@ -2,6 +2,7 @@
 title: npm简介
 date: 2017-06-23 15:26:43
 tags: npm node.js
+categories: npm
 ---
 
 ## get npm 

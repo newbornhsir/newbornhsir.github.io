@@ -2,6 +2,7 @@
 title: django学习之Models-and-database
 date: 2017-06-09 18:03:52
 tags: django
+categories: python
 ---
 
 # Models and database（待完成）

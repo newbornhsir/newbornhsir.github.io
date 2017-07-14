@@ -2,6 +2,7 @@
 title: django学习之http-request
 date: 2017-06-10 01:05:18
 tags: django
+categories: python
 ---
 
 # django处理http请求(未完，待续)
