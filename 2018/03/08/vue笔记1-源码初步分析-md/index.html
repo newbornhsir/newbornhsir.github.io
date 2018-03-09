@@ -1,0 +1,760 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="vue," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="全局注册12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394(function (global">
+<meta name="keywords" content="vue">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vue笔记1-源码初步分析.md">
+<meta property="og:url" content="http://yoursite.com/2018/03/08/vue笔记1-源码初步分析-md/index.html">
+<meta property="og:site_name" content="我的博客">
+<meta property="og:description" content="全局注册12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394(function (global">
+<meta property="og:updated_time" content="2018-03-08T14:57:19.995Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="vue笔记1-源码初步分析.md">
+<meta name="twitter:description" content="全局注册12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394(function (global">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/03/08/vue笔记1-源码初步分析-md/"/>
+
+
+
+
+
+  <title>vue笔记1-源码初步分析.md | 我的博客</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">我的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/08/vue笔记1-源码初步分析-md/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="newbornhsir">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="我的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">vue笔记1-源码初步分析.md</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-08T21:58:51+08:00">
+                2018-03-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/vue/" itemprop="url" rel="index">
+                    <span itemprop="name">vue</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="全局注册"><a href="#全局注册" class="headerlink" title="全局注册"></a>全局注册</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div></pre></td><td class="code"><pre><div class="line">(function (global,factory)&#123;</div><div class="line">    global.Vue = factory()</div><div class="line">&#125;(this,(function()&#123;</div><div class="line">    ...</div><div class="line">    function Vue$3(options)&#123;</div><div class="line">        this._init(options)</div><div class="line">    &#125;</div><div class="line">    /*</div><div class="line">     *initMixin中为Vue$3的原型添加了_init方法</div><div class="line">     */</div><div class="line">    initMixin(Vue$3);</div><div class="line">    /*</div><div class="line">     * 在Vue$3的原型上定义$data,$props,$set,$delete,$watch</div><div class="line">     */</div><div class="line">    stateMixin(Vue$3);</div><div class="line">    // 事件相关</div><div class="line">    /*</div><div class="line">     * 在原型上定义$on,$once,$off,$emit,</div><div class="line">     */</div><div class="line">    eventsMixin(Vue$3);</div><div class="line">    // 生命周期</div><div class="line">    /*</div><div class="line">     * 原型上定义_update,$forceUpdate,$destory,</div><div class="line">     * </div><div class="line">     */</div><div class="line">    lifecycleMixin(Vue$3);</div><div class="line">    // render处理</div><div class="line">    /*</div><div class="line">     * 原型上绑定一些辅助方法和</div><div class="line">     * $nextTick,_render</div><div class="line">     */</div><div class="line">    renderMixin(Vue$3);</div><div class="line">    ....</div><div class="line">    /*</div><div class="line">     * Vue$3上添加了config,set,delete,nextTick,options</div><div class="line">     * options中添加了components,directives,filters对象</div><div class="line">     */</div><div class="line">    initGlobalAPI(Vue$3);</div><div class="line">    // Vue$3原型添加$isServer属性</div><div class="line">    Object.defineProperty(Vue$3.prototype, &apos;$isServer&apos;, &#123;</div><div class="line">      get: isServerRendering</div><div class="line">    &#125;);</div><div class="line">    // Vue$3原型添加$ssrContext属性</div><div class="line">    Object.defineProperty(Vue$3.prototype, &apos;$ssrContext&apos;, &#123;</div><div class="line">      get: function get () &#123;</div><div class="line">        /* istanbul ignore next */</div><div class="line">        return this.$vnode &amp;&amp; this.$vnode.ssrContext</div><div class="line">      &#125;</div><div class="line">    &#125;);</div><div class="line">    Vue$3.version = &apos;2.5.13&apos;;</div><div class="line">    ....</div><div class="line">    // install platform specific utils</div><div class="line">    Vue$3.config.mustUseProp = mustUseProp;</div><div class="line">    Vue$3.config.isReservedTag = isReservedTag;</div><div class="line">    Vue$3.config.isReservedAttr = isReservedAttr;</div><div class="line">    Vue$3.config.getTagNamespace = getTagNamespace;</div><div class="line">    Vue$3.config.isUnknownElement = isUnknownElement;</div><div class="line"></div><div class="line">    // install platform runtime directives &amp; components</div><div class="line">    extend(Vue$3.options.directives, platformDirectives);</div><div class="line">    extend(Vue$3.options.components, platformComponents);</div><div class="line"></div><div class="line">    // install platform patch function</div><div class="line">    Vue$3.prototype.__patch__ = inBrowser ? patch : noop;</div><div class="line"></div><div class="line">    // public mount method</div><div class="line">    // Vue添加$mount,Vue.$options添加render</div><div class="line">    Vue$3.prototype.$mount = function (</div><div class="line">      el,</div><div class="line">      hydrating</div><div class="line">    ) &#123;</div><div class="line">      el = el &amp;&amp; inBrowser ? query(el) : undefined;</div><div class="line">      return mountComponent(this, el, hydrating)</div><div class="line">    &#125;;</div><div class="line">    Vue$3.nextTick(function () &#123;</div><div class="line">      .....</div><div class="line">    &#125;, 0);</div><div class="line">    ...</div><div class="line">    /*</div><div class="line">     * 重写$mount方法</div><div class="line">     */</div><div class="line">    var mount = Vue$3.prototype.$mount;</div><div class="line">    Vue$3.prototype.$mount = function (</div><div class="line">      el,</div><div class="line">      hydrating</div><div class="line">    ) &#123;</div><div class="line">      ...</div><div class="line">      return mount.call(this, el, hydrating)</div><div class="line">    &#125;;</div><div class="line"></div><div class="line">      Vue$3.compile = compileToFunctions;</div><div class="line">    ....</div><div class="line">    return Vue$3</div><div class="line">&#125;)))</div></pre></td></tr></table></figure>
+<h3 id="实例化过程"><a href="#实例化过程" class="headerlink" title="实例化过程"></a>实例化过程</h3><p>以<code>var vm = new Vue({el: &#39;#app&#39;,data:{name: &#39;demo&#39;}})</code>为例：</p>
+<ul>
+<li>第一步，调用构造函数</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">function Vue$3 (options) &#123;</div><div class="line">  /*</div><div class="line">  * 检测Vue的调用方式和环境</div><div class="line">  */</div><div class="line">  if (&quot;development&quot; !== &apos;production&apos; &amp;&amp;</div><div class="line">    !(this instanceof Vue$3)</div><div class="line">  ) &#123;</div><div class="line">    warn(&apos;Vue is a constructor and should be called with the `new` keyword&apos;);</div><div class="line">  &#125;</div><div class="line">  // 调用 _init方法</div><div class="line">  this._init(options);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>第二步：执行初始化函数</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div></pre></td><td class="code"><pre><div class="line">function initMixin (Vue) &#123;</div><div class="line">  Vue.prototype._init = function (options) &#123;</div><div class="line">    var vm = this;// 这里的Vue$3的实例化对象</div><div class="line">    // a uid</div><div class="line">    vm._uid = uid$1++;</div><div class="line"></div><div class="line">    var startTag, endTag;</div><div class="line">    /* istanbul ignore if */</div><div class="line">    if (&quot;development&quot; !== &apos;production&apos; &amp;&amp; config.performance &amp;&amp; mark) &#123;</div><div class="line">      startTag = &quot;vue-perf-start:&quot; + (vm._uid);</div><div class="line">      endTag = &quot;vue-perf-end:&quot; + (vm._uid);</div><div class="line">      mark(startTag);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    // a flag to avoid this being observed</div><div class="line">    // 避免被观察</div><div class="line">    vm._isVue = true;</div><div class="line">    // merge options</div><div class="line">    // 实例化的时候没有_isComponent,所以第一次不执行这里</div><div class="line">    if (options &amp;&amp; options._isComponent) &#123;</div><div class="line">      // optimize internal component instantiation</div><div class="line">      // since dynamic options merging is pretty slow, and none of the</div><div class="line">      // internal component options needs special treatment.</div><div class="line">      initInternalComponent(vm, options);</div><div class="line">    &#125; else &#123;</div><div class="line">      //resolveConstructorOptions(vm.constructor),返回Vue$3的默认配置</div><div class="line">      // 实例化对象赋值$options</div><div class="line">      </div><div class="line">      vm.$options = mergeOptions(</div><div class="line">        resolveConstructorOptions(vm.constructor),</div><div class="line">        options || &#123;&#125;,</div><div class="line">        vm</div><div class="line">      );</div><div class="line">    &#125;</div><div class="line">    /* istanbul ignore else */</div><div class="line">    &#123;</div><div class="line">      initProxy(vm);</div><div class="line">    &#125;</div><div class="line">    // return;</div><div class="line">    // expose real self</div><div class="line">    vm._self = vm;</div><div class="line">    /*</div><div class="line">     * 初始花生命周期</div><div class="line">     * $parent,$root,$children,$refs,_watcher,_inactive</div><div class="line">     * _directInactive,_isMounted,_isDestroyed,_isBegingDestroyed</div><div class="line">     */</div><div class="line">    initLifecycle(vm);</div><div class="line">    // 事件的监听和传递</div><div class="line">    /* </div><div class="line">     * _events ,_hasHoolEvent</div><div class="line">     */</div><div class="line">    initEvents(vm);</div><div class="line">    /*</div><div class="line">     * _vnode,_staticTrees,$slots,$scopedSlots</div><div class="line">     * _c,$createElemen</div><div class="line">     */</div><div class="line">    initRender(vm);</div><div class="line"></div><div class="line">    // 检查beforeCreate生命周期函数</div><div class="line">    callHook(vm, &apos;beforeCreate&apos;);</div><div class="line">    // 处理inject</div><div class="line">    initInjections(vm); // resolve injections before data/props</div><div class="line">    // 初始话状态, method.data,props</div><div class="line">    initState(vm);</div><div class="line">    // provide的处理</div><div class="line">    initProvide(vm); // resolve provide after data/props</div><div class="line">    callHook(vm, &apos;created&apos;);</div><div class="line"></div><div class="line">    /* istanbul ignore if */</div><div class="line">    if (&quot;development&quot; !== &apos;production&apos; &amp;&amp; config.performance &amp;&amp; mark) &#123;</div><div class="line">      vm._name = formatComponentName(vm, false);</div><div class="line">      mark(endTag);</div><div class="line">      measure((&quot;vue &quot; + (vm._name) + &quot; init&quot;), startTag, endTag);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    if (vm.$options.el) &#123;</div><div class="line">        /*</div><div class="line">         * 渲染</div><div class="line">         */</div><div class="line">      vm.$mount(vm.$options.el);</div><div class="line">    &#125;</div><div class="line">  &#125;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>第三步：执行$mount方法</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div></pre></td><td class="code"><pre><div class="line">var mount = Vue$3.prototype.$mount;</div><div class="line">Vue$3.prototype.$mount = function (// 重写$mount方法</div><div class="line">  el,</div><div class="line">  hydrating</div><div class="line">) &#123;</div><div class="line">  // 根结点</div><div class="line">  el = el &amp;&amp; query(el);</div><div class="line"></div><div class="line">  /* istanbul ignore if */</div><div class="line">  // 不能为body的提示</div><div class="line">  if (el === document.body || el === document.documentElement) &#123;</div><div class="line">    &quot;development&quot; !== &apos;production&apos; &amp;&amp; warn(</div><div class="line">      &quot;Do not mount Vue to &lt;html&gt; or &lt;body&gt; - mount to normal elements instead.&quot;</div><div class="line">    );</div><div class="line">    return this</div><div class="line">  &#125;</div><div class="line">  var options = this.$options;</div><div class="line">  // resolve template/el and convert to render function</div><div class="line">  if (!options.render) &#123;</div><div class="line">    /*</div><div class="line">     * 第一次实例化的时候没有render</div><div class="line">     */</div><div class="line">    var template = options.template;</div><div class="line">    if (template) &#123;</div><div class="line">        // 以template形式传入的dom</div><div class="line">      if (typeof template === &apos;string&apos;) &#123;</div><div class="line">        if (template.charAt(0) === &apos;#&apos;) &#123;</div><div class="line">          template = idToTemplate(template);</div><div class="line">          /* istanbul ignore if */</div><div class="line">          if (&quot;development&quot; !== &apos;production&apos; &amp;&amp; !template) &#123;</div><div class="line">            warn(</div><div class="line">              (&quot;Template element not found or is empty: &quot; + (options.template)),</div><div class="line">              this</div><div class="line">            );</div><div class="line">          &#125;</div><div class="line">        &#125;</div><div class="line">      &#125; else if (template.nodeType) &#123;</div><div class="line">        template = template.innerHTML;</div><div class="line">      &#125; else &#123;</div><div class="line">        &#123;</div><div class="line">          warn(&apos;invalid template option:&apos; + template, this);</div><div class="line">        &#125;</div><div class="line">        return this</div><div class="line">      &#125;</div><div class="line">    &#125; else if (el) &#123;</div><div class="line">        // 获取dom的html内容</div><div class="line">      template = getOuterHTML(el);</div><div class="line">    &#125;</div><div class="line">    if (template) &#123;</div><div class="line">      /* istanbul ignore if */</div><div class="line">      if (&quot;development&quot; !== &apos;production&apos; &amp;&amp; config.performance &amp;&amp; mark) &#123;</div><div class="line">        mark(&apos;compile&apos;);</div><div class="line">      &#125;</div><div class="line">      var ref = compileToFunctions(template, &#123;</div><div class="line">        shouldDecodeNewlines: shouldDecodeNewlines,</div><div class="line">        shouldDecodeNewlinesForHref: shouldDecodeNewlinesForHref,</div><div class="line">        delimiters: options.delimiters,</div><div class="line">        comments: options.comments</div><div class="line">      &#125;, this);</div><div class="line">      var render = ref.render;</div><div class="line">      var staticRenderFns = ref.staticRenderFns;</div><div class="line">      /*</div><div class="line">       * vm.$options提供render，staticRenderFns方法</div><div class="line">       */</div><div class="line">      options.render = render;</div><div class="line">      options.staticRenderFns = staticRenderFns;</div><div class="line"></div><div class="line">      /* istanbul ignore if */</div><div class="line">      if (&quot;development&quot; !== &apos;production&apos; &amp;&amp; config.performance &amp;&amp; mark) &#123;</div><div class="line">        mark(&apos;compile end&apos;);</div><div class="line">        measure((&quot;vue &quot; + (this._name) + &quot; compile&quot;), &apos;compile&apos;, &apos;compile end&apos;);</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  /*</div><div class="line">   * mount 方法：return mountComponent(this, el, hydrating)</div><div class="line">   */</div><div class="line">  return mount.call(this, el, hydrating)</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<ul>
+<li>第四步：执行<code>mountComponent</code></li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/vue/" rel="tag"># vue</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/11/23/virtualenv的使用-md/" rel="next" title="virtualenv的使用.md">
+                <i class="fa fa-chevron-left"></i> virtualenv的使用.md
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/09/vue源码分析day1-ast实现-md/" rel="prev" title="vue源码分析day1-ast实现.md">
+                vue源码分析day1-ast实现.md <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="newbornhsir" />
+          <p class="site-author-name" itemprop="name">newbornhsir</p>
+           
+              <p class="site-description motion-element" itemprop="description">择一城终老</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">17</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#全局注册"><span class="nav-number">1.</span> <span class="nav-text">全局注册</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实例化过程"><span class="nav-number">2.</span> <span class="nav-text">实例化过程</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">newbornhsir</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

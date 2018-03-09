@@ -1,0 +1,882 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="react-native," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="安装官方文档 路由分类 StackNavigator TabNavigator DrawerNavigator  StackNavigatorConfig  使用 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455import &amp;#123;Stac">
+<meta name="keywords" content="react-native">
+<meta property="og:type" content="article">
+<meta property="og:title" content="react-navigation的使用">
+<meta property="og:url" content="http://yoursite.com/2017/11/02/react-navigation/index.html">
+<meta property="og:site_name" content="我的博客">
+<meta property="og:description" content="安装官方文档 路由分类 StackNavigator TabNavigator DrawerNavigator  StackNavigatorConfig  使用 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455import &amp;#123;Stac">
+<meta property="og:updated_time" content="2017-11-07T19:33:15.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="react-navigation的使用">
+<meta name="twitter:description" content="安装官方文档 路由分类 StackNavigator TabNavigator DrawerNavigator  StackNavigatorConfig  使用 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455import &amp;#123;Stac">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/11/02/react-navigation/"/>
+
+
+
+
+
+  <title>react-navigation的使用 | 我的博客</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">我的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/02/react-navigation/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="newbornhsir">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="我的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">react-navigation的使用</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-02T14:57:50+08:00">
+                2017-11-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p><a href="https://reactnavigation.org/docs/navigators/stack" target="_blank" rel="external">官方文档</a></p>
+<h2 id="路由分类"><a href="#路由分类" class="headerlink" title="路由分类"></a>路由分类</h2><ul>
+<li><a href="#stack">StackNavigator</a></li>
+<li><a href="#tab">TabNavigator</a></li>
+<li><a href="#drawer">DrawerNavigator</a></li>
+</ul>
+<h3 id="statck">StackNavigatorConfig</h3>
+
+<p>使用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div></pre></td><td class="code"><pre><div class="line">import &#123;StackNavigator&#125; from &apos;react-navigation&apos;;</div><div class="line"></div><div class="line">const App = StackNavigator(routerConfig,StackNavigatorConfig)</div><div class="line"></div><div class="line">// routerConfig</div><div class="line">&#123;</div><div class="line">    pathName: &#123;</div><div class="line">        screen: screenName,</div><div class="line">        path: &apos;&apos;,</div><div class="line">        navigationOptions: (&#123;navigator&#125;)=&gt;(&#123;</div><div class="line">                // navigationOptions config</div><div class="line">            &#125;)</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">//StackNavigatorConfig</div><div class="line"></div><div class="line">&#123;</div><div class="line">    // 路由配置</div><div class="line">    initialRouteName: &apos;&apos;,//默认显示的路由，不配置则默认为路由配置中的第一个</div><div class="line">    initialRouteParams: &#123;&#125;,</div><div class="line">    navigationOptions: (&#123;navigator&#125;)=&gt;(&#123;</div><div class="line">        title: &apos;headetitle&apos;,</div><div class="line">        // null/React Element/ function that given HeaderProps returns a React Element</div><div class="line">        header: null,</div><div class="line">        //react Element/ string</div><div class="line">        headerTitle: ,</div><div class="line">        headerLeft: ,//react element</div><div class="line">        headerStyle: &#123;&#125;,//style Obj</div><div class="line">        headerTitleStyle: &#123;&#125;, // style Obj for title component</div><div class="line">        headerTintColor: &apos;#ccc&apos;, // tint color</div><div class="line">        ....</div><div class="line">    &#125;),</div><div class="line">    path: ,//A mapping of overrides for the paths set in the route configs</div><div class="line">    // 视觉显示配置</div><div class="line">    mode: &apos;card&apos;,//card/modal, default is card</div><div class="line">    // 配置了一下headerMode,没看到太大差别，除了none的时候不现实header，文档说float在ios常见，screen在android常见</div><div class="line">    headerMode: &apos;float&apos;,// float/screen/none</div><div class="line">    cardStyle: ,//</div><div class="line">    // 函数：传递一下三个参数,transitionProps,prevtransitionProps,isModal,返回一个和默认过渡效果配置的对象</div><div class="line">    transitionConfig: ()=&gt;&#123;&#125;,</div><div class="line">    onTransitionStart: ()=&gt;&#123;&#125;,</div><div class="line">    onTransitionEnd; ()=&gt;&#123;&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"> // Navigator Props </div><div class="line">// StackNavigator创建的导航可以通过screenProps向子视图传递额外的数据</div><div class="line"></div><div class="line">const SomeStack = StackNavigator(&#123;</div><div class="line">  // config</div><div class="line">&#125;);</div><div class="line"></div><div class="line">&lt;SomeStack</div><div class="line">  screenProps=&#123;/* this prop will get passed to the screen components as this.props.screenProps */&#125;</div><div class="line">/&gt;</div></pre></td></tr></table></figure>
+<h3 id="tab">TabNavigator</h3>
+
+<p>API : TabNavigator(routerconfig,TabNavigatorConfig)</p>
+<h4 id="routerconfig"><a href="#routerconfig" class="headerlink" title="routerconfig"></a>routerconfig</h4><p>和StackNavigator一致</p>
+<h4 id="TabNavigatorConfig"><a href="#TabNavigatorConfig" class="headerlink" title="TabNavigatorConfig"></a>TabNavigatorConfig</h4><ul>
+<li>tabBarComponent: default: TabBarBottom in ios, TabBarTop in android</li>
+<li>tabBarPosition: ‘top’ or ‘bottom’</li>
+<li>swipeEnable: 是否可以滑动切换</li>
+<li>animationEnable: 切换是否有动画</li>
+<li>lazy: 是否lazy渲染</li>
+<li>initiallayout:</li>
+<li><p>tabBarOptions: 如下</p>
+<ol>
+<li>initialRouteName</li>
+<li>order</li>
+<li>paths</li>
+<li><p>backBehavior</p>
+<h5 id="tabBarBottom"><a href="#tabBarBottom" class="headerlink" title="tabBarBottom"></a>tabBarBottom</h5></li>
+<li><p>activeTintColor</p>
+</li>
+<li>activebackgroundColor</li>
+<li>inactiveTintColor</li>
+<li>inactiveBackgroundColor</li>
+<li>showLabel</li>
+<li>style</li>
+<li>backgroundColor</li>
+<li>labelStyle</li>
+<li>tabStyle</li>
+<li><p>allowFontScaling</p>
+<h5 id="tabBarTop"><a href="#tabBarTop" class="headerlink" title="tabBarTop"></a>tabBarTop</h5></li>
+<li><p>activeTintColor</p>
+</li>
+<li>inactiveTintColor</li>
+<li>showIcon</li>
+<li>showLabel</li>
+<li>upperCaseLabel</li>
+<li>pressColor</li>
+<li>pressOpacity</li>
+<li>scrollEnable</li>
+<li>tabStyle</li>
+<li>indicatorStyle</li>
+<li>labelStyle</li>
+<li>iconStyle</li>
+<li>style</li>
+<li>allowFontScaling</li>
+</ol>
+</li>
+<li><p>navigationOptions: 如下</p>
+<ol>
+<li>title</li>
+<li>tabBarVisible</li>
+<li>tabBaricon</li>
+<li>tabBarLabel</li>
+<li>tabBarOnPress</li>
+</ol>
+</li>
+</ul>
+<h3 id="drawer">Drawernavigator</h3>
+
+<p>目前未用到，用法见官方文档。</p>
+<h2 id="Screen-Navigation-Prop"><a href="#Screen-Navigation-Prop" class="headerlink" title="Screen Navigation Prop"></a>Screen Navigation Prop</h2><p>props.navigation 接受一下4个prop</p>
+<ol>
+<li>navigate(router,params,action)</li>
+</ol>
+<p>路径，参数，The sub-action to run in the child router, if the screen is a navigator</p>
+<ol>
+<li>state</li>
+</ol>
+<p>Object: {routeName:’’,key:’’,params:{}}</p>
+<ol>
+<li>setParams</li>
+</ol>
+<p>更改路由中参数</p>
+<ol>
+<li>goBack()</li>
+</ol>
+<p>goBack(“screen”||null)</p>
+<ol>
+<li>dispatch</li>
+</ol>
+<p>send an action to the router </p>
+<h2 id="Navigation-Action"><a href="#Navigation-Action" class="headerlink" title="Navigation Action"></a>Navigation Action</h2><h3 id="Navigate"><a href="#Navigate" class="headerlink" title="Navigate"></a>Navigate</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">import &#123; NavigationActions &#125; from &apos;react-navigation&apos;</div><div class="line"></div><div class="line">const navigateAction = NavigationActions.navigate(&#123;</div><div class="line"></div><div class="line">  routeName: &apos;Profile&apos;,// 在app中注册过的目标路由</div><div class="line"></div><div class="line">  params: &#123;&#125;, // Object, 传递到目标路由的参数</div><div class="line"></div><div class="line">  // Object: The sub-action to run in the child router, if the screen is a navigator</div><div class="line"></div><div class="line">  action: NavigationActions.navigate(&#123; routeName: &apos;SubProfileRoute&apos;&#125;)</div><div class="line">&#125;)</div><div class="line"></div><div class="line">this.props.navigation.dispatch(navigateAction)</div></pre></td></tr></table></figure>
+<h3 id="Reset"><a href="#Reset" class="headerlink" title="Reset"></a>Reset</h3><ul>
+<li>index - number - required - Index of the active route on routes array in navigation state.</li>
+<li>actions - array - required - Array of Navigation Actions that will replace the navigation state.</li>
+<li>key - string or null - optional - If set, the navigator with the given key will reset. If null, the root navigator will reset.</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">import &#123; NavigationActions &#125; from &apos;react-navigation&apos;</div><div class="line"></div><div class="line">const resetAction = NavigationActions.reset(&#123;</div><div class="line">  index: 0,</div><div class="line">  actions: [</div><div class="line">    NavigationActions.navigate(&#123; routeName: &apos;Profile&apos;&#125;)</div><div class="line">  ]</div><div class="line">&#125;)</div><div class="line">this.props.navigation.dispatch(resetAction)</div></pre></td></tr></table></figure>
+<h3 id="Back"><a href="#Back" class="headerlink" title="Back"></a>Back</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">import &#123; NavigationActions &#125; from &apos;react-navigation&apos;</div><div class="line"></div><div class="line">const backAction = NavigationActions.back(&#123;</div><div class="line">    //string or null - optional - If set, navigation will go back from the given key. If null, navigation will go back anywhere.</div><div class="line">  key: &apos;Profile&apos;</div><div class="line">&#125;)</div><div class="line">this.props.navigation.dispatch(backAction)</div></pre></td></tr></table></figure>
+<h3 id="SetParams"><a href="#SetParams" class="headerlink" title="SetParams"></a>SetParams</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">import &#123; NavigationActions &#125; from &apos;react-navigation&apos;</div><div class="line"></div><div class="line">const setParamsAction = NavigationActions.setParams(&#123;</div><div class="line">  params: &#123; title: &apos;Hello&apos; &#125;,//Object</div><div class="line">  key: &apos;screen-123&apos;,//string - required - Route key that should get the new params</div><div class="line"></div><div class="line">&#125;)</div><div class="line">this.props.navigation.dispatch(setParamsAction)</div></pre></td></tr></table></figure>
+<h2 id="Router"><a href="#Router" class="headerlink" title="Router"></a>Router</h2><p>routers 定义一个组件的navigation的state,允许开发者定义可处理的route和action.</p>
+<h3 id="build-in-routers"><a href="#build-in-routers" class="headerlink" title="build-in routers"></a>build-in routers</h3><ul>
+<li>StackRouter</li>
+</ul>
+<p>api: StackRouter(routerconfig,stackconfig)</p>
+<p>routerconfig:</p>
+<ol>
+<li><p>path; Specify the screen component or child navigator</p>
+</li>
+<li><p>screen: Specify the screen component or child navigator</p>
+</li>
+<li><p>getScreen(): Set a lazy getter for a screen component (but not navigators)</p>
+</li>
+</ol>
+<p>stackconfig</p>
+<ol>
+<li>initialRouteName</li>
+<li>initialRouteParams</li>
+<li>paths - 可更改routerconfig中的path</li>
+</ol>
+<ul>
+<li>TabRouter</li>
+</ul>
+<p>api: StackRouter(routerconfig,tabconfig)</p>
+<p>routerconfig:</p>
+<ol>
+<li><p>path; Specify the screen component or child navigator</p>
+</li>
+<li><p>screen: Specify the screen component or child navigator</p>
+</li>
+<li><p>getScreen(): Set a lazy getter for a screen component (but not navigators)</p>
+</li>
+</ol>
+<p>tabconfig</p>
+<ol>
+<li>initialRouteName</li>
+<li>order - Array of routeNames which defines the order of the tabs</li>
+<li>paths - 可更改routerconfig中的path</li>
+<li>backbehavior - Should the back button cause a tab switch to the initial tab? If yes, set to initialRoute, otherwise none. Defaults to initialRoute behavior.</li>
+</ol>
+<p>use</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">class MyNavigator extends React.Component &#123;</div><div class="line">    static router = StackRouter(routes, config);</div><div class="line">    ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="custom-router-API"><a href="#custom-router-API" class="headerlink" title="custom router API"></a>custom router API</h3><image src="https://reactnavigation.org/assets/routers-concept-map.png"> 
+
+<h4 id="getStateForAction-action-state"><a href="#getStateForAction-action-state" class="headerlink" title="getStateForAction(action, state)"></a>getStateForAction(action, state)</h4><p>定义所给action的state。函数在传入props.navigation.dispatch()的时候调用。返回</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    index: 0,</div><div class="line">    routers: [</div><div class="line">        &#123;</div><div class="line">            routerName: &apos;name&apos;,</div><div class="line">            ...</div><div class="line">        &#125;</div><div class="line">        ...</div><div class="line">    ]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="getComponentForRouteName-routename"><a href="#getComponentForRouteName-routename" class="headerlink" title="getComponentForRouteName(routename)"></a>getComponentForRouteName(routename)</h4><p>返回所给路由的子组件或者导航</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  index: 1,</div><div class="line">  routes: [</div><div class="line">    &#123; key: &apos;A&apos;, routeName: &apos;Foo&apos; &#125;,</div><div class="line">    &#123; key: &apos;B&apos;, routeName: &apos;Bar&apos; &#125;,</div><div class="line">  ],</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="getComponentForState-state"><a href="#getComponentForState-state" class="headerlink" title="getComponentForState(state)"></a>getComponentForState(state)</h4><p>Returns the active component for a deep navigation state.</p>
+<h4 id="getActionForPathAndParams-path-params"><a href="#getActionForPathAndParams-path-params" class="headerlink" title="getActionForPathAndParams(path, params)"></a>getActionForPathAndParams(path, params)</h4><p>Returns an optional navigation action that should be used when the user navigates to this path and provides optional query parameters.</p>
+<h4 id="getPathAndParamsForState-state"><a href="#getPathAndParamsForState-state" class="headerlink" title="getPathAndParamsForState(state)"></a>getPathAndParamsForState(state)</h4><p>Returns the path and params that can be put into the URL to link the user back to the same spot in the app.<br>The path/params that are output from this should form an action when passed back into the router’s getActionForPathAndParams. That action should take you to a similar state once passed through getStateForAction.</p>
+<h4 id="getScreenOptions-navigation-screenProps"><a href="#getScreenOptions-navigation-screenProps" class="headerlink" title="getScreenOptions(navigation, screenProps)"></a>getScreenOptions(navigation, screenProps)</h4><p>Used to retrieve the navigation options for a screen. Must provide the screen’s current navigation prop and optionally, other props that your navigation options may need to consume.</p>
+<ul>
+<li>navigation - This is the navigation prop that the screen will use, where the state refers to the screen’s route/state. Dispatch will trigger actions in the context of that screen.</li>
+<li>screenProps - Other props that your navigation options may need to consume</li>
+<li>navigationOptions - The previous set of options that are default or provided by the previous configurer<br>Inside an example view, perhaps you need to fetch the configured title:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">// First, prepare a navigation prop for your child, or re-use one if already available.</div><div class="line">const screenNavigation = addNavigationHelpers(&#123;</div><div class="line">  // In this case we use navigation.state.index because we want the title for the active route.</div><div class="line">  state: navigation.state.routes[navigation.state.index],</div><div class="line">  dispatch: navigation.dispatch,</div><div class="line">&#125;);</div><div class="line">const options = this.props.router.getScreenOptions(screenNavigation, &#123;&#125;);</div><div class="line">const title = options.title;</div></pre></td></tr></table></figure>
+<h3 id="custom-navigation-actions"><a href="#custom-navigation-actions" class="headerlink" title="custom navigation actions"></a>custom navigation actions</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">const MyApp = StackNavigator(&#123;</div><div class="line">  Home: &#123; screen: HomeScreen &#125;,</div><div class="line">  Profile: &#123; screen: ProfileScreen &#125;,</div><div class="line">&#125;, &#123;</div><div class="line">  initialRouteName: &apos;Home&apos;,</div><div class="line">&#125;)</div><div class="line"></div><div class="line">const defaultGetStateForAction = MyApp.router.getStateForAction;</div><div class="line"></div><div class="line">MyApp.router.getStateForAction = (action, state) =&gt; &#123;</div><div class="line">  if (state &amp;&amp; action.type === &apos;PushTwoProfiles&apos;) &#123;</div><div class="line">    const routes = [</div><div class="line">      ...state.routes,</div><div class="line">      &#123;key: &apos;A&apos;, routeName: &apos;Profile&apos;, params: &#123; name: action.name1 &#125;&#125;,</div><div class="line">      &#123;key: &apos;B&apos;, routeName: &apos;Profile&apos;, params: &#123; name: action.name2 &#125;&#125;,</div><div class="line">    ];</div><div class="line">    return &#123;</div><div class="line">      ...state,</div><div class="line">      routes,</div><div class="line">      index: routes.length - 1,</div><div class="line">    &#125;;</div><div class="line">  &#125;</div><div class="line">  return defaultGetStateForAction(action, state);</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h3 id="阻止-navigation-action"><a href="#阻止-navigation-action" class="headerlink" title="阻止 navigation action"></a>阻止 navigation action</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">import &#123; NavigationActions &#125; from &apos;react-navigation&apos;</div><div class="line"></div><div class="line">const MyStackRouter = StackRouter(&#123;</div><div class="line">  Home: &#123; screen: HomeScreen &#125;,</div><div class="line">  Profile: &#123; screen: ProfileScreen &#125;,</div><div class="line">&#125;, &#123;</div><div class="line">  initialRouteName: &apos;Home&apos;,</div><div class="line">&#125;)</div><div class="line"></div><div class="line">const defaultGetStateForAction = MyStackRouter.router.getStateForAction;</div><div class="line"></div><div class="line">MyStackRouter.router.getStateForAction = (action, state) =&gt; &#123;</div><div class="line">  if (</div><div class="line">    state &amp;&amp;</div><div class="line">    action.type === NavigationActions.BACK &amp;&amp;</div><div class="line">    state.routes[state.index].params.isEditing</div><div class="line">  ) &#123;</div><div class="line">    // Returning null from getStateForAction means that the action</div><div class="line">    // has been handled/blocked, but there is not a new state</div><div class="line">    return null;</div><div class="line">  &#125;</div><div class="line">  </div><div class="line">  return defaultGetStateForAction(action, state);</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h3 id="Handling-Custom-URIs"><a href="#Handling-Custom-URIs" class="headerlink" title="Handling Custom URIs"></a>Handling Custom URIs</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">import &#123; NavigationActions &#125; from &apos;react-navigation&apos;</div><div class="line"></div><div class="line">const MyApp = StackNavigator(&#123;</div><div class="line">  Home: &#123; screen: HomeScreen &#125;,</div><div class="line">  Profile: &#123; screen: ProfileScreen &#125;,</div><div class="line">&#125;, &#123;</div><div class="line">  initialRouteName: &apos;Home&apos;,</div><div class="line">&#125;)</div><div class="line">const previousGetActionForPathAndParams = MyApp.router.getActionForPathAndParams;</div><div class="line"></div><div class="line">Object.assign(MyApp.router, &#123;</div><div class="line">  getActionForPathAndParams(path, params) &#123;</div><div class="line">    if (</div><div class="line">      path === &apos;my/custom/path&apos; &amp;&amp;</div><div class="line">      params.magic === &apos;yes&apos;</div><div class="line">    ) &#123;</div><div class="line">      // returns a profile navigate action for /my/custom/path?magic=yes</div><div class="line">      return NavigationActions.navigate(&#123;</div><div class="line">        routeName: &apos;Profile&apos;,</div><div class="line">        action: NavigationActions.navigate(&#123;</div><div class="line">          // This child action will get passed to the child router</div><div class="line">          // ProfileScreen.router.getStateForAction to get the child</div><div class="line">          // navigation state.</div><div class="line">          routeName: &apos;Friends&apos;,</div><div class="line">        &#125;),</div><div class="line">      &#125;);</div><div class="line">    &#125;</div><div class="line">    return previousGetActionForPathAndParams(path, params);</div><div class="line">  &#125;,</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+</image>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/react-native/" rel="tag"># react-native</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/10/30/前端路由/" rel="next" title="前端路由">
+                <i class="fa fa-chevron-left"></i> 前端路由
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/11/03/es6-1/" rel="prev" title="es6/1">
+                es6/1 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="newbornhsir" />
+          <p class="site-author-name" itemprop="name">newbornhsir</p>
+           
+              <p class="site-description motion-element" itemprop="description">择一城终老</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">17</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装"><span class="nav-number">1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#路由分类"><span class="nav-number">2.</span> <span class="nav-text">路由分类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#statck"><span class="nav-number">2.1.</span> <span class="nav-text">StackNavigatorConfig</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tab"><span class="nav-number">2.2.</span> <span class="nav-text">TabNavigator</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#routerconfig"><span class="nav-number">2.2.1.</span> <span class="nav-text">routerconfig</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TabNavigatorConfig"><span class="nav-number">2.2.2.</span> <span class="nav-text">TabNavigatorConfig</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#tabBarBottom"><span class="nav-number">2.2.2.1.</span> <span class="nav-text">tabBarBottom</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#tabBarTop"><span class="nav-number">2.2.2.2.</span> <span class="nav-text">tabBarTop</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#drawer"><span class="nav-number">2.3.</span> <span class="nav-text">Drawernavigator</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Screen-Navigation-Prop"><span class="nav-number">3.</span> <span class="nav-text">Screen Navigation Prop</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Navigation-Action"><span class="nav-number">4.</span> <span class="nav-text">Navigation Action</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Navigate"><span class="nav-number">4.1.</span> <span class="nav-text">Navigate</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Reset"><span class="nav-number">4.2.</span> <span class="nav-text">Reset</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Back"><span class="nav-number">4.3.</span> <span class="nav-text">Back</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SetParams"><span class="nav-number">4.4.</span> <span class="nav-text">SetParams</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Router"><span class="nav-number">5.</span> <span class="nav-text">Router</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#build-in-routers"><span class="nav-number">5.1.</span> <span class="nav-text">build-in routers</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#custom-router-API"><span class="nav-number">5.2.</span> <span class="nav-text">custom router API</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#getStateForAction-action-state"><span class="nav-number">5.2.1.</span> <span class="nav-text">getStateForAction(action, state)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#getComponentForRouteName-routename"><span class="nav-number">5.2.2.</span> <span class="nav-text">getComponentForRouteName(routename)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#getComponentForState-state"><span class="nav-number">5.2.3.</span> <span class="nav-text">getComponentForState(state)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#getActionForPathAndParams-path-params"><span class="nav-number">5.2.4.</span> <span class="nav-text">getActionForPathAndParams(path, params)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#getPathAndParamsForState-state"><span class="nav-number">5.2.5.</span> <span class="nav-text">getPathAndParamsForState(state)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#getScreenOptions-navigation-screenProps"><span class="nav-number">5.2.6.</span> <span class="nav-text">getScreenOptions(navigation, screenProps)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#custom-navigation-actions"><span class="nav-number">5.3.</span> <span class="nav-text">custom navigation actions</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#阻止-navigation-action"><span class="nav-number">5.4.</span> <span class="nav-text">阻止 navigation action</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Handling-Custom-URIs"><span class="nav-number">5.5.</span> <span class="nav-text">Handling Custom URIs</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">newbornhsir</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
