@@ -74,7 +74,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="javascript 设计模式," />
+  <meta name="keywords" content="typescript," />
 
 
 
@@ -90,17 +90,17 @@
 
 
 
-<meta name="description" content="发布订阅发布者是实现了添加订阅、移除订阅、发布订阅的对象 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849/**新闻发布者，  * publisher 可以发布消息，让其它用户订阅消息，移除订阅 */const newsPublisher = &amp;#123;    sub">
-<meta name="keywords" content="javascript 设计模式">
+<meta name="description" content="interface接口用来对结构中的数据进行检查，描述结构包含属性以及属性的数据类型,编译成的js并不包含此部分的内容。 对象类型的接口123456interface Test &amp;#123;  name : string;  age ?: number;  [propName:string]: any;  [propName:number]:any&amp;#125; propName是额外类型，ts会进">
+<meta name="keywords" content="typescript">
 <meta property="og:type" content="article">
-<meta property="og:title" content="observer.md">
-<meta property="og:url" content="http://yoursite.com/2018/03/25/observer-md/index.html">
+<meta property="og:title" content="ts中的类接口">
+<meta property="og:url" content="http://yoursite.com/2019/07/04/ts中的类接口/index.html">
 <meta property="og:site_name" content="我的博客">
-<meta property="og:description" content="发布订阅发布者是实现了添加订阅、移除订阅、发布订阅的对象 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849/**新闻发布者，  * publisher 可以发布消息，让其它用户订阅消息，移除订阅 */const newsPublisher = &amp;#123;    sub">
-<meta property="og:updated_time" content="2019-06-26T13:13:09.943Z">
+<meta property="og:description" content="interface接口用来对结构中的数据进行检查，描述结构包含属性以及属性的数据类型,编译成的js并不包含此部分的内容。 对象类型的接口123456interface Test &amp;#123;  name : string;  age ?: number;  [propName:string]: any;  [propName:number]:any&amp;#125; propName是额外类型，ts会进">
+<meta property="og:updated_time" content="2019-07-04T08:02:26.883Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="observer.md">
-<meta name="twitter:description" content="发布订阅发布者是实现了添加订阅、移除订阅、发布订阅的对象 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849/**新闻发布者，  * publisher 可以发布消息，让其它用户订阅消息，移除订阅 */const newsPublisher = &amp;#123;    sub">
+<meta name="twitter:title" content="ts中的类接口">
+<meta name="twitter:description" content="interface接口用来对结构中的数据进行检查，描述结构包含属性以及属性的数据类型,编译成的js并不包含此部分的内容。 对象类型的接口123456interface Test &amp;#123;  name : string;  age ?: number;  [propName:string]: any;  [propName:number]:any&amp;#125; propName是额外类型，ts会进">
 
 
 
@@ -128,13 +128,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/03/25/observer-md/"/>
+  <link rel="canonical" href="http://yoursite.com/2019/07/04/ts中的类接口/"/>
 
 
 
 
 
-  <title>observer.md | 我的博客</title>
+  <title>ts中的类接口 | 我的博客</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -283,7 +283,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/25/observer-md/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/04/ts中的类接口/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="newbornhsir">
@@ -300,7 +300,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">observer.md</h1>
+          <h1 class="post-title" itemprop="name headline">ts中的类接口</h1>
         
 
         <div class="post-meta">
@@ -312,8 +312,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-25T19:15:56+08:00">
-                2018-03-25
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-04T15:27:48+08:00">
+                2019-07-04
               </time>
             
 
@@ -347,10 +347,18 @@
       
 
       
-        <h3 id="发布订阅"><a href="#发布订阅" class="headerlink" title="发布订阅"></a>发布订阅</h3><p>发布者是实现了添加订阅、移除订阅、发布订阅的对象</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div></pre></td><td class="code"><pre><div class="line">/**新闻发布者， </div><div class="line"> * publisher 可以发布消息，让其它用户订阅消息，移除订阅</div><div class="line"> */</div><div class="line">const newsPublisher = &#123;</div><div class="line">    subs: &#123;</div><div class="line">        base: []</div><div class="line">    &#125;,</div><div class="line">    subscribe (newsType, cb) &#123;</div><div class="line">        if (!this.subs[newsType]) &#123;</div><div class="line">            /**订阅一个新的新闻类型 */</div><div class="line">            this.subs[newsType] = []</div><div class="line">        &#125;</div><div class="line">        this.subs[newsType].push(cb)</div><div class="line">    &#125;,</div><div class="line">    unSubscribe(newsType, cb) &#123;</div><div class="line">        /**取消订阅 */</div><div class="line">        let cbs = this.subs[newsType]</div><div class="line">        if (cbs) &#123;</div><div class="line">            let index = cbs.indexOf(cb)</div><div class="line">            cbs.splice(index,1)</div><div class="line">        &#125;</div><div class="line">    &#125;,</div><div class="line">    publisher (newsType) &#123;</div><div class="line">        let cbs = this.subs[newsType]</div><div class="line">        if (cbs) &#123;</div><div class="line">            cbs.forEach(cb =&gt; cb())</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">class Person &#123;</div><div class="line">    constructor (cb) &#123;</div><div class="line">        this.cb = cb</div><div class="line">    &#125;</div><div class="line">    subscribe (newType) &#123;</div><div class="line">        newsPublisher.subscribe(newType, this.cb)</div><div class="line">    &#125;</div><div class="line">    unSubscribe (newType) &#123;</div><div class="line">        newsPublisher.unSubscribe(newType, this.cb)</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">p1 = new Person(()=&gt;console.log(&apos;p1 know&apos;))</div><div class="line">p2 = new Person(()=&gt;console.log(&apos;p2 know&apos;))</div><div class="line">p1.subscribe(&apos;base&apos;)</div><div class="line">p2.subscribe(&apos;base&apos;)</div><div class="line">newsPublisher.publisher(&apos;base&apos;)</div><div class="line">p2.unSubscribe(&apos;base&apos;)</div><div class="line">newsPublisher.publisher(&apos;base&apos;)</div></pre></td></tr></table></figure>
-<h3 id="观察者模式"><a href="#观察者模式" class="headerlink" title="观察者模式"></a>观察者模式</h3><p>观察者模式是发布订阅的变体。将发布者所基本的添加、移除订阅，发布订阅的功能抽象出一个类，叫做依赖管理器，而订阅这部分的对象抽象出update方法，叫做watcher，在依赖出发notify的时候进行更新</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * 现在存在多个publisher，都可以添加订阅，移除订阅，发布订阅，</div><div class="line"> * 这部分公用的抽象出一个类，叫做Dep，依赖管理器</div><div class="line"> * 可以订阅的用户叫做watcher</div><div class="line"> */</div><div class="line">class Dep &#123;</div><div class="line">    constructor () &#123;</div><div class="line">        this.sub = []</div><div class="line">    &#125;</div><div class="line">    addSub (watcher) &#123;</div><div class="line">       /**添加 */</div><div class="line">       let index = this.sub.indexOf(watcher)</div><div class="line">       if (index === -1) &#123;</div><div class="line">           this.sub.push(watcher)</div><div class="line">       &#125;</div><div class="line">    &#125;</div><div class="line">    removeSub () &#123;</div><div class="line">       let index = this.sub.indexOf(watcher)</div><div class="line">       if (index !== -1) &#123;</div><div class="line">           this.sub.splice(index, 1)</div><div class="line">       &#125;</div><div class="line">    &#125;</div><div class="line">    notify () &#123;</div><div class="line">        this.sub.forEach(sub =&gt; sub.update())</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">class Watcher &#123;</div><div class="line">    constructor () &#123;</div><div class="line">       </div><div class="line">    &#125;</div><div class="line">    update () &#123;</div><div class="line"></div><div class="line">    &#125;</div><div class="line">    addDep (dep) &#123;</div><div class="line">        dep.addSub(this)</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+        <h2 id="interface"><a href="#interface" class="headerlink" title="interface"></a>interface</h2><p>接口用来对结构中的数据进行检查，描述结构包含属性以及属性的数据类型,编译成的js并不包含此部分的内容。</p>
+<h4 id="对象类型的接口"><a href="#对象类型的接口" class="headerlink" title="对象类型的接口"></a>对象类型的接口</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">interface Test &#123;</div><div class="line">  name : string;</div><div class="line">  age ?: number;</div><div class="line">  [propName:string]: any;</div><div class="line">  [propName:number]:any</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>propName是额外类型，ts会进行额外的类型检查，如果出现接口中未定义的部分，会报错，此时需要propName，来告诉ts对象可包含的额外特属性。也可以通过类型推断来跳过额外的类型检查</p>
+<h4 id="函数类型"><a href="#函数类型" class="headerlink" title="函数类型"></a>函数类型</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">interface Test &#123;</div><div class="line">  // [propName:string]:any</div><div class="line">  a: number;</div><div class="line">&#125;</div><div class="line">function n(a:Test):void &#123;</div><div class="line">  console.log(a)</div><div class="line">&#125;</div><div class="line">n(&#123;a:1,b:2&#125; as Test)</div></pre></td></tr></table></figure>
+<h4 id="类类型"><a href="#类类型" class="headerlink" title="类类型"></a>类类型</h4><p>类类型接口描述类的实例部分属性，不包括静态部分，constructor是静态部分，需要特殊的处理。</p>
+<ol>
+<li>类接口对实例部分进行检测</li>
+<li>类构造函数接口对类构造函数部分进行检测</li>
+<li>createTest函数将两者关联起来，通过此函数创建的对象才会进行全部的检测</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">interface TestClass &#123;</div><div class="line">  name: string;</div><div class="line">  say(): void;</div><div class="line">&#125;</div><div class="line">interface TestConstructor &#123;</div><div class="line">  new (name:string);</div><div class="line">&#125;</div><div class="line">function createTest(ctor:TestConstructor,name:string):TestClass &#123;</div><div class="line">  return new ctor(name)</div><div class="line">&#125;</div><div class="line"></div><div class="line">class Test implements TestClass &#123;</div><div class="line">  public name: string;</div><div class="line">  constructor (name: string) &#123;</div><div class="line">    this.name = name</div><div class="line">  &#125;</div><div class="line">  say () &#123;</div><div class="line">    console.log(this.name)</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">let t = createTest(Test,&apos;age&apos;)</div></pre></td></tr></table></figure>
+
       
     </div>
 
@@ -379,7 +387,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/javascript-设计模式/" rel="tag"># javascript 设计模式</a>
+            <a href="/tags/typescript/" rel="tag"># typescript</a>
           
         </div>
       
@@ -392,8 +400,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/03/22/vue源码笔记day3-md/" rel="next" title="vue源码笔记day3-渲染.md">
-                <i class="fa fa-chevron-left"></i> vue源码笔记day3-渲染.md
+              <a href="/2019/07/04/ts中的类/" rel="next" title="ts中的类">
+                <i class="fa fa-chevron-left"></i> ts中的类
               </a>
             
           </div>
@@ -401,10 +409,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/03/25/从发布订阅到观察者模式/" rel="prev" title="observer.md">
-                observer.md <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -533,7 +537,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#发布订阅"><span class="nav-number">1.</span> <span class="nav-text">发布订阅</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#观察者模式"><span class="nav-number">2.</span> <span class="nav-text">观察者模式</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#interface"><span class="nav-number">1.</span> <span class="nav-text">interface</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#对象类型的接口"><span class="nav-number">1.0.1.</span> <span class="nav-text">对象类型的接口</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#函数类型"><span class="nav-number">1.0.2.</span> <span class="nav-text">函数类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#类类型"><span class="nav-number">1.0.3.</span> <span class="nav-text">类类型</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
