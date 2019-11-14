@@ -283,6 +283,630 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/14/es6特性/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="newbornhsir">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="我的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/11/14/es6特性/" itemprop="url">es6特性</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-14T21:04:51+08:00">
+                2019-11-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="变量声明"><a href="#变量声明" class="headerlink" title="变量声明"></a>变量声明</h2><p>es6提供了新的变量声明方式：<code>let</code> <code>const</code>。和<code>var</code>声明相比，有以下特点：</p>
+<ol>
+<li><p>不存在变量提升</p>
+ <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// es5</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params">condition</span>)</span>&#123;</div><div class="line">  <span class="keyword">if</span>(condition)&#123;</div><div class="line">    <span class="keyword">var</span> result = <span class="number">1</span>;</div><div class="line">    <span class="keyword">return</span> result;</div><div class="line">  &#125;</div><div class="line">  <span class="built_in">console</span>.log(result) <span class="comment">// undefined,变量会提升到函数体的顶部</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>不允许重复声明，重复声明会报错</p>
+</li>
+<li><p>暂时性死区,在变量声明前访问会报错</p>
+ <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>)</span>&#123;</div><div class="line">  <span class="built_in">console</span>.log(a)<span class="comment">// 报错</span></div><div class="line">  <span class="keyword">let</span> a = <span class="number">1</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>块级作用域绑定</p>
+ <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// es5创建局部作用域通过函数</span></div><div class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</div><div class="line">  setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="built_in">console</span>.log(i)&#125;, <span class="number">0</span>)</div><div class="line">&#125;</div><div class="line"><span class="built_in">console</span>.log(i)</div><div class="line"></div><div class="line"><span class="comment">// es6，新增&#123;&#125;可以创建块级作用域，作用域内的变量在外部不可访问</span></div><div class="line"><span class="keyword">for</span>(<span class="keyword">let</span> j = <span class="number">0</span>; j &lt; <span class="number">10</span>; j++)&#123;</div><div class="line">  setTimeout(<span class="function"><span class="params">()</span>=&gt;</span><span class="built_in">console</span>.log(j),<span class="number">0</span>)</div><div class="line">&#125;</div><div class="line"><span class="built_in">console</span>.log(j)</div></pre></td></tr></table></figure>
+</li>
+<li><p><code>const</code>常用来声明被保护的变量，如常量，表示该变量不可更改</p>
+</li>
+</ol>
+<h2 id="字符串扩展"><a href="#字符串扩展" class="headerlink" title="字符串扩展"></a>字符串扩展</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// es5</span></div><div class="line"><span class="keyword">var</span> first_name = <span class="string">'zhang'</span>, last_name = <span class="string">'san'</span>;</div><div class="line"><span class="keyword">var</span> message = <span class="string">'my name is'</span> + first_name + last_name;</div><div class="line"><span class="comment">// es6新增模版字符串，解决以前字符串拼接的痛点</span></div><div class="line"><span class="comment">//const message = `my name is $&#123;first_name&#125;$&#123;last_name&#125;`;</span></div></pre></td></tr></table></figure>
+<h2 id="解构"><a href="#解构" class="headerlink" title="解构"></a>解构</h2><p>es6允许我们从特定的结构中取值</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// es5从对象中取值</span></div><div class="line"><span class="keyword">var</span> obj = &#123;<span class="attr">name</span>: <span class="string">'test'</span>, <span class="attr">age</span>: <span class="number">12</span>&#125;;</div><div class="line"><span class="keyword">var</span> name = obj.name, age = obj.age;</div><div class="line"><span class="comment">// es6</span></div><div class="line"><span class="keyword">const</span> &#123;<span class="attr">name</span>: name2, <span class="attr">age</span>: age2&#125; = obj;</div></pre></td></tr></table></figure>
+<h3 id="对象解构"><a href="#对象解构" class="headerlink" title="对象解构"></a>对象解构</h3><ol>
+<li><p>基本用法</p>
+ <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> &#123;test&#125; = &#123;<span class="attr">test</span>: <span class="string">'test'</span>&#125;;</div><div class="line"></div><div class="line">(&#123;test&#125; = &#123;<span class="attr">test</span>: <span class="string">'new test'</span>&#125;);<span class="comment">// 在非变量声明的时候从对象中取值，需要使用括号包起来就</span></div><div class="line"><span class="comment">// &#123;test&#125; = &#123;test: 'new test'&#125; // 错误的方式</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>解构赋默认值</p>
+</li>
+<li>解构给不同的本地变量</li>
+<li>嵌套解构</li>
+</ol>
+<h3 id="数组解构"><a href="#数组解构" class="headerlink" title="数组解构"></a>数组解构</h3><p>数组解构同对象解构相似</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> [a, b] = [<span class="number">1</span>, <span class="number">2</span>]</div><div class="line">[a, b] = [<span class="number">2</span>, <span class="number">3</span>]; <span class="comment">// 此处和对象解构不同， 不必须使用括号包裹</span></div><div class="line"></div><div class="line"><span class="comment">// 使 a b 两个值互换</span></div><div class="line">[a, b] = [b, a]</div></pre></td></tr></table></figure>
+<h2 id="扩展运算符"><a href="#扩展运算符" class="headerlink" title="扩展运算符"></a>扩展运算符</h2><p>…</p>
+<h2 id="函数扩展"><a href="#函数扩展" class="headerlink" title="函数扩展"></a>函数扩展</h2><h3 id="箭头函数"><a href="#箭头函数" class="headerlink" title="箭头函数"></a>箭头函数</h3><h3 id="函数参数"><a href="#函数参数" class="headerlink" title="函数参数"></a>函数参数</h3><ol>
+<li>默认参数</li>
+<li>剩余参数</li>
+<li>参数解构</li>
+</ol>
+<h3 id="target属性"><a href="#target属性" class="headerlink" title="target属性"></a>target属性</h3><p>函数作为构造函数使用的时候，可以创建实例对象，此时函数被称为构造函数，为了确保构造函数被正确的调用，经常需要进行一些检测操作：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Animal</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">if</span> (!(<span class="keyword">this</span> <span class="keyword">instanceof</span> Animal)) &#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="number">1</span>)</div><div class="line">    <span class="keyword">return</span></div><div class="line">  &#125;</div><div class="line">  <span class="built_in">console</span>.log(<span class="string">'success'</span>);</div><div class="line">&#125;</div><div class="line">Animal()</div><div class="line"><span class="keyword">var</span> a = <span class="keyword">new</span> Animal();</div><div class="line">Animal.call(a); <span class="comment">// 无法区分</span></div></pre></td></tr></table></figure>
+<p>es6通过<code>new.target</code>进行判断， 非<code>new</code>调用的时候为<code>undefined</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Animal</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="built_in">console</span>.log(<span class="keyword">new</span>.target === Animal);</div><div class="line">&#125;</div><div class="line">Animal()</div><div class="line"><span class="keyword">var</span> a = <span class="keyword">new</span> Animal();</div><div class="line">Animal.call(a);</div></pre></td></tr></table></figure>
+<h2 id="对象扩展"><a href="#对象扩展" class="headerlink" title="对象扩展"></a>对象扩展</h2><h3 id="初始化简化"><a href="#初始化简化" class="headerlink" title="初始化简化"></a>初始化简化</h3><h3 id="方法简化"><a href="#方法简化" class="headerlink" title="方法简化"></a>方法简化</h3><h3 id="扩展方法"><a href="#扩展方法" class="headerlink" title="扩展方法"></a>扩展方法</h3><ol>
+<li><code>Object.assign</code></li>
+<li><code>Object.is</code></li>
+</ol>
+<h2 id="类"><a href="#类" class="headerlink" title="类"></a>类</h2><p>es6支持类的语法</p>
+<h2 id="Symbol"><a href="#Symbol" class="headerlink" title="Symbol"></a>Symbol</h2><ol>
+<li>创建</li>
+<li>全局符号表</li>
+</ol>
+<h2 id="迭代器和生成器"><a href="#迭代器和生成器" class="headerlink" title="迭代器和生成器"></a>迭代器和生成器</h2><p>什么是迭代器<br>什么是生成器<br>什么是可迭代对象</p>
+<h2 id="异步函数"><a href="#异步函数" class="headerlink" title="异步函数"></a>异步函数</h2><p>es5如何实现异步</p>
+<h2 id="promise"><a href="#promise" class="headerlink" title="promise"></a>promise</h2><p>创建<br>then,catch</p>
+<h2 id="代理和反射"><a href="#代理和反射" class="headerlink" title="代理和反射"></a>代理和反射</h2><h2 id="模块化"><a href="#模块化" class="headerlink" title="模块化"></a>模块化</h2>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/14/webpack配置/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="newbornhsir">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="我的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/08/14/webpack配置/" itemprop="url">webpack配置</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-14T18:04:15+08:00">
+                2019-08-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="es6转es5"><a href="#es6转es5" class="headerlink" title="es6转es5"></a>es6转es5</h3><p>es6支持需要使用<a href="https://babel.docschina.org/setup#installation" target="_blank" rel="external">babel</a></p>
+<h4 id="配置loader"><a href="#配置loader" class="headerlink" title="配置loader"></a>配置loader</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">module: &#123;</div><div class="line">  rules: [</div><div class="line">    &#123;</div><div class="line">      test: /\.js$/,</div><div class="line">      use: &#123;</div><div class="line">        loader: &apos;babel-loader&apos;</div><div class="line">      &#125;,</div><div class="line">      // 忽律 node_modules目录</div><div class="line">      exclude: /node_modules/</div><div class="line">    &#125;</div><div class="line">  ]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="安装-babel-preset-env进行语法转换-配置-babelrc"><a href="#安装-babel-preset-env进行语法转换-配置-babelrc" class="headerlink" title="安装@babel/preset-env进行语法转换,配置.babelrc"></a>安装@babel/preset-env进行语法转换,配置.babelrc</h4><p><code>npm install @babel/preset-env --save-dev</code></p>
+<p>安装<code>@babel/plugin-transform-runtime</code>，使支持新的es特性</p>
+<p>项目目录下创建.babelrc文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  &quot;presets&quot;: [&quot;@babel/preset-env&quot;],</div><div class="line">  &quot;plugins&quot;: [&quot;@babel/plugin-transform-runtime&quot;]</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="js校验-eslint配置"><a href="#js校验-eslint配置" class="headerlink" title="js校验, eslint配置"></a>js校验, eslint配置</h3><h4 id="安装eslint-eslint-loader"><a href="#安装eslint-eslint-loader" class="headerlink" title="安装eslint, eslint-loader"></a>安装eslint, eslint-loader</h4><p><code>npm i eslint eslint-loader --save-dev</code></p>
+<h4 id="配置loader-1"><a href="#配置loader-1" class="headerlink" title="配置loader"></a>配置loader</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">rules: [</div><div class="line">    &#123;</div><div class="line">      test: /\.js$/,</div><div class="line">      use: [&apos;babel-loader&apos;, &apos;eslint-loader&apos;],</div><div class="line">      // 忽律 node_modules目录</div><div class="line">      exclude: /node_modules/</div><div class="line">    &#125;</div><div class="line">  ]</div></pre></td></tr></table></figure>
+<h4 id="创建eslint配置文件-eslintrc-json"><a href="#创建eslint配置文件-eslintrc-json" class="headerlink" title="创建eslint配置文件.eslintrc.json"></a>创建eslint配置文件.eslintrc.json</h4><h3 id="每次打包清除旧的打包内容"><a href="#每次打包清除旧的打包内容" class="headerlink" title="每次打包清除旧的打包内容"></a>每次打包清除旧的打包内容</h3><h3 id="提取公共代码"><a href="#提取公共代码" class="headerlink" title="提取公共代码 ???"></a>提取公共代码 ???</h3><p>多入口时候，引用同一个文件, 不配置的时候会被打包到每个引用文件中去，加大了代码体积。<br>new webpack.optimize.CommonsChunkPlugin(options)<br>wepack4x使用optimization.splitChunks </p>
+<font color="red">配置之后，公用代码块可以，但是第三方库jquery分离不报错，但是不能使用。</font>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">optimization: &#123;</div><div class="line">  splitChunks: &#123;//  分割代码</div><div class="line">    cacheGroups: &#123;// 缓存组</div><div class="line">      common: &#123;</div><div class="line">        // 表明哪些chunks需要优化，可以传递字符串或者函数</div><div class="line">        // 合法的字符串: all , async, initial</div><div class="line">        // 函数可以更灵活控制需要优化的chunks</div><div class="line">        chunks: &apos;all&apos;,</div><div class="line">        // 最少被包含的数量</div><div class="line">        minChunks: 2</div><div class="line">      &#125;,</div><div class="line">      vendor: &#123;</div><div class="line">        test: /node_modules/,</div><div class="line">        chunks: &apos;initial&apos;,</div><div class="line">        minChunks: 2,</div><div class="line">        priority: 1,</div><div class="line">        enforce:true</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;,</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/07/从零开始创建react应用03-使用redux进行状态管理/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="newbornhsir">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="我的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/08/07/从零开始创建react应用03-使用redux进行状态管理/" itemprop="url">从零开始创建react应用03-使用redux进行状态管理</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-07T17:40:01+08:00">
+                2019-08-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>store</p>
+<p>reducer</p>
+<p>action</p>
+<p>subscribe</p>
+<p>dispatch</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/07/从零开始创建react应用02-react基础语法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="newbornhsir">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="我的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/08/07/从零开始创建react应用02-react基础语法/" itemprop="url">从零开始创建react应用02-react基础语法</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-07T17:38:46+08:00">
+                2019-08-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/07/从零开始创建react应用01-环境搭建/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="newbornhsir">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="我的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/08/07/从零开始创建react应用01-环境搭建/" itemprop="url">从零开始创建react应用01-环境搭建</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-07T17:36:23+08:00">
+                2019-08-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>react应用环境创建</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/04/ts中的类接口/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -868,637 +1492,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/03/webpack01-md/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="newbornhsir">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="我的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/04/03/webpack01-md/" itemprop="url">webpack01.md</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-03T19:20:29+08:00">
-                2019-04-03
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>webpack 是一个现代 JavaScript 应用程序的静态模块打包器(module bundler)。<br>当 webpack 处理应用程序时，它会递归地构建一个依赖关系图(dependency graph)，<br>其中包含应用程序需要的每个模块，然后将所有这些模块打包成一个或多个 bundle。<br>webpack四个核心概念</p>
-<ul>
-<li>entry</li>
-<li>output</li>
-<li>loader</li>
-<li>plugins</li>
-</ul>
-<h3 id="entry"><a href="#entry" class="headerlink" title="entry"></a>entry</h3><p>入口起点，决定从哪个模块开始构建依赖关系。可以配置多个入口起点</p>
-<h3 id="output"><a href="#output" class="headerlink" title="output"></a>output</h3><p>指定输出打包文件的配置，如路径，文件名等</p>
-<h3 id="loader"><a href="#loader" class="headerlink" title="loader"></a>loader</h3><p>loader可以让webpack加载非javascript文件。webpack只识别javascript，loader可以加载其它模块让webpack来处理。<br>loader有两个重要的配置:</p>
-<ul>
-<li>test: 标示出加载的文件</li>
-<li>use: 指明使用的loader类型</li>
-</ul>
-<h3 id="plugins"><a href="#plugins" class="headerlink" title="plugins"></a>plugins</h3><p>用来处理特定的任务，如对打包进行优化和压缩等，相当于扩展</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/25/从发布订阅到观察者模式/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="newbornhsir">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="我的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/03/25/从发布订阅到观察者模式/" itemprop="url">observer.md</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-25T19:15:56+08:00">
-                2018-03-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="发布订阅"><a href="#发布订阅" class="headerlink" title="发布订阅"></a>发布订阅</h3><p>发布者是实现了添加订阅、移除订阅、发布订阅的对象</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div></pre></td><td class="code"><pre><div class="line">/**新闻发布者， </div><div class="line"> * publisher 可以发布消息，让其它用户订阅消息，移除订阅</div><div class="line"> */</div><div class="line">const newsPublisher = &#123;</div><div class="line">    subs: &#123;</div><div class="line">        base: []</div><div class="line">    &#125;,</div><div class="line">    subscribe (newsType, cb) &#123;</div><div class="line">        if (!this.subs[newsType]) &#123;</div><div class="line">            /**订阅一个新的新闻类型 */</div><div class="line">            this.subs[newsType] = []</div><div class="line">        &#125;</div><div class="line">        this.subs[newsType].push(cb)</div><div class="line">    &#125;,</div><div class="line">    unSubscribe(newsType, cb) &#123;</div><div class="line">        /**取消订阅 */</div><div class="line">        let cbs = this.subs[newsType]</div><div class="line">        if (cbs) &#123;</div><div class="line">            let index = cbs.indexOf(cb)</div><div class="line">            cbs.splice(index,1)</div><div class="line">        &#125;</div><div class="line">    &#125;,</div><div class="line">    publisher (newsType) &#123;</div><div class="line">        let cbs = this.subs[newsType]</div><div class="line">        if (cbs) &#123;</div><div class="line">            cbs.forEach(cb =&gt; cb())</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">class Person &#123;</div><div class="line">    constructor (cb) &#123;</div><div class="line">        this.cb = cb</div><div class="line">    &#125;</div><div class="line">    subscribe (newType) &#123;</div><div class="line">        newsPublisher.subscribe(newType, this.cb)</div><div class="line">    &#125;</div><div class="line">    unSubscribe (newType) &#123;</div><div class="line">        newsPublisher.unSubscribe(newType, this.cb)</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">p1 = new Person(()=&gt;console.log(&apos;p1 know&apos;))</div><div class="line">p2 = new Person(()=&gt;console.log(&apos;p2 know&apos;))</div><div class="line">p1.subscribe(&apos;base&apos;)</div><div class="line">p2.subscribe(&apos;base&apos;)</div><div class="line">newsPublisher.publisher(&apos;base&apos;)</div><div class="line">p2.unSubscribe(&apos;base&apos;)</div><div class="line">newsPublisher.publisher(&apos;base&apos;)</div></pre></td></tr></table></figure>
-<h3 id="观察者模式"><a href="#观察者模式" class="headerlink" title="观察者模式"></a>观察者模式</h3><p>观察者模式是发布订阅的变体。将发布者所基本的添加、移除订阅，发布订阅的功能抽象出一个类，叫做依赖管理器，而订阅这部分的对象抽象出update方法，叫做watcher，在依赖出发notify的时候进行更新</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * 现在存在多个publisher，都可以添加订阅，移除订阅，发布订阅，</div><div class="line"> * 这部分公用的抽象出一个类，叫做Dep，依赖管理器</div><div class="line"> * 可以订阅的用户叫做watcher</div><div class="line"> */</div><div class="line">class Dep &#123;</div><div class="line">    constructor () &#123;</div><div class="line">        this.sub = []</div><div class="line">    &#125;</div><div class="line">    addSub (watcher) &#123;</div><div class="line">       /**添加 */</div><div class="line">       let index = this.sub.indexOf(watcher)</div><div class="line">       if (index === -1) &#123;</div><div class="line">           this.sub.push(watcher)</div><div class="line">       &#125;</div><div class="line">    &#125;</div><div class="line">    removeSub () &#123;</div><div class="line">       let index = this.sub.indexOf(watcher)</div><div class="line">       if (index !== -1) &#123;</div><div class="line">           this.sub.splice(index, 1)</div><div class="line">       &#125;</div><div class="line">    &#125;</div><div class="line">    notify () &#123;</div><div class="line">        this.sub.forEach(sub =&gt; sub.update())</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">class Watcher &#123;</div><div class="line">    constructor () &#123;</div><div class="line">       </div><div class="line">    &#125;</div><div class="line">    update () &#123;</div><div class="line"></div><div class="line">    &#125;</div><div class="line">    addDep (dep) &#123;</div><div class="line">        dep.addSub(this)</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/25/observer-md/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="newbornhsir">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="我的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/03/25/observer-md/" itemprop="url">observer.md</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-25T19:15:56+08:00">
-                2018-03-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="发布订阅"><a href="#发布订阅" class="headerlink" title="发布订阅"></a>发布订阅</h3><p>发布者是实现了添加订阅、移除订阅、发布订阅的对象</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div></pre></td><td class="code"><pre><div class="line">/**新闻发布者， </div><div class="line"> * publisher 可以发布消息，让其它用户订阅消息，移除订阅</div><div class="line"> */</div><div class="line">const newsPublisher = &#123;</div><div class="line">    subs: &#123;</div><div class="line">        base: []</div><div class="line">    &#125;,</div><div class="line">    subscribe (newsType, cb) &#123;</div><div class="line">        if (!this.subs[newsType]) &#123;</div><div class="line">            /**订阅一个新的新闻类型 */</div><div class="line">            this.subs[newsType] = []</div><div class="line">        &#125;</div><div class="line">        this.subs[newsType].push(cb)</div><div class="line">    &#125;,</div><div class="line">    unSubscribe(newsType, cb) &#123;</div><div class="line">        /**取消订阅 */</div><div class="line">        let cbs = this.subs[newsType]</div><div class="line">        if (cbs) &#123;</div><div class="line">            let index = cbs.indexOf(cb)</div><div class="line">            cbs.splice(index,1)</div><div class="line">        &#125;</div><div class="line">    &#125;,</div><div class="line">    publisher (newsType) &#123;</div><div class="line">        let cbs = this.subs[newsType]</div><div class="line">        if (cbs) &#123;</div><div class="line">            cbs.forEach(cb =&gt; cb())</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">class Person &#123;</div><div class="line">    constructor (cb) &#123;</div><div class="line">        this.cb = cb</div><div class="line">    &#125;</div><div class="line">    subscribe (newType) &#123;</div><div class="line">        newsPublisher.subscribe(newType, this.cb)</div><div class="line">    &#125;</div><div class="line">    unSubscribe (newType) &#123;</div><div class="line">        newsPublisher.unSubscribe(newType, this.cb)</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">p1 = new Person(()=&gt;console.log(&apos;p1 know&apos;))</div><div class="line">p2 = new Person(()=&gt;console.log(&apos;p2 know&apos;))</div><div class="line">p1.subscribe(&apos;base&apos;)</div><div class="line">p2.subscribe(&apos;base&apos;)</div><div class="line">newsPublisher.publisher(&apos;base&apos;)</div><div class="line">p2.unSubscribe(&apos;base&apos;)</div><div class="line">newsPublisher.publisher(&apos;base&apos;)</div></pre></td></tr></table></figure>
-<h3 id="观察者模式"><a href="#观察者模式" class="headerlink" title="观察者模式"></a>观察者模式</h3><p>观察者模式是发布订阅的变体。将发布者所基本的添加、移除订阅，发布订阅的功能抽象出一个类，叫做依赖管理器，而订阅这部分的对象抽象出update方法，叫做watcher，在依赖出发notify的时候进行更新</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * 现在存在多个publisher，都可以添加订阅，移除订阅，发布订阅，</div><div class="line"> * 这部分公用的抽象出一个类，叫做Dep，依赖管理器</div><div class="line"> * 可以订阅的用户叫做watcher</div><div class="line"> */</div><div class="line">class Dep &#123;</div><div class="line">    constructor () &#123;</div><div class="line">        this.sub = []</div><div class="line">    &#125;</div><div class="line">    addSub (watcher) &#123;</div><div class="line">       /**添加 */</div><div class="line">       let index = this.sub.indexOf(watcher)</div><div class="line">       if (index === -1) &#123;</div><div class="line">           this.sub.push(watcher)</div><div class="line">       &#125;</div><div class="line">    &#125;</div><div class="line">    removeSub () &#123;</div><div class="line">       let index = this.sub.indexOf(watcher)</div><div class="line">       if (index !== -1) &#123;</div><div class="line">           this.sub.splice(index, 1)</div><div class="line">       &#125;</div><div class="line">    &#125;</div><div class="line">    notify () &#123;</div><div class="line">        this.sub.forEach(sub =&gt; sub.update())</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">class Watcher &#123;</div><div class="line">    constructor () &#123;</div><div class="line">       </div><div class="line">    &#125;</div><div class="line">    update () &#123;</div><div class="line"></div><div class="line">    &#125;</div><div class="line">    addDep (dep) &#123;</div><div class="line">        dep.addSub(this)</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/22/vue源码笔记day3-md/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="newbornhsir">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="我的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/03/22/vue源码笔记day3-md/" itemprop="url">vue源码笔记day3-渲染.md</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-22T21:57:47+08:00">
-                2018-03-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>在vue完成模版编译的时候，是如何渲染的呢？</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">// $mount</div><div class="line"></div><div class="line">Vue.prototype.$mount = function (</div><div class="line">  el?: string | Element,</div><div class="line">  hydrating?: boolean</div><div class="line">): Component &#123;</div><div class="line">  el = el &amp;&amp; inBrowser ? query(el) : undefined</div><div class="line">  return mountComponent(this, el, hydrating)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">export function mountComponent (</div><div class="line">  vm: Component,</div><div class="line">  el: ?Element,</div><div class="line">  hydrating?: boolean</div><div class="line">): Component &#123;</div><div class="line">  // 实例添加$el属性,根结点</div><div class="line">  vm.$el = el</div><div class="line">  // render的检测，此时已经编译完成</div><div class="line">  if (!vm.$options.render) &#123;</div><div class="line">    //</div><div class="line">    vm.$options.render = createEmptyVNode</div><div class="line">    if (process.env.NODE_ENV !== &apos;production&apos;) &#123;</div><div class="line">      .....</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  // 检测是否有beforemount生命周期钩子的调用</div><div class="line">  callHook(vm, &apos;beforeMount&apos;)</div><div class="line">  // 创建更新函数</div><div class="line">  let updateComponent</div><div class="line">  /* istanbul ignore if */</div><div class="line">  if (process.env.NODE_ENV !== &apos;production&apos; &amp;&amp; config.performance &amp;&amp; mark) &#123;</div><div class="line">    updateComponent = () =&gt; &#123;</div><div class="line">      .....</div><div class="line">    &#125;</div><div class="line">  &#125; else &#123;</div><div class="line">    updateComponent = () =&gt; &#123;</div><div class="line">      vm._update(vm._render(), hydrating)</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  // we set this to vm._watcher inside the watcher&apos;s constructor</div><div class="line">  // since the watcher&apos;s initial patch may call $forceUpdate (e.g. inside child</div><div class="line">  // component&apos;s mounted hook), which relies on vm._watcher being already defined</div><div class="line">  // watcher如何进行数据检测？</div><div class="line">  new Watcher(vm, updateComponent, noop, null, true /* isRenderWatcher */)</div><div class="line">  hydrating = false</div><div class="line"></div><div class="line">  // manually mounted instance, call mounted on self</div><div class="line">  // mounted is called for render-created child components in its inserted hook</div><div class="line">  // 挂载完成</div><div class="line">  if (vm.$vnode == null) &#123;</div><div class="line">    vm._isMounted = true</div><div class="line">    callHook(vm, &apos;mounted&apos;)</div><div class="line">  &#125;</div><div class="line">  return vm</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>调用Watcher</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/19/gulp-md/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="newbornhsir">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="我的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/03/19/gulp-md/" itemprop="url">gulp.md</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-19T11:54:57+08:00">
-                2018-03-19
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="gulp"><a href="#gulp" class="headerlink" title="gulp"></a>gulp</h3><p>简介</p>
-<p>gulp自动化构建，配合一些插件使用，可以完成如sass预处理，js 压缩，html模版，动态刷新等工作。gulp是基于node中的stream，在stream上做了一次封装成vinyl file。通过pipe(管道)，传递流进行传递数据。</p>
-<p>使用流的好处是存储在内存中，减少I/O,因此效率更高.</p>
-<h2 id="这里是还未具体了解的知识点"><a href="#这里是还未具体了解的知识点" class="headerlink" title="这里是还未具体了解的知识点"></a>这里是还未具体了解的知识点</h2><ul>
-<li>stream</li>
-</ul>
-<p>stream 是nodejs的一个模块</p>
-<p>gulp的流式处理： 上一个的输出，是下一个的输入</p>
-<ul>
-<li><p>pipe</p>
-</li>
-<li><p>vinyl file</p>
-</li>
-</ul>
-<h3 id="gulp-vs-grunt"><a href="#gulp-vs-grunt" class="headerlink" title="gulp vs grunt"></a>gulp vs grunt</h3><ul>
-<li>gulp 易于书写和阅读</li>
-<li>减少频繁的I/O，快速构建</li>
-<li>易于使用和学习</li>
-<li>task依赖orchestrator，支持最大可能并发</li>
-</ul>
-<h3 id="gulp-vs-webpack"><a href="#gulp-vs-webpack" class="headerlink" title="gulp vs webpack"></a>gulp vs webpack</h3><h3 id="api"><a href="#api" class="headerlink" title="api"></a>api</h3><h5 id="src-globs-options"><a href="#src-globs-options" class="headerlink" title="src(globs[,options])"></a>src(globs[,options])</h5><p>匹配globs中的路径文件，返回一个vinyl files的stream，可以pipe到别的插件。 option为可选的一些配置</p>
-<h5 id="dest-path-options"><a href="#dest-path-options" class="headerlink" title="dest(path[,options])"></a>dest(path[,options])</h5><p>输出到路径， path为string或者函数 ? 函数怎么使用</p>
-<h5 id="task-name-deps-fn"><a href="#task-name-deps-fn" class="headerlink" title="task(name[,deps],fn)"></a>task(name[,deps],fn)</h5><p>创建一个任务，可选的deps数组，是其它的依赖任务，会在当前任务运行前执行</p>
-<h5 id="watch-glob-opts-tasks"><a href="#watch-glob-opts-tasks" class="headerlink" title="watch(glob[,opts],tasks)"></a>watch(glob[,opts],tasks)</h5><p>监视文件的变动</p>
-<p>glob: string | Array</p>
-<p>opts: 传递给gaze的参数。 gaze是什么？</p>
-<p>tasks: array，文件变动后需要执行的任务</p>
-<h5 id="start-taskName"><a href="#start-taskName" class="headerlink" title="start(taskName)"></a>start(taskName)</h5><p>执行一个任务,这里的参数？</p>
-<h3 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h3><ul>
-<li>安装gulp</li>
-</ul>
-<p><code>npm install gulp</code></p>
-<ul>
-<li>创建配置文件</li>
-</ul>
-<p>1- 在项目根目录创建一个gulpfile.js的文件，运行gulp的时候会执行这个文件</p>
-<p>2- 多个配置文件，可以使用 <code>gulp --gulpfile &lt;filename&gt;</code>,来指定路径</p>
-<p>3- gulpfile.js中创建任务</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">// demo,当在命令行中执行gulp的时候，默认执行配置文件的default任务</div><div class="line">// 也可以 gulp &lt;taskName&gt; 来执行指定的任务</div><div class="line">/* gulp 只有你需要熟知的参数标记，其他所有的参数标记只在一些任务需要的时候使用。</div><div class="line"></div><div class="line"> *   -v 或 --version 会显示全局和项目本地所安装的 gulp 版本号</div><div class="line"> *   --require &lt;module path&gt; 将会在执行之前 reqiure   </div><div class="line"> *   一个模块。这对于一些语言编译器或者需要其他应用的情况来说来说很有用。你可以使用多个--require</div><div class="line"> *   --gulpfile &lt;gulpfile path&gt; 手动指定一个 gulpfile 的路径，这在你有很多个 gulpfile 的时候很有用。这也会将 CWD 设置到该 gulpfile 所在目录</div><div class="line"> *   --cwd &lt;dir path&gt; 手动指定 CWD。定义 gulpfile 查找的位置，此外，所有的相应的依赖（require）会从这里开始计算相对路径</div><div class="line"> *   -T 或 --tasks 会显示所指定 gulpfile 的 task 依赖树</div><div class="line"> *  --tasks-simple 会以纯文本的方式显示所载入的 gulpfile 中的 task 列表</div><div class="line"> *  --color 强制 gulp 和 gulp 插件显示颜色，即便没有颜色支持</div><div class="line"> *  --no-color 强制不显示颜色，即便检测到有颜色支持</div><div class="line"> *  --silent 禁止所有的 gulp 日志</div><div class="line"> *  gulp &lt;task&gt; &lt;otherTask&gt; 执行任务</div><div class="line"> */</div><div class="line"> var gulp = require(&quot;gulp&quot;);</div><div class="line">gulp.task(taskName,function()&#123;</div><div class="line"></div><div class="line">&#125;)</div></pre></td></tr></table></figure>
-<h3 id="常用的插件"><a href="#常用的插件" class="headerlink" title="常用的插件"></a>常用的插件</h3><h4 id="browserify"><a href="#browserify" class="headerlink" title="browserify"></a>browserify</h4><ul>
-<li><p>gulp-load-plugins</p>
-</li>
-<li><p>browserify</p>
-</li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1543,7 +1541,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">28</span>
+                <span class="site-state-item-count">32</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1565,7 +1563,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-count">19</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

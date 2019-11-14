@@ -283,6 +283,557 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/30/前端路由/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="newbornhsir">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="我的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/10/30/前端路由/" itemprop="url">前端路由</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-30T23:08:26+08:00">
+                2017-10-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="实现原理"><a href="#实现原理" class="headerlink" title="实现原理:"></a>实现原理:</h3><p>eg: <a href="https://www.baidu.com/about" target="_blank" rel="external">https://www.baidu.com/about</a></p>
+<p>web服务器接受到请求后，会解析url,作出对应的处理，并返回处理结果。每一次请求都会刷新页面。</p>
+<p>前端路由指的是把路由的部分拿到前端来做，通过js处理，在 HTML5的history API出现之前，前端的路由都是通过 hash 来实现的，hash 能兼容低版本的浏览器。</p>
+<p>eg: <a href="https://www.baidu.com/#/about" target="_blank" rel="external">https://www.baidu.com/#/about</a></p>
+<p>web服务器不会解析hash,#号之后的内容会被忽略，但是可以通过window.location.hash获取到。因此可以对获取到的内容加以处理，通过ajax来获取数据。</p>
+<p>history 是 HTML5 才有的新 API，可以用来操作浏览器的 session history。基于 history 来实现的路由可以和最初的例子中提到的路径规则一样</p>
+<h3 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h3><p>spa</p>
+<h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><p>无需每一次请求都要刷新页面</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/19/react-native问题汇总/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="newbornhsir">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="我的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/09/19/react-native问题汇总/" itemprop="url">react-native问题汇总</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-19T10:25:15+08:00">
+                2017-09-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/react-native/" itemprop="url" rel="index">
+                    <span itemprop="name">react-native</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Print-Entry-“-CFBundleIdentifier”-Does-Not-Exist"><a href="#Print-Entry-“-CFBundleIdentifier”-Does-Not-Exist" class="headerlink" title="Print: Entry, “:CFBundleIdentifier”, Does Not Exist"></a>Print: Entry, “:CFBundleIdentifier”, Does Not Exist</h2><p>运行<code>react-native run-ios</code>报错，打开xcode,发现报错信息是<code>boost/iterator/iterator_adaptor.hpp’ file not found</code>,参考<a href="https://medium.com/@jjerryhan/handling-third-party-build-error-on-react-native-0-46x-445f867e7a2b" target="_blank" rel="external">https://medium.com/@jjerryhan/handling-third-party-build-error-on-react-native-0-46x-445f867e7a2b</a>所给的原因，重新下载和编译第三方库,再次运行成功。</p>
+<h2 id="ios中fetch的http请求"><a href="#ios中fetch的http请求" class="headerlink" title="ios中fetch的http请求"></a>ios中fetch的http请求</h2><p>ios阻止http类型的请求，修改ios项目目录下的info.plist文件，添加允许访问的域或者关闭苹果提供的安全保障</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&lt;key&gt;NSAppTransportSecurity&lt;/key&gt;</div><div class="line">    &lt;dict&gt;</div><div class="line">        &lt;key&gt;NSExceptionDomains&lt;/key&gt;</div><div class="line">        &lt;dict&gt;</div><div class="line">            &lt;key&gt;localhost&lt;/key&gt;</div><div class="line">            &lt;dict&gt;</div><div class="line">                &lt;key&gt;NSExceptionAllowsInsecureHTTPLoads&lt;/key&gt;</div><div class="line">                &lt;true/&gt;</div><div class="line">            &lt;/dict&gt;</div><div class="line">        &lt;/dict&gt;</div><div class="line">    &lt;/dict&gt;</div></pre></td></tr></table></figure>
+<h2 id="app-ids-和-push-Notifications证书创建"><a href="#app-ids-和-push-Notifications证书创建" class="headerlink" title="app ids 和 push Notifications证书创建"></a>app ids 和 push Notifications证书创建</h2><p><a href="www.jianshu.com/p/78282e16db66">链接</a></p>
+<h2 id="Exception-in-thread-“main”-java-util-zip-ZipException-zip-END-header-not-found"><a href="#Exception-in-thread-“main”-java-util-zip-ZipException-zip-END-header-not-found" class="headerlink" title="Exception in thread “main” java.util.zip.ZipException: zip END header not found"></a>Exception in thread “main” java.util.zip.ZipException: zip END header not found</h2><p>gradle-4.1-all 包下载出错,重新下载放到.</p>
+<h2 id="Could-not-determine-java-version-from-‘9-0-1’"><a href="#Could-not-determine-java-version-from-‘9-0-1’" class="headerlink" title="Could not determine java version from ‘9.0.1’."></a>Could not determine java version from ‘9.0.1’.</h2><p>运行react-native run-android报错<code>Could not determine java version from &#39;9.0.1&#39;.</code>。jdk版本的问题，官方文档给的链接是jdk8</p>
+<p>虽然报错，但是在AndroidStudio中可以运行成功</p>
+<p> 解决办法一： </p>
+<p> 更换jdk 版本</p>
+<p> 解决办法二：</p>
+<p> <a href="https://github.com/facebook/react-native/issues/16536" target="_blank" rel="external">github/react-native issue</a>。我更换了之后仍然报错</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"> A problem occurred configuring root project &apos;ReactNativeDemo&apos;.</div><div class="line">&gt; Could not resolve all files for configuration &apos;:classpath&apos;.</div><div class="line">   &gt; Could not find com.android.tools.build:gradle:3.0.0.</div><div class="line">     Searched in the following locations:</div><div class="line">         https://jcenter.bintray.com/com/android/tools/build/gradle/3.0.0/gradle-3.0.0.pom</div><div class="line">         https://jcenter.bintray.com/com/android/tools/build/gradle/3.0.0/gradle-3.0.0.jar</div></pre></td></tr></table></figure>
+<p>虽然报错，但是可以正常运行。暂时不知道原因;</p>
+<p>猜测：用AndroidStudio打开项目会提示更新gradle到3.0，更新之后就会报这个错误，默认配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">distributionUrl=https\://services.gradle.org/distributions/gradle-2.14.1-all.zip</div></pre></td></tr></table></figure>
+<p>建议在不了解的情况下，先不要根据提示更新。</p>
+<p>参考网上给出的解决方案，修改build.gradle,添加google().<a href="http://blog.csdn.net/zhouxianling233/article/details/78359217" target="_blank" rel="external">原文链接</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">// Top-level build file where you can add configuration options common to all sub-projects/modules.</div><div class="line"></div><div class="line">buildscript &#123;</div><div class="line">    repositories &#123;</div><div class="line">         // this is add</div><div class="line">        google()</div><div class="line">        jcenter()</div><div class="line">    &#125;</div><div class="line">    dependencies &#123;</div><div class="line">        classpath &apos;com.android.tools.build:gradle:3.0.0&apos;</div><div class="line"></div><div class="line">        // NOTE: Do not place your application dependencies here; they belong</div><div class="line">        // in the individual module build.gradle files</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">allprojects &#123;</div><div class="line">    repositories &#123;</div><div class="line">        // this is add</div><div class="line">        google()</div><div class="line">        mavenLocal()</div><div class="line">        jcenter()</div><div class="line">        maven &#123;</div><div class="line">            // All of React Native (JS, Obj-C sources, Android binaries) is installed from npm</div><div class="line">            url &quot;$rootDir/../node_modules/react-native/android&quot;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>暂时不清楚解决办法，先换回jdk8</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/12/flex布局/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="newbornhsir">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="我的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/09/12/flex布局/" itemprop="url">flex布局</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-12T22:56:44+08:00">
+                2017-09-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/css/" itemprop="url" rel="index">
+                    <span itemprop="name">css</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/12/react-native学习路线总结/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="newbornhsir">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="我的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/09/12/react-native学习路线总结/" itemprop="url">react-native学习路线总结</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-12T22:39:45+08:00">
+                2017-09-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/react-native/" itemprop="url" rel="index">
+                    <span itemprop="name">react-native</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <ol>
+<li><p>jsx</p>
+<p> react 使用jsx语法书写元素和组件，当然也可以不使用。在看官网教程的时候会了解其使用语法</p>
+</li>
+<li><p>es6</p>
+<p> react使用了es6语法，因此学习react之前最好了解es6。如果想快速了解的话推荐看<a href="http://es6.ruanyifeng.com" target="_blank" rel="external">ECMAScript 6 入门</a>,如果想详细了解的话推荐看官方英文文档。</p>
+</li>
+<li><p>react</p>
+<p> 初期主要了解知识点有元素、组件、渲染机制以及方法、props、state、状态提升、条件渲染、列表渲染等.<br> <a href="https://doc.react-china.org/react/docs/hello-world.html" target="_blank" rel="external">中文文档地址</a>，<a href="https://facebook.github.io/react/" target="_blank" rel="external">官方文档地址</a></p>
+</li>
+<li><p>react-native</p>
+<p> 各种API的使用</p>
+</li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/12/react-md/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1530,353 +2081,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/05/postgres/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="newbornhsir">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="我的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/06/05/postgres/" itemprop="url">postgres</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-05T18:30:46+08:00">
-                2017-06-05
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/postgresql/" itemprop="url" rel="index">
-                    <span itemprop="name">postgresql</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="postgresql学习"><a href="#postgresql学习" class="headerlink" title="postgresql学习"></a>postgresql学习</h1><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>下载文件安装（百度）</p>
-<h2 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h2><p>1 建数据库语句(在postgresql 的sql shell中执行)</p>
-<p> <code>create database name;</code>，需要分号来结束语句，语句执行完后显示<code>CREATE DATABASE</code>则建表成功</p>
-<p>2 查看数据库</p>
-<p><code>\l</code></p>
-<p>3 连接或退出数据库</p>
-<p>连接<code>\c 数据库name</code>，退出<code>\q</code></p>
-<p>4 删除数据库</p>
-<p><code>DROP DATABASE NAME</code>这里我使用大写，发现小写创建的数据表删除了，所以postgresql应该是不区分大小写的</p>
-<p>5 建表</p>
-<ul>
-<li><p>首先连接数据库<code>\c name</code></p>
-</li>
-<li><p>建表语句</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">CREATE TABLE table_name(</div><div class="line">   column1 datatype,</div><div class="line">   column2 datatype,</div><div class="line">   column3 datatype,</div><div class="line">   .....</div><div class="line">   columnN datatype,</div><div class="line">   PRIMARY KEY( one or more columns )</div><div class="line">);</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>6 查看和删除</p>
-<p><code>\d</code> <code>DROP TABLE table_name;</code></p>
-<p>7 schema</p>
-<ul>
-<li>默认mydb数据库中只有一个架构public</li>
-<li>执行 <code>create schema myschema;</code>命令后，架构中多了一个myschema，执行<code>create table table_name();</code>语句，是在public下建立数据表，在schema模式下建表需要执行 <code>create table schemaName.tableName();</code></li>
-<li>删除schema <code>drop schema schemaName</code></li>
-</ul>
-<p>8 insert into</p>
-<ul>
-<li>插入</li>
-</ul>
-<p><code>insert into tableName(column1,column2,...,columnn) values(value1),...,(valuen);</code></p>
-<p>插入一行或者多行，返回数据<code>insert 0 rows</code>则插入成功</p>
-<ul>
-<li>查看插入结果</li>
-</ul>
-<p><code>select * from tableName</code>，<code>select key1,key2,...,keyn from tableName</code></p>
-<p>9 运算符，主要用来条件查找,主要有算术、比较、逻辑、位串操作符</p>
-<ul>
-<li><code>select * from tablename where (a-1=1)is true;</code>,</li>
-<li><code>select * from tablename where id&gt;1 and id&lt;5;</code>,</li>
-</ul>
-<p>10 update 和delete</p>
-<ul>
-<li><code>update tablename 键值对（或多个） where 条件</code></li>
-<li><code>delete from tablename where 条件</code></li>
-</ul>
-<p>11 like模糊查询</p>
-<pre><code><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">   WHERE SALARY::text LIKE &apos;200%&apos;	Finds any values that start with 200</div><div class="line"></div><div class="line">WHERE SALARY::text LIKE &apos;%200%&apos;	Finds any values that have 200 in any position</div><div class="line"> </div><div class="line">WHERE SALARY::text LIKE &apos;_00%&apos;	Finds any values that have 00 in the second and third positions</div><div class="line"></div><div class="line">WHERE SALARY::text LIKE &apos;2_%_%&apos;	Finds any values that start with 2 and are at least 3 characters in length</div><div class="line"></div><div class="line">WHERE SALARY::text LIKE &apos;%2&apos;	Finds any values that end with 2</div><div class="line"></div><div class="line">WHERE SALARY::text LIKE &apos;_2%3&apos;	Finds any values that have a 2 in the second position and end with a 3</div><div class="line"></div><div class="line">WHERE SALARY::text LIKE &apos;2___3&apos;	Finds any values in a five-digit number that start with 2 and end with 3</div></pre></td></tr></table></figure>
-</code></pre><p>12 orderby</p>
-<p><code>SELECT column-list FROM table_name [WHERE condition] [ORDER BY column1, column2, .. columnN] [ASC | DESC];</code>  </p>
-<p>13 with</p>
-<p>14 distinct</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/09/hexo+github搭建个人博客/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="newbornhsir">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="我的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/05/09/hexo+github搭建个人博客/" itemprop="url">hexo+github搭建个人博客</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-09T11:42:55+08:00">
-                2017-05-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/hexo/" itemprop="url" rel="index">
-                    <span itemprop="name">hexo</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="搭建个人博客"><a href="#搭建个人博客" class="headerlink" title="搭建个人博客"></a>搭建个人博客</h2><p>因为自己电脑需要更换，但目前没有资金，想创建博客也希望在更换电脑的时候很好的迁移，网上查了一下资料，发现这么一种方法。自己试了一下目前是成功的，为了防止下次更换电脑时忘记具体流程，所以在操作完成之后凭借印象写下这篇博客。具体操作中可能会有和当时操作不一样地方，具体没有检查，或许会有错误</p>
-<h3 id="安装node-js和git"><a href="#安装node-js和git" class="headerlink" title="安装node.js和git"></a>安装node.js和git</h3><ul>
-<li>具体操作和环境配置看网上配置教程<h3 id="在github上创建仓库"><a href="#在github上创建仓库" class="headerlink" title="在github上创建仓库"></a>在github上创建仓库</h3></li>
-<li>仓库名称为username.github.io,网上说仓库必须以这个命名规范，其他的命令是否可以不清楚，没有测试</li>
-<li>仓库中新建分支hexo存放博客源文件，master分支存放发布的文件</li>
-<li>仓库克隆到本地<h3 id="安装hexo"><a href="#安装hexo" class="headerlink" title="安装hexo"></a>安装hexo</h3></li>
-<li>执行 npm init (这一步我添加的，具体操作没试过，可以不用这一步)</li>
-<li>npm install hexo-cli –save</li>
-<li>hexo init blogName</li>
-<li>cd blogName</li>
-<li>npm install</li>
-<li>执行hexo server，打开端口查看效果<h3 id="hexo-远程git仓库配置"><a href="#hexo-远程git仓库配置" class="headerlink" title="hexo 远程git仓库配置"></a>hexo 远程git仓库配置</h3></li>
-<li>打开blogName目录下的_config.yml文件</li>
-<li><p>修改deploy</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">deploy:</div><div class="line">  type: git</div><div class="line">  repo: git@github.com:username/username.github.io.git</div><div class="line">  branch: master</div></pre></td></tr></table></figure>
-</li>
-<li><p>其它配置按照自己喜好修改</p>
-</li>
-<li>安装 npm install hexo-deployer-git –save<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3></li>
-<li>执行 git push 提交命令到hexo分支，在远程仓库的hexo分支查看文件是否上传</li>
-<li>执行hexo d -g命令，提交完成，打开<code>https://username.github.io</code>查看博客<h3 id="主题配置"><a href="#主题配置" class="headerlink" title="主题配置"></a>主题配置</h3></li>
-<li>网上搜索hexo主题，挑选自己喜欢的下载放到thems文件夹下</li>
-<li>修改blogName下_config.yml文件中的theme为所应用主题的名称</li>
-<li>主题的其它修改在主题文件目录下的_config.yml文件中</li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1921,7 +2130,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">28</span>
+                <span class="site-state-item-count">32</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1943,7 +2152,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-count">19</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
