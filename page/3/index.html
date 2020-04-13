@@ -283,6 +283,540 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/08/vue笔记1-源码初步分析-md/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="newbornhsir">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="我的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/03/08/vue笔记1-源码初步分析-md/" itemprop="url">vue笔记1-源码初步分析.md</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-08T21:58:51+08:00">
+                2018-03-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/vue/" itemprop="url" rel="index">
+                    <span itemprop="name">vue</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Vue-的初始化过程"><a href="#Vue-的初始化过程" class="headerlink" title="Vue 的初始化过程"></a>Vue 的初始化过程</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">st=&gt;start: merge option</div><div class="line">op1=&gt;operation: initLifecycle</div><div class="line">op2=&gt;operation: initEvents</div><div class="line">op3=&gt;operation: initRender</div><div class="line">op4=&gt;operation: callHook</div><div class="line">op5=&gt;operation: initInjections</div><div class="line">op6=&gt;operation: initState</div><div class="line">op7=&gt;operation: initProvide</div><div class="line">op8=&gt;operation: callHook</div><div class="line">e=&gt;end: mount</div><div class="line"></div><div class="line">st(right)-&gt;op1-&gt;op2(right)-&gt;op3-&gt;op4(right)-&gt;op5-&gt;op6(right)-&gt;op7-&gt;op8(right)-&gt;e</div></pre></td></tr></table></figure>
+<h3 id="1-合并options"><a href="#1-合并options" class="headerlink" title="1. 合并options"></a>1. 合并options</h3><p>判断是否为组件， 采用不同的合并方式</p>
+<h4 id="1-1-非组件options合并"><a href="#1-1-非组件options合并" class="headerlink" title="1.1 非组件options合并"></a>1.1 非组件options合并</h4><ol>
+<li>解析Vue的options和Vue原型的option, 递归解析，合并成一个option， 期间判断是否和缓存相同，决定是否需要重新合并</li>
+<li>将解析出的Vue option和传入的option合并成一个对象</li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/23/virtualenv的使用-md/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="newbornhsir">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="我的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/23/virtualenv的使用-md/" itemprop="url">virtualenv的使用.md</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-23T17:30:10+08:00">
+                2017-11-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>virtualenv用来搭建python的开发环境</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p><code>pip install virtualenv</code></p>
+<h2 id="创建环境目录"><a href="#创建环境目录" class="headerlink" title="创建环境目录"></a>创建环境目录</h2><p><code>virtualenv ENV</code> </p>
+<p>ENV是虚拟开发环境的目录，命令的作用:</p>
+<ol>
+<li>创建<code>ENV/lib/</code> 和 <code>ENV/include/</code> 目录, 目录包含新的开发环境所支持的library. 开发环境下安装的包会放在 <code>ENV/lib/pythonX.X/site-packages/</code>目录。</li>
+<li><code>ENV/bin</code> is created, where executables live - noticeably a new python. Thus running a script with #! /path/to/ENV/bin/python would run that script under this virtualenv’s python.</li>
+<li>虚拟环境下安装了<code>pip</code> and <code>setuptools</code> . This associated pip can be run from ENV/bin/pip.</li>
+</ol>
+<h2 id="激活环境"><a href="#激活环境" class="headerlink" title="激活环境"></a>激活环境</h2><p><code>source bin/activate</code></p>
+<p>激活成功后，命令行提示符前出现目录名称</p>
+<h2 id="取消激活"><a href="#取消激活" class="headerlink" title="取消激活"></a>取消激活</h2><p><code>deactivate</code></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/02/react-navigation/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="newbornhsir">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="我的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/02/react-navigation/" itemprop="url">react-navigation的使用</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-02T14:57:50+08:00">
+                2017-11-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p><a href="https://reactnavigation.org/docs/navigators/stack" target="_blank" rel="external">官方文档</a></p>
+<h2 id="路由分类"><a href="#路由分类" class="headerlink" title="路由分类"></a>路由分类</h2><ul>
+<li><a href="#stack">StackNavigator</a></li>
+<li><a href="#tab">TabNavigator</a></li>
+<li><a href="#drawer">DrawerNavigator</a></li>
+</ul>
+<h3 id="statck">StackNavigatorConfig</h3>
+
+<p>使用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div></pre></td><td class="code"><pre><div class="line">import &#123;StackNavigator&#125; from &apos;react-navigation&apos;;</div><div class="line"></div><div class="line">const App = StackNavigator(routerConfig,StackNavigatorConfig)</div><div class="line"></div><div class="line">// routerConfig</div><div class="line">&#123;</div><div class="line">    pathName: &#123;</div><div class="line">        screen: screenName,</div><div class="line">        path: &apos;&apos;,</div><div class="line">        navigationOptions: (&#123;navigator&#125;)=&gt;(&#123;</div><div class="line">                // navigationOptions config</div><div class="line">            &#125;)</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">//StackNavigatorConfig</div><div class="line"></div><div class="line">&#123;</div><div class="line">    // 路由配置</div><div class="line">    initialRouteName: &apos;&apos;,//默认显示的路由，不配置则默认为路由配置中的第一个</div><div class="line">    initialRouteParams: &#123;&#125;,</div><div class="line">    navigationOptions: (&#123;navigator&#125;)=&gt;(&#123;</div><div class="line">        title: &apos;headetitle&apos;,</div><div class="line">        // null/React Element/ function that given HeaderProps returns a React Element</div><div class="line">        header: null,</div><div class="line">        //react Element/ string</div><div class="line">        headerTitle: ,</div><div class="line">        headerLeft: ,//react element</div><div class="line">        headerStyle: &#123;&#125;,//style Obj</div><div class="line">        headerTitleStyle: &#123;&#125;, // style Obj for title component</div><div class="line">        headerTintColor: &apos;#ccc&apos;, // tint color</div><div class="line">        ....</div><div class="line">    &#125;),</div><div class="line">    path: ,//A mapping of overrides for the paths set in the route configs</div><div class="line">    // 视觉显示配置</div><div class="line">    mode: &apos;card&apos;,//card/modal, default is card</div><div class="line">    // 配置了一下headerMode,没看到太大差别，除了none的时候不现实header，文档说float在ios常见，screen在android常见</div><div class="line">    headerMode: &apos;float&apos;,// float/screen/none</div><div class="line">    cardStyle: ,//</div><div class="line">    // 函数：传递一下三个参数,transitionProps,prevtransitionProps,isModal,返回一个和默认过渡效果配置的对象</div><div class="line">    transitionConfig: ()=&gt;&#123;&#125;,</div><div class="line">    onTransitionStart: ()=&gt;&#123;&#125;,</div><div class="line">    onTransitionEnd; ()=&gt;&#123;&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"> // Navigator Props </div><div class="line">// StackNavigator创建的导航可以通过screenProps向子视图传递额外的数据</div><div class="line"></div><div class="line">const SomeStack = StackNavigator(&#123;</div><div class="line">  // config</div><div class="line">&#125;);</div><div class="line"></div><div class="line">&lt;SomeStack</div><div class="line">  screenProps=&#123;/* this prop will get passed to the screen components as this.props.screenProps */&#125;</div><div class="line">/&gt;</div></pre></td></tr></table></figure>
+<h3 id="tab">TabNavigator</h3>
+
+<p>API : TabNavigator(routerconfig,TabNavigatorConfig)</p>
+<h4 id="routerconfig"><a href="#routerconfig" class="headerlink" title="routerconfig"></a>routerconfig</h4><p>和StackNavigator一致</p>
+<h4 id="TabNavigatorConfig"><a href="#TabNavigatorConfig" class="headerlink" title="TabNavigatorConfig"></a>TabNavigatorConfig</h4><ul>
+<li>tabBarComponent: default: TabBarBottom in ios, TabBarTop in android</li>
+<li>tabBarPosition: ‘top’ or ‘bottom’</li>
+<li>swipeEnable: 是否可以滑动切换</li>
+<li>animationEnable: 切换是否有动画</li>
+<li>lazy: 是否lazy渲染</li>
+<li>initiallayout:</li>
+<li><p>tabBarOptions: 如下</p>
+<ol>
+<li>initialRouteName</li>
+<li>order</li>
+<li>paths</li>
+<li><p>backBehavior</p>
+<h5 id="tabBarBottom"><a href="#tabBarBottom" class="headerlink" title="tabBarBottom"></a>tabBarBottom</h5></li>
+<li><p>activeTintColor</p>
+</li>
+<li>activebackgroundColor</li>
+<li>inactiveTintColor</li>
+<li>inactiveBackgroundColor</li>
+<li>showLabel</li>
+<li>style</li>
+<li>backgroundColor</li>
+<li>labelStyle</li>
+<li>tabStyle</li>
+<li><p>allowFontScaling</p>
+<h5 id="tabBarTop"><a href="#tabBarTop" class="headerlink" title="tabBarTop"></a>tabBarTop</h5></li>
+<li><p>activeTintColor</p>
+</li>
+<li>inactiveTintColor</li>
+<li>showIcon</li>
+<li>showLabel</li>
+<li>upperCaseLabel</li>
+<li>pressColor</li>
+<li>pressOpacity</li>
+<li>scrollEnable</li>
+<li>tabStyle</li>
+<li>indicatorStyle</li>
+<li>labelStyle</li>
+<li>iconStyle</li>
+<li>style</li>
+<li>allowFontScaling</li>
+</ol>
+</li>
+<li><p>navigationOptions: 如下</p>
+<ol>
+<li>title</li>
+<li>tabBarVisible</li>
+<li>tabBaricon</li>
+<li>tabBarLabel</li>
+<li>tabBarOnPress</li>
+</ol>
+</li>
+</ul>
+<h3 id="drawer">Drawernavigator</h3>
+
+<p>目前未用到，用法见官方文档。</p>
+<h2 id="Screen-Navigation-Prop"><a href="#Screen-Navigation-Prop" class="headerlink" title="Screen Navigation Prop"></a>Screen Navigation Prop</h2><p>props.navigation 接受一下4个prop</p>
+<ol>
+<li>navigate(router,params,action)</li>
+</ol>
+<p>路径，参数，The sub-action to run in the child router, if the screen is a navigator</p>
+<ol>
+<li>state</li>
+</ol>
+<p>Object: {routeName:’’,key:’’,params:{}}</p>
+<ol>
+<li>setParams</li>
+</ol>
+<p>更改路由中参数</p>
+<ol>
+<li>goBack()</li>
+</ol>
+<p>goBack(“screen”||null)</p>
+<ol>
+<li>dispatch</li>
+</ol>
+<p>send an action to the router </p>
+<h2 id="Navigation-Action"><a href="#Navigation-Action" class="headerlink" title="Navigation Action"></a>Navigation Action</h2><h3 id="Navigate"><a href="#Navigate" class="headerlink" title="Navigate"></a>Navigate</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">import &#123; NavigationActions &#125; from &apos;react-navigation&apos;</div><div class="line"></div><div class="line">const navigateAction = NavigationActions.navigate(&#123;</div><div class="line"></div><div class="line">  routeName: &apos;Profile&apos;,// 在app中注册过的目标路由</div><div class="line"></div><div class="line">  params: &#123;&#125;, // Object, 传递到目标路由的参数</div><div class="line"></div><div class="line">  // Object: The sub-action to run in the child router, if the screen is a navigator</div><div class="line"></div><div class="line">  action: NavigationActions.navigate(&#123; routeName: &apos;SubProfileRoute&apos;&#125;)</div><div class="line">&#125;)</div><div class="line"></div><div class="line">this.props.navigation.dispatch(navigateAction)</div></pre></td></tr></table></figure>
+<h3 id="Reset"><a href="#Reset" class="headerlink" title="Reset"></a>Reset</h3><ul>
+<li>index - number - required - Index of the active route on routes array in navigation state.</li>
+<li>actions - array - required - Array of Navigation Actions that will replace the navigation state.</li>
+<li>key - string or null - optional - If set, the navigator with the given key will reset. If null, the root navigator will reset.</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">import &#123; NavigationActions &#125; from &apos;react-navigation&apos;</div><div class="line"></div><div class="line">const resetAction = NavigationActions.reset(&#123;</div><div class="line">  index: 0,</div><div class="line">  actions: [</div><div class="line">    NavigationActions.navigate(&#123; routeName: &apos;Profile&apos;&#125;)</div><div class="line">  ]</div><div class="line">&#125;)</div><div class="line">this.props.navigation.dispatch(resetAction)</div></pre></td></tr></table></figure>
+<h3 id="Back"><a href="#Back" class="headerlink" title="Back"></a>Back</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">import &#123; NavigationActions &#125; from &apos;react-navigation&apos;</div><div class="line"></div><div class="line">const backAction = NavigationActions.back(&#123;</div><div class="line">    //string or null - optional - If set, navigation will go back from the given key. If null, navigation will go back anywhere.</div><div class="line">  key: &apos;Profile&apos;</div><div class="line">&#125;)</div><div class="line">this.props.navigation.dispatch(backAction)</div></pre></td></tr></table></figure>
+<h3 id="SetParams"><a href="#SetParams" class="headerlink" title="SetParams"></a>SetParams</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">import &#123; NavigationActions &#125; from &apos;react-navigation&apos;</div><div class="line"></div><div class="line">const setParamsAction = NavigationActions.setParams(&#123;</div><div class="line">  params: &#123; title: &apos;Hello&apos; &#125;,//Object</div><div class="line">  key: &apos;screen-123&apos;,//string - required - Route key that should get the new params</div><div class="line"></div><div class="line">&#125;)</div><div class="line">this.props.navigation.dispatch(setParamsAction)</div></pre></td></tr></table></figure>
+<h2 id="Router"><a href="#Router" class="headerlink" title="Router"></a>Router</h2><p>routers 定义一个组件的navigation的state,允许开发者定义可处理的route和action.</p>
+<h3 id="build-in-routers"><a href="#build-in-routers" class="headerlink" title="build-in routers"></a>build-in routers</h3><ul>
+<li>StackRouter</li>
+</ul>
+<p>api: StackRouter(routerconfig,stackconfig)</p>
+<p>routerconfig:</p>
+<ol>
+<li><p>path; Specify the screen component or child navigator</p>
+</li>
+<li><p>screen: Specify the screen component or child navigator</p>
+</li>
+<li><p>getScreen(): Set a lazy getter for a screen component (but not navigators)</p>
+</li>
+</ol>
+<p>stackconfig</p>
+<ol>
+<li>initialRouteName</li>
+<li>initialRouteParams</li>
+<li>paths - 可更改routerconfig中的path</li>
+</ol>
+<ul>
+<li>TabRouter</li>
+</ul>
+<p>api: StackRouter(routerconfig,tabconfig)</p>
+<p>routerconfig:</p>
+<ol>
+<li><p>path; Specify the screen component or child navigator</p>
+</li>
+<li><p>screen: Specify the screen component or child navigator</p>
+</li>
+<li><p>getScreen(): Set a lazy getter for a screen component (but not navigators)</p>
+</li>
+</ol>
+<p>tabconfig</p>
+<ol>
+<li>initialRouteName</li>
+<li>order - Array of routeNames which defines the order of the tabs</li>
+<li>paths - 可更改routerconfig中的path</li>
+<li>backbehavior - Should the back button cause a tab switch to the initial tab? If yes, set to initialRoute, otherwise none. Defaults to initialRoute behavior.</li>
+</ol>
+<p>use</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">class MyNavigator extends React.Component &#123;</div><div class="line">    static router = StackRouter(routes, config);</div><div class="line">    ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="custom-router-API"><a href="#custom-router-API" class="headerlink" title="custom router API"></a>custom router API</h3><image src="https://reactnavigation.org/assets/routers-concept-map.png"> 
+
+<h4 id="getStateForAction-action-state"><a href="#getStateForAction-action-state" class="headerlink" title="getStateForAction(action, state)"></a>getStateForAction(action, state)</h4><p>定义所给action的state。函数在传入props.navigation.dispatch()的时候调用。返回</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    index: 0,</div><div class="line">    routers: [</div><div class="line">        &#123;</div><div class="line">            routerName: &apos;name&apos;,</div><div class="line">            ...</div><div class="line">        &#125;</div><div class="line">        ...</div><div class="line">    ]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="getComponentForRouteName-routename"><a href="#getComponentForRouteName-routename" class="headerlink" title="getComponentForRouteName(routename)"></a>getComponentForRouteName(routename)</h4><p>返回所给路由的子组件或者导航</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  index: 1,</div><div class="line">  routes: [</div><div class="line">    &#123; key: &apos;A&apos;, routeName: &apos;Foo&apos; &#125;,</div><div class="line">    &#123; key: &apos;B&apos;, routeName: &apos;Bar&apos; &#125;,</div><div class="line">  ],</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="getComponentForState-state"><a href="#getComponentForState-state" class="headerlink" title="getComponentForState(state)"></a>getComponentForState(state)</h4><p>Returns the active component for a deep navigation state.</p>
+<h4 id="getActionForPathAndParams-path-params"><a href="#getActionForPathAndParams-path-params" class="headerlink" title="getActionForPathAndParams(path, params)"></a>getActionForPathAndParams(path, params)</h4><p>Returns an optional navigation action that should be used when the user navigates to this path and provides optional query parameters.</p>
+<h4 id="getPathAndParamsForState-state"><a href="#getPathAndParamsForState-state" class="headerlink" title="getPathAndParamsForState(state)"></a>getPathAndParamsForState(state)</h4><p>Returns the path and params that can be put into the URL to link the user back to the same spot in the app.<br>The path/params that are output from this should form an action when passed back into the router’s getActionForPathAndParams. That action should take you to a similar state once passed through getStateForAction.</p>
+<h4 id="getScreenOptions-navigation-screenProps"><a href="#getScreenOptions-navigation-screenProps" class="headerlink" title="getScreenOptions(navigation, screenProps)"></a>getScreenOptions(navigation, screenProps)</h4><p>Used to retrieve the navigation options for a screen. Must provide the screen’s current navigation prop and optionally, other props that your navigation options may need to consume.</p>
+<ul>
+<li>navigation - This is the navigation prop that the screen will use, where the state refers to the screen’s route/state. Dispatch will trigger actions in the context of that screen.</li>
+<li>screenProps - Other props that your navigation options may need to consume</li>
+<li>navigationOptions - The previous set of options that are default or provided by the previous configurer<br>Inside an example view, perhaps you need to fetch the configured title:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">// First, prepare a navigation prop for your child, or re-use one if already available.</div><div class="line">const screenNavigation = addNavigationHelpers(&#123;</div><div class="line">  // In this case we use navigation.state.index because we want the title for the active route.</div><div class="line">  state: navigation.state.routes[navigation.state.index],</div><div class="line">  dispatch: navigation.dispatch,</div><div class="line">&#125;);</div><div class="line">const options = this.props.router.getScreenOptions(screenNavigation, &#123;&#125;);</div><div class="line">const title = options.title;</div></pre></td></tr></table></figure>
+<h3 id="custom-navigation-actions"><a href="#custom-navigation-actions" class="headerlink" title="custom navigation actions"></a>custom navigation actions</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">const MyApp = StackNavigator(&#123;</div><div class="line">  Home: &#123; screen: HomeScreen &#125;,</div><div class="line">  Profile: &#123; screen: ProfileScreen &#125;,</div><div class="line">&#125;, &#123;</div><div class="line">  initialRouteName: &apos;Home&apos;,</div><div class="line">&#125;)</div><div class="line"></div><div class="line">const defaultGetStateForAction = MyApp.router.getStateForAction;</div><div class="line"></div><div class="line">MyApp.router.getStateForAction = (action, state) =&gt; &#123;</div><div class="line">  if (state &amp;&amp; action.type === &apos;PushTwoProfiles&apos;) &#123;</div><div class="line">    const routes = [</div><div class="line">      ...state.routes,</div><div class="line">      &#123;key: &apos;A&apos;, routeName: &apos;Profile&apos;, params: &#123; name: action.name1 &#125;&#125;,</div><div class="line">      &#123;key: &apos;B&apos;, routeName: &apos;Profile&apos;, params: &#123; name: action.name2 &#125;&#125;,</div><div class="line">    ];</div><div class="line">    return &#123;</div><div class="line">      ...state,</div><div class="line">      routes,</div><div class="line">      index: routes.length - 1,</div><div class="line">    &#125;;</div><div class="line">  &#125;</div><div class="line">  return defaultGetStateForAction(action, state);</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h3 id="阻止-navigation-action"><a href="#阻止-navigation-action" class="headerlink" title="阻止 navigation action"></a>阻止 navigation action</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">import &#123; NavigationActions &#125; from &apos;react-navigation&apos;</div><div class="line"></div><div class="line">const MyStackRouter = StackRouter(&#123;</div><div class="line">  Home: &#123; screen: HomeScreen &#125;,</div><div class="line">  Profile: &#123; screen: ProfileScreen &#125;,</div><div class="line">&#125;, &#123;</div><div class="line">  initialRouteName: &apos;Home&apos;,</div><div class="line">&#125;)</div><div class="line"></div><div class="line">const defaultGetStateForAction = MyStackRouter.router.getStateForAction;</div><div class="line"></div><div class="line">MyStackRouter.router.getStateForAction = (action, state) =&gt; &#123;</div><div class="line">  if (</div><div class="line">    state &amp;&amp;</div><div class="line">    action.type === NavigationActions.BACK &amp;&amp;</div><div class="line">    state.routes[state.index].params.isEditing</div><div class="line">  ) &#123;</div><div class="line">    // Returning null from getStateForAction means that the action</div><div class="line">    // has been handled/blocked, but there is not a new state</div><div class="line">    return null;</div><div class="line">  &#125;</div><div class="line">  </div><div class="line">  return defaultGetStateForAction(action, state);</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h3 id="Handling-Custom-URIs"><a href="#Handling-Custom-URIs" class="headerlink" title="Handling Custom URIs"></a>Handling Custom URIs</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">import &#123; NavigationActions &#125; from &apos;react-navigation&apos;</div><div class="line"></div><div class="line">const MyApp = StackNavigator(&#123;</div><div class="line">  Home: &#123; screen: HomeScreen &#125;,</div><div class="line">  Profile: &#123; screen: ProfileScreen &#125;,</div><div class="line">&#125;, &#123;</div><div class="line">  initialRouteName: &apos;Home&apos;,</div><div class="line">&#125;)</div><div class="line">const previousGetActionForPathAndParams = MyApp.router.getActionForPathAndParams;</div><div class="line"></div><div class="line">Object.assign(MyApp.router, &#123;</div><div class="line">  getActionForPathAndParams(path, params) &#123;</div><div class="line">    if (</div><div class="line">      path === &apos;my/custom/path&apos; &amp;&amp;</div><div class="line">      params.magic === &apos;yes&apos;</div><div class="line">    ) &#123;</div><div class="line">      // returns a profile navigate action for /my/custom/path?magic=yes</div><div class="line">      return NavigationActions.navigate(&#123;</div><div class="line">        routeName: &apos;Profile&apos;,</div><div class="line">        action: NavigationActions.navigate(&#123;</div><div class="line">          // This child action will get passed to the child router</div><div class="line">          // ProfileScreen.router.getStateForAction to get the child</div><div class="line">          // navigation state.</div><div class="line">          routeName: &apos;Friends&apos;,</div><div class="line">        &#125;),</div><div class="line">      &#125;);</div><div class="line">    &#125;</div><div class="line">    return previousGetActionForPathAndParams(path, params);</div><div class="line">  &#125;,</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+</image>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/30/前端路由/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1450,637 +1984,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/10/django学习之http-request/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="newbornhsir">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="我的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/06/10/django学习之http-request/" itemprop="url">django学习之http-request</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-10T01:05:18+08:00">
-                2017-06-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="django处理http请求-未完，待续"><a href="#django处理http请求-未完，待续" class="headerlink" title="django处理http请求(未完，待续)"></a>django处理http请求(未完，待续)</h1><p>执行<code>python manage.py startapp httpRequest</code></p>
-<h2 id="url设计"><a href="#url设计" class="headerlink" title="url设计"></a>url设计</h2><p>1 django如何处理请求</p>
-<p>当用户从django站点发起一个请求，以下是算法系统接下来决定去执行什么python代码</p>
-<ul>
-<li><p>django决定使用的root URLconf。通常，这个值由ROOT_URLCONF设置。但是，如果接下来的HttpRequest对象有urlconf属性(由middleware request processing设置)，这个值将替代ROOT_URLconf设置</p>
-</li>
-<li><p>django加载Python模块并寻找可变的urlpatterns–应该是一个django.conf.urls.url()的实例python列表</p>
-</li>
-<li><p>django按顺序执行每一个url模式并在第一个匹配的url停止</p>
-</li>
-<li><p>一旦正则匹配，django将暴露并执行所给的视图函数。视图传递以下参数</p>
-<p>1    HttpRequest实例</p>
-<p>2    如果匹配的正则表达式没有返回任何命名组，那么来自正则表达式的匹配将作为位置参数提供。</p>
-<p>3    关键字参数由正则表达式匹配的任何命名组提供，通过django.conf.urls.url()中的可选择的关键字参数来覆盖(翻译不准确)</p>
-</li>
-<li><p>如果没有匹配项或者在此过程中出现异常，django调用适当的异常处理视图。详情<a href="https://docs.djangoproject.com/en/1.9/topics/http/urls/#error-handling" target="_blank" rel="external">error handling</a></p>
-</li>
-</ul>
-<h3 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h3><p>详见httpRequest/views.py,httpRequest/urls.py</p>
-<h3 id="named-groups和no-named-groups正则表达式匹配-分类的规则"><a href="#named-groups和no-named-groups正则表达式匹配-分类的规则" class="headerlink" title="named groups和no-named groups正则表达式匹配/分类的规则"></a>named groups和no-named groups正则表达式匹配/分类的规则</h3><p>1 如果存在任何命名参数，将使用命名参数，忽略无命名参数</p>
-<p>2 其他情况，将无命名参数作为位置参数传递</p>
-<h3 id="URLconf搜索的内容"><a href="#URLconf搜索的内容" class="headerlink" title="URLconf搜索的内容"></a>URLconf搜索的内容</h3><p>URLconf搜索请求的url，将它作为Python字符串解析，不包含POST或者GET参数或者域名</p>
-<h3 id="捕获的参数总是字符串"><a href="#捕获的参数总是字符串" class="headerlink" title="捕获的参数总是字符串"></a>捕获的参数总是字符串</h3><p>每个捕获到的参数总是作为Python字符串发送到视图，不管正则表达式中所确定的类型</p>
-<h3 id="处理错误"><a href="#处理错误" class="headerlink" title="处理错误"></a>处理错误</h3><p>django默认一些处理错误的模块</p>
-<ul>
-<li><p>handler400 django.conf.urld.handler400</p>
-</li>
-<li><p>handler403 django.conf.urls.handler403</p>
-</li>
-<li><p>handler404 django.cof.urls.handler404</p>
-</li>
-<li><p>handler500 django.conf.urls.handler500</p>
-</li>
-</ul>
-<h3 id="include-other-URLconfs"><a href="#include-other-URLconfs" class="headerlink" title="include other URLconfs"></a>include other URLconfs</h3><p>在任何情况，你的urlpatterns可以’include’其它url</p>
-<h1 id="编写视图"><a href="#编写视图" class="headerlink" title="编写视图"></a>编写视图</h1><p>一个view函数是一个携带web请求和返回的Python函数。实现一个页面的过程</p>
-<ul>
-<li>编写view函数</li>
-<li>指定url到view</li>
-<li>view函数处理错误</li>
-<li><p>可选，定制错误的view视图</p>
-<h1 id="视图装饰器"><a href="#视图装饰器" class="headerlink" title="视图装饰器"></a>视图装饰器</h1><p>django提供一些装饰器，可应用于html个一些特性</p>
-<h2 id="支持的http方法"><a href="#支持的http方法" class="headerlink" title="支持的http方法"></a>支持的http方法</h2><p>django.views.decorators.http中的装饰器可以限制对视图访问的请求方式。如果条件不符合，他将返回<a href="https://docs.djangoproject.com/en/1.9/ref/request-response/#django.http.HttpResponseNotAllowed" target="_blank" rel="external">django.http.HttpResponseNotAllowed</a></p>
-</li>
-<li><p>require_http_methods</p>
-</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">from django.views.decoratord.http import require_http_methods</div><div class="line">@require_http_methods([&apos;GET&apos;,&apos;POST&apos;])</div><div class="line">#请求方式必须大写</div><div class="line">def my_view(request):</div><div class="line">	#仅通过post或者get请求</div><div class="line">	pass</div></pre></td></tr></table></figure>
-<ul>
-<li><p>require_GET()</p>
-</li>
-<li><p>reuire_POST()</p>
-</li>
-<li><p>require_safe()</p>
-</li>
-</ul>
-<p>装饰器要求视图只接受GET和HEAD方法。 这些方法通常被认为是“安全的”，因为除了检索所请求的资源之外，它们不应该具有采取行动的意思。</p>
-<h2 id="conditional-view-processing"><a href="#conditional-view-processing" class="headerlink" title="conditional view processing"></a>conditional view processing</h2><p>接下来的在django.views.decorators.http中的装饰器可以控制个别视图的缓存</p>
-<ul>
-<li><p>condition(etag_func=None, last_modified_func=None)</p>
-</li>
-<li><p>last_modified(last_modified_func)</p>
-</li>
-</ul>
-<p>These decorators can be used to generate ETag and Last-Modified headers; see conditional view processing.</p>
-<h2 id="GZip-compression"><a href="#GZip-compression" class="headerlink" title="GZip compression"></a>GZip compression</h2><p>The decorators in django.views.decorators.gzip control content compression on a per-view basis.</p>
-<h3 id="gzip-page"><a href="#gzip-page" class="headerlink" title="gzip_page()"></a>gzip_page()</h3><p>This decorator compresses content if the browser allows gzip compression. It sets the Vary header accordingly, so that caches will base their storage on the Accept-Encoding header.</p>
-<h2 id="vary-headers"><a href="#vary-headers" class="headerlink" title="vary headers"></a>vary headers</h2><p>The decorators in django.views.decorators.vary can be used to control caching based on specific request headers.</p>
-<h3 id="vary-on-cookie-func"><a href="#vary-on-cookie-func" class="headerlink" title="vary_on_cookie(func)"></a>vary_on_cookie(func)</h3><h3 id="vary-on-headers-headers"><a href="#vary-on-headers-headers" class="headerlink" title="vary_on_headers(*headers)"></a>vary_on_headers(*headers)</h3><ul>
-<li><p>The Vary header defines which request headers a cache mechanism should take into account when building its cache key.</p>
-</li>
-<li><p>See using vary headers.</p>
-</li>
-</ul>
-<h2 id="Caching"><a href="#Caching" class="headerlink" title="Caching"></a>Caching</h2><p>The decorators in django.views.decorators.cache control server and client-side caching</p>
-<h3 id="never-cache-view-func"><a href="#never-cache-view-func" class="headerlink" title="never_cache(view_func)"></a>never_cache(view_func)</h3><p>This decorator adds a Cache-Control: max-age=0, no-cache, no-store, must-revalidate header to a response to indicate that a page should never be cached.</p>
-<h1 id="文件上传link"><a href="#文件上传link" class="headerlink" title="文件上传link"></a>文件上传<a href="https://docs.djangoproject.com/en/1.9/topics/http/file-uploads/" target="_blank" rel="external">link</a></h1><h1 id="django-shortcut-function"><a href="#django-shortcut-function" class="headerlink" title="django shortcut function"></a>django shortcut function</h1><h2 id="render"><a href="#render" class="headerlink" title="render()"></a>render()</h2><p>render(request, template_name, context=None, context_instance=_context_instance_undefined, content_type=None, status=None, current_app=_current_app_undefined, dirs=_dirs_undefined, using=None)</p>
-<h3 id="必须参数"><a href="#必须参数" class="headerlink" title="必须参数"></a>必须参数</h3><ul>
-<li><p>request(请求对象)</p>
-</li>
-<li><p>模板名称</p>
-<h3 id="可选参数"><a href="#可选参数" class="headerlink" title="可选参数"></a>可选参数</h3></li>
-<li>context(添加到模板环境的字典数据)</li>
-<li>context_instance</li>
-<li>content_type</li>
-<li>status</li>
-<li>current_app</li>
-<li>using</li>
-</ul>
-<h2 id="render-to-response"><a href="#render-to-response" class="headerlink" title="render_to_response()"></a>render_to_response()</h2><p>render_to_response(template_name, context=None, context_instance=_context_instance_undefined, content_type=None, status=None, dirs=_dirs_undefined, using=None)</p>
-<h3 id="必须参数-1"><a href="#必须参数-1" class="headerlink" title="必须参数"></a>必须参数</h3><ul>
-<li>template_name<h3 id="可选参数-1"><a href="#可选参数-1" class="headerlink" title="可选参数"></a>可选参数</h3></li>
-<li>context</li>
-<li>context_instance</li>
-<li>content_type</li>
-<li>status</li>
-<li>using<h2 id="redirect"><a href="#redirect" class="headerlink" title="redirect()"></a>redirect()</h2><h2 id="get-object-or-404"><a href="#get-object-or-404" class="headerlink" title="get_object_or_404()"></a>get_object_or_404()</h2><h2 id="get-list-or-404"><a href="#get-list-or-404" class="headerlink" title="get_list_or_404()"></a>get_list_or_404()</h2></li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/09/django学习之Models-and-database/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="newbornhsir">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="我的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/06/09/django学习之Models-and-database/" itemprop="url">django学习之Models-and-database</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-09T18:03:52+08:00">
-                2017-06-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Models-and-database（待完成）"><a href="#Models-and-database（待完成）" class="headerlink" title="Models and database（待完成）"></a>Models and database（待完成）</h1><p>django的models和database学习。在mysite目录下执行<code>python manage.py startapp modelsanddatabase</code>,在setting.py的INSTALLED_APPS中添加<code>&#39;modelsanddatabase.apps.ModelsanddatabaseConfig&#39;,</code></p>
-<h2 id="Model"><a href="#Model" class="headerlink" title="Model"></a>Model</h2><p>模型是单一明确的信息数据来源。它包含基本的字段和你所存储数据的行为。通常，每个模型匹配一个数据表。<br><br>基本要素：</p>
-<ul>
-<li>每个model都是一个Python类，并且是django.db.models.Model的子类</li>
-<li>每个modle的属性代表一个数据库字段</li>
-<li>django有自动生成数据的API。详情见<a href="https://docs.djangoproject.com/en/1.9/topics/db/queries/" target="_blank" rel="external">Making queries</a></li>
-</ul>
-<p>Example:(modelsanddatabase/models.py)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">from django.db import models</div><div class="line"></div><div class="line">class Person(models.Model):</div><div class="line">    first_name = models.CharField(max_length=30)</div><div class="line">    last_name = models.CharField(max_length=30)</div></pre></td></tr></table></figure></p>
-<p>将modelsanddatabase添加到settings.py中，执行<code>python manage.py makemigrations modelsanddatabase</code>和<code>python manage.py migrate</code>。将看到建表提示和添加提示。若想在admin中显示，需在modelsanddatabase/admin.py中注册</p>
-<h2 id="Field"><a href="#Field" class="headerlink" title="Field"></a>Field</h2><p>字段是model中最重要的一部分，字段命名不能与models API冲突</p>
-<p>1 字段类型</p>
-<p>每个字段应该是一个合适字段类的实例<a href="https://docs.djangoproject.com/en/1.9/ref/models/fields/#model-field-types" target="_blank" rel="external"> model field reference</a>。django使用字段类型处理以下事情：</p>
-<ul>
-<li>告诉数据库存储类型</li>
-<li>当渲染from表单是使用默认的HTML组件</li>
-<li>用于django管理和自动生成form表单的最小验证需求</li>
-</ul>
-<p>2 字段选项</p>
-<p>每个字段都需要一组特定于字段的参数。例如CharField需要max_length参数去指定可变字符串数据的存储长度。</p>
-<p>3 自动生成的主键</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/08/djano学习/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="newbornhsir">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="我的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/06/08/djano学习/" itemprop="url">djano学习</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-08T17:07:31+08:00">
-                2017-06-08
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="django学习"><a href="#django学习" class="headerlink" title="django学习"></a>django学习</h1><p>python=3.4.3,django=1.9.7,参考官网 <a href="https://docs.djangoproject.com/en/1.9/intro/tutorial01/" target="_blank" rel="external">Writing your first Django app</a> 希望能对django有一个初步的了解。</p>
-<h2 id="第一部分"><a href="#第一部分" class="headerlink" title="第一部分"></a>第一部分</h2><p>1 创建项目<code>django-admin startproject projectname</code></p>
-<p>目录结构如下</p>
-<p>— mysite/</p>
-<p>—— mysite/</p>
-<p>———— <strong> init </strong>.py</p>
-<p>———— setting.py</p>
-<p>———— urls.py</p>
-<p>———— wsgi.py</p>
-<p>— manage.py</p>
-<p>这些文件是：</p>
-<ul>
-<li>外层mysite/根目录只是项目的容器，你可以重新命名</li>
-<li>manage.py 提供了使用命令行和django项目交互的功能，详情在<a href="https://docs.djangoproject.com/en/1.9/ref/django-admin/" target="_blank" rel="external">adango-admin and manage.py</a></li>
-<li>内层mysite/目录是项目实际意义的python程序包，通过程序包的名称import其中的内容。eg:mysite.urls</li>
-<li>mysite/__init__.py: 空文件，告诉python此目录是一个python程序包</li>
-<li>mysite/settings.py： django项目的配置文件。<a href="https://docs.djangoproject.com/en/1.9/topics/settings/" target="_blank" rel="external">工作原理</a></li>
-<li>mysite/urls.py: url配置</li>
-<li>mysite/wsgi.py:为项目服务的一个WSGI-compatible web服务器的入口点。 <a href="https://docs.djangoproject.com/en/1.9/howto/deployment/wsgi/" target="_blank" rel="external">详情</a></li>
-</ul>
-<p>2 启动<code>python manage.py runserver</code></p>
-<p>3 新建polls app<code>python manage.py startapp polls</code>,执行命令后会在项目下创建polls目录</p>
-<ul>
-<li><p>编写第一个视图,polls/views.py</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">from django.http import HttpResponse</div><div class="line"></div><div class="line">def hello(request):</div><div class="line">	return HttpResponse(&quot;hello,worls&quot;)</div></pre></td></tr></table></figure>
-</li>
-<li><p>编写urls,polls/urls.py</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">from django.conf.urls import url</div><div class="line">from . import views</div><div class="line">urlpatterns = [</div><div class="line">	url(r&apos;^$&apos;,views.hello,name=&quot;hello&quot;),</div><div class="line">]</div></pre></td></tr></table></figure>
-</li>
-<li><p>将根目录的URLconf指向polls.urls，mysite/urls.py</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">from django.conf.urls import include, url</div><div class="line">from django.contrib import admin</div><div class="line">urlpatterns = [</div><div class="line">	url(r&apos;^polls/&apos;, include(&apos;polls.urls&apos;)),//include()函数可以连接其它URLconf</div><div class="line">	url(r&apos;^admin/&apos;, admin.site.urls),</div><div class="line">]</div></pre></td></tr></table></figure>
-</li>
-<li><p>显示效果<code>localhost:8000/polls</code></p>
-</li>
-</ul>
-<p>&ensp;&ensp;&ensp;url有四个参数，两个必须（正则表达式–匹配URl和视图–确定视图函数）,两个可选（关键字参数–用字典的形式传递到指定视图和name–命名式路由）</p>
-<h2 id="第二部分–数据库"><a href="#第二部分–数据库" class="headerlink" title="第二部分–数据库"></a>第二部分–数据库</h2><p>数据库的配置在mysite/setting.py的DATABASES中，默认使用db.sqlite3。INSTALLED_APP中包含了django 项目中激活的实例。默认包含如下app</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">INSTALLED_APPS = [</div><div class="line">    &apos;django.contrib.admin&apos;,# admin site</div><div class="line">    &apos;django.contrib.auth&apos;, # 验证</div><div class="line">    &apos;django.contrib.contenttypes&apos;, # 内容类型框架</div><div class="line">    &apos;django.contrib.sessions&apos;, # session框架</div><div class="line">    &apos;django.contrib.messages&apos;, # messageing framework</div><div class="line">    &apos;django.contrib.staticfiles&apos;, # 静态文件管理框架</div><div class="line">]</div></pre></td></tr></table></figure>
-<p>需要运行命令为这些数据建立数据表<code>python manage.py migrate</code>。这个命令会查找INSTALLED_APPS设置，创建所需的数据表</p>
-<ul>
-<li>创建数据模型polls/models.py</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">from django.db import models</div><div class="line"></div><div class="line"># Create your models here.</div><div class="line"></div><div class="line">class Question(models.Model):</div><div class="line">	def __str__(self): #打印对象的字符串表达</div><div class="line">		return self.question_text</div><div class="line">	question_text = models.CharField(max_length=200)</div><div class="line">	pub_date = models.DateTimeField(&apos;date published&apos;)</div><div class="line"></div><div class="line">class Choice(models.Model):</div><div class="line">	def __Str__(self):</div><div class="line">		return self.choice_text</div><div class="line">	#ForeignKey(Class_Name, limit_choices_to=&#123;‘key_name’: value&#125;, on_delete=models.SET_NULL)</div><div class="line">	#绑定一个其他类的元素(类名、可以是 ‘self’, 对于目标的属性的限制条件，关联目标被删除时的操作)</div><div class="line">	question = models.ForeignKey(Question, on_delete=models.CASCADE)</div><div class="line">	choice_text = models.CharField(max_length=200)</div><div class="line">	votes = models.IntegerField(default=0)</div></pre></td></tr></table></figure>
-<ul>
-<li>将polls添加到INSTALLED_APPS中，在polls/apps.py中有pollsConfig，将polls.apps.pollsConfig添加到INSTALLED_APPS中，执行<code>python manage.py makemigrations polls</code>创建模型。<code>执行python manage.py sqlmigrate polls 0001</code>查看上述操作返回的SQL语句</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">C:\Users\Administrator\Desktop\online\mysite&gt;python manage.py makemigrations polls</div><div class="line">Migrations for &apos;polls&apos;:</div><div class="line">  0001_initial.py:</div><div class="line">    - Create model Choice</div><div class="line">    - Create model Question</div><div class="line">    - Add field question to choice</div><div class="line"></div><div class="line">C:\Users\Administrator\Desktop\online\mysite&gt;python manage.py sqlmigrate polls 0001</div><div class="line">BEGIN;</div><div class="line">--</div><div class="line">-- Create model Choice</div><div class="line">--</div><div class="line">CREATE TABLE &quot;polls_choice&quot; (</div><div class="line">	&quot;id&quot; integer NOT NULL PRIMARY KEY AUTOINCREMENT, </div><div class="line">	&quot;choice_text&quot; varchar(200) NOT NULL, </div><div class="line">	&quot;votes&quot; integer NOT NULL);</div><div class="line">--</div><div class="line">-- Create model Question</div><div class="line">--</div><div class="line">CREATE TABLE &quot;polls_question&quot; (</div><div class="line">	&quot;id&quot; integer NOT NULL PRIMARY KEY AUTOINCREMENT, </div><div class="line">	&quot;question_text&quot; varchar(200) NOT NULL, </div><div class="line">	&quot;pub_date&quot; datetime NOT NULL);</div><div class="line">--</div><div class="line">-- Add field question to choice</div><div class="line">--</div><div class="line">ALTER TABLE &quot;polls_choice&quot; RENAME TO &quot;polls_choice__old&quot;;</div><div class="line">CREATE TABLE &quot;polls_choice&quot; (&quot;id&quot; integer NOT NULL PRIMARY KEY AUTOINCREMENT, &quot;choice_text&quot; varchar(200) NOT NULL, &quot;votes&quot; integer NOT NULL, &quot;question_id&quot; integer NOT NULL REFERENCES &quot;polls_question&quot; (&quot;id&quot;));</div><div class="line">INSERT INTO &quot;polls_choice&quot; (&quot;choice_text&quot;, &quot;question_id&quot;, &quot;votes&quot;, &quot;id&quot;) SELECT &quot;choice_text&quot;, NULL, &quot;votes&quot;, &quot;id&quot; FROM &quot;polls_choice__old&quot;;</div><div class="line">DROP TABLE &quot;polls_choice__old&quot;;</div><div class="line">CREATE INDEX &quot;polls_choice_7aa0f6ee&quot; ON &quot;polls_choice&quot; (&quot;question_id&quot;);</div><div class="line"></div><div class="line">COMMIT;</div></pre></td></tr></table></figure>
-<ul>
-<li><code>python manage.py migrate</code>更新</li>
-<li><p>使用python shell操作数据库<code>python manage.py shell</code></p>
-</li>
-<li><p><code>python manage.py createsuperuser</code>创建登录用户，<code>http://localhost:8000/admin/</code>登录系统，发现并没有创建的Questiob和Choice</p>
-</li>
-<li><p>注册所创建的模型polls/admin.py,刷新页面，出现Question和Choice</p>
-</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">from django.contrib import admin</div><div class="line">from .models import Question, Choice</div><div class="line"># Register your models here.</div><div class="line"></div><div class="line">admin.site.register(Question)</div><div class="line">admin.site.register(Choice)</div></pre></td></tr></table></figure>
-<h2 id="第三部分-视图"><a href="#第三部分-视图" class="headerlink" title="第三部分-视图"></a>第三部分-视图</h2><ul>
-<li>添加视图函数polls/views.py</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">def detail(request,id):</div><div class="line">	return HttpResponse(&quot;you are looking at %s&quot; %id)</div><div class="line"></div><div class="line">def results(request,id):</div><div class="line">	res = &quot;your are looking at the results of question %s&quot;</div><div class="line">	return HttpResponse(res % id)</div><div class="line"></div><div class="line">def vote(request,id):</div><div class="line">	return HttpResponse(&quot;you are voting on question %s&quot; % id)</div></pre></td></tr></table></figure>
-<ul>
-<li>添加路由</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">urlpatterns = [</div><div class="line">	url(r&apos;^$&apos;,views.hello,name=&quot;hello&quot;),</div><div class="line">	url(r&apos;^(?P&lt;id&gt;[0-9]+)/$&apos;, views.detail, name=&apos;detail&apos;),</div><div class="line">    # ex: /polls/5/results/</div><div class="line">    url(r&apos;^(?P&lt;id&gt;[0-9]+)/results/$&apos;, views.results, name=&apos;results&apos;),</div><div class="line">    # ex: /polls/5/vote/</div><div class="line">    url(r&apos;^(?P&lt;id&gt;[0-9]+)/vote/$&apos;, views.vote, name=&apos;vote&apos;),</div><div class="line">]</div></pre></td></tr></table></figure>
-<ul>
-<li>在管理界面添加测试数据，打开<code>http://localhost:8000/polls/1/</code>,<code>http://localhost:8000/polls/1/results</code>,<code>http://localhost:8000/polls/1/vote</code>查看显示效果。<br>视图中的id来自Url正则表达式中的id。使用括号包含内容，捕获和传递参数到视图函数<br>P<id>定义匹配模式参数的名称。</id></li>
-<li>修改视图让它自动做一些事情<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">from .models import Question</div><div class="line">def hello(request):</div><div class="line">	latest_question_list = Question.objects.order_by(&apos;-pub_date&apos;)[:5]</div><div class="line">	output = &quot;, &quot;.join([q.question_text for q in latest_question_list])</div><div class="line">	return HttpResponse(output)</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>这种做法的缺点是页面硬编码在视图函数中，页面不易修改。改善方法—使用模板加载</p>
-<ul>
-<li>新建模板polls/templates/polls/index.html</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&#123;% if latest_question_list %&#125;</div><div class="line">    &lt;	ul&gt;</div><div class="line">    &#123;% for question in latest_question_list %&#125;</div><div class="line">        &lt;	li&gt;&lt;	a href=&quot;/polls/&#123;&#123; question.id &#125;&#125;/&quot;&gt;&#123;&#123; question.question_text &#125;&#125;&lt;/a&gt;&lt;/li&gt;</div><div class="line">    &#123;% endfor %&#125;</div><div class="line">    &lt;	/ul&gt;</div><div class="line">&#123;% else %&#125;</div><div class="line">    &lt;	p&gt;No polls are available.&lt;	/p&gt;</div><div class="line">&#123;% endif %&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li><p>修改视图函数，使用loader加载模板</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">def hello(request):</div><div class="line">	latest_question_list = Question.objects.order_by(&apos;-pub_date&apos;)[:5]</div><div class="line">	# output = &quot;, &quot;.join([q.question_text for q in latest_question_list])</div><div class="line">	# return HttpResponse(output)</div><div class="line">	template = loader.get_template(&apos;polls/index.html&apos;)</div><div class="line">	context = &#123;</div><div class="line">		&apos;latest_question_list&apos;: latest_question_list</div><div class="line">	&#125;</div><div class="line">	return HttpResponse(template.render(context,request))</div></pre></td></tr></table></figure>
-</li>
-<li><p>更简便的方法：render()</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">from django.shortcuts import render</div><div class="line">from django.http import HttpResponse</div><div class="line">from django.template import loader</div><div class="line"># Create your views here.</div><div class="line">from .models import Question</div><div class="line">def hello(request):</div><div class="line">	latest_question_list = Question.objects.order_by(&apos;-pub_date&apos;)[:5]</div><div class="line">	# output = &quot;, &quot;.join([q.question_text for q in latest_question_list])</div><div class="line">	# return HttpResponse(output)</div><div class="line">	# template = loader.get_template(&apos;polls/index.html&apos;)</div><div class="line">	context = &#123;</div><div class="line">		&apos;latest_question_list&apos;: latest_question_list</div><div class="line">	&#125;</div><div class="line">	# return HttpResponse(template.render(context,request))</div><div class="line">	return render(request,&apos;polls/index.html&apos;,context)#三个参数，请求对象，模板，字典（可选）</div></pre></td></tr></table></figure>
-</li>
-<li><p>处理404，修改视图函数</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">from django.http import Http404</div><div class="line">def detail(request,id):</div><div class="line">	try:</div><div class="line">		question = Question.objects.get(pk=id)</div><div class="line">	except Question.DoesNotExist:</div><div class="line">		raise Http404(&quot;question does not exist&quot;)</div><div class="line">	return HttpResponse(&quot;you are looking at %s&quot; %id)</div></pre></td></tr></table></figure>
-</li>
-<li><p>更简便的方法：get_object_or_404()</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">from django.shortcuts import render,get_object_or_404</div><div class="line">def detail(request,id):</div><div class="line">	# try:</div><div class="line">	# 	question = Question.objects.get(pk=id)</div><div class="line">	# except Question.DoesNotExist:</div><div class="line">	# 	raise Http404(&quot;question does not exist&quot;)</div><div class="line">	question = get_object_or_404(Question,pk=id)</div><div class="line">	return HttpResponse(&quot;you are looking at %s&quot; %question)</div></pre></td></tr></table></figure>
-</li>
-<li><p>使用模板 polls/templates/polls/detail.html,修改detail的视图函数</p>
-</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt; h1&gt;&#123;&#123; question.question_text &#125;&#125;&lt; /h1&gt;</div><div class="line">&lt; ul&gt;</div><div class="line">&#123;% for choice in question.choice_set.all %&#125;</div><div class="line">    &lt; li&gt;&#123;&#123; choice.choice_text &#125;&#125;&lt;/ li&gt;</div><div class="line">&#123;% endfor %&#125;</div><div class="line">&lt;/ ul&gt;</div><div class="line">--</div></pre></td></tr></table></figure>
-<ul>
-<li>修改模板中的硬编码url</li>
-</ul>
-<pre><code>
-<li><a href="{% url 'detail' question.id %}">{{ question.question_text }}</a></li>
-</code></pre>
-
-<p>好处:方便路由管理</p>
-<ul>
-<li>添加命名空间，区分url</li>
-</ul>
-<p>1    在polls/urls.py中添加app_name=”polls”</p>
-<p>2    修改<pre><code><li>&lt;a href=”{% url 'polls:detail' question.id %}“&gt;{{ question.question_text }}&lt;    /a&gt;</li></code></pre></p>
-<h2 id="第四部分"><a href="#第四部分" class="headerlink" title="第四部分"></a>第四部分</h2><ul>
-<li><p>处理表单,polls/templates/polls/detail.html</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">&lt;h1&gt;&#123;&#123; question.question_text &#125;&#125;&lt;/h1&gt;</div><div class="line"></div><div class="line">&#123;% if error_message %&#125;&lt;	p&gt;&lt;	strong&gt;&#123;&#123; error_message &#125;&#125;&lt;	/strong&gt;&lt;	/p&gt;&#123;% endif %&#125;</div><div class="line"></div><div class="line">&lt; form action=&quot;&#123;% url &apos;polls:vote&apos; question.id %&#125;&quot; method=&quot;post&quot;&gt;</div><div class="line">&#123;% csrf_token %&#125;</div><div class="line">&#123;% for choice in question.choice_set.all %&#125;</div><div class="line">    &lt; input type=&quot;radio&quot; name=&quot;choice&quot; id=&quot;choice&#123;&#123; forloop.counter &#125;&#125;&quot; value=&quot;&#123;&#123; choice.id &#125;&#125;&quot; /&gt;</div><div class="line">    &lt; label for=&quot;choice&#123;&#123; forloop.counter &#125;&#125;&quot;&gt;&#123;&#123; choice.choice_text &#125;&#125;&lt; /label&gt;&lt; br /&gt;</div><div class="line">&#123;% endfor %&#125;</div><div class="line">&lt; input type=&quot;submit&quot; value=&quot;Vote&quot; /&gt;</div><div class="line">&lt; /form&gt;</div></pre></td></tr></table></figure>
-</li>
-<li><p>修改视图函数vote</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">from django.shortcuts import get_object_or_404, render</div><div class="line">from django.http import HttpResponseRedirect, HttpResponse</div><div class="line">from django.core.urlresolvers import reverse</div><div class="line"></div><div class="line">from .models import Choice, Question</div><div class="line"># ...</div><div class="line">def vote(request, id):</div><div class="line">    question = get_object_or_404(Question, pk=id)</div><div class="line">    try:</div><div class="line">        selected_choice = question.choice_set.get(pk=request.POST[&apos;choice&apos;])</div><div class="line">    except (KeyError, Choice.DoesNotExist):</div><div class="line">        # Redisplay the question voting form.</div><div class="line">        return render(request, &apos;polls/detail.html&apos;, &#123;</div><div class="line">            &apos;question&apos;: question,</div><div class="line">            &apos;error_message&apos;: &quot;You didn&apos;t select a choice.&quot;,</div><div class="line">        &#125;)</div><div class="line">    else:</div><div class="line">        selected_choice.votes += 1</div><div class="line">        selected_choice.save()</div><div class="line">        # Always return an HttpResponseRedirect after successfully dealing</div><div class="line">        # with POST data. This prevents data from being posted twice if a</div><div class="line">        # user hits the Back button.</div><div class="line">        return HttpResponseRedirect(reverse(&apos;polls:results&apos;, args=(question.id,)))</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="第五部分–编写测试文件"><a href="#第五部分–编写测试文件" class="headerlink" title="第五部分–编写测试文件"></a>第五部分–编写测试文件</h2><h2 id="第六部分–定制app样式"><a href="#第六部分–定制app样式" class="headerlink" title="第六部分–定制app样式"></a>第六部分–定制app样式</h2><p>写在页面或者link加载<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&#123;% load staticfiles %&#125;</div><div class="line"></div><div class="line">&lt; link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;&#123;% static &apos;polls/style.css&apos; %&#125;&quot; /&gt;</div></pre></td></tr></table></figure></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2130,7 +2033,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">32</span>
+                <span class="site-state-item-count">35</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2152,7 +2055,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">19</span>
+                <span class="site-state-item-count">21</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -2194,7 +2097,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2019</span>
+  <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

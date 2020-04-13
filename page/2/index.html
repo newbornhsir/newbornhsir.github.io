@@ -283,6 +283,351 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/22/vue笔记day4-响应式实现-md/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="newbornhsir">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="我的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/04/22/vue笔记day4-响应式实现-md/" itemprop="url">vue笔记day4-响应式实现.md</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-22T09:33:58+08:00">
+                2019-04-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="vue响应式的实现原理"><a href="#vue响应式的实现原理" class="headerlink" title="vue响应式的实现原理"></a>vue响应式的实现原理</h2><p>vue通过Object.defineProperty将对象设置成为响应式，通过Dep收集依赖，在数据发生变化的时候通知订阅的watcher进行更新。</p>
+<h3 id="响应式对象"><a href="#响应式对象" class="headerlink" title="响应式对象"></a>响应式对象</h3><p>Object.defineProperty(obj, prop, descriptor)可以定义属性的get和set方法，用来检测数据访问和变动</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">var obj = &#123;&#125;, val = &apos;custom&apos;;</div><div class="line">Object.defineProperty(obj,&apos;name&apos;, &#123;</div><div class="line">  configurable: true,</div><div class="line">  enumerable: true,</div><div class="line">  get: function () &#123;</div><div class="line">    return val</div><div class="line">  &#125;,</div><div class="line">  set: function (newVal) &#123;</div><div class="line">    val = newVal</div><div class="line">  &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<h3 id="Dep和Watcher"><a href="#Dep和Watcher" class="headerlink" title="Dep和Watcher"></a>Dep和Watcher</h3><p>dep是依赖收集器，有三个基本方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div></pre></td><td class="code"><pre><div class="line">class Dep &#123;</div><div class="line">    /*</div><div class="line">     * 某一个主体对象的依赖收集器，可以有多个观察者对其感兴趣，</div><div class="line">     * 实际上是defineReactive中data[key]抽象出来的管理类，用来处理依赖，减少耦合</div><div class="line">     * 发布订阅的变体，data可以发布，可以订阅</div><div class="line">     * 当主体发生改变的时候，可以通知相对应的观察者更新</div><div class="line">     * 因此其有三个基本的方法，添加观察者，移除观察者，提醒更新</div><div class="line">     */</div><div class="line">    constructor () &#123;</div><div class="line">        this.subs = [];</div><div class="line">    &#125;</div><div class="line">    addSub (watcher) &#123;</div><div class="line">        if (this.subs.indexOf(watcher) === -1) &#123;</div><div class="line">            // 避免重复添加</div><div class="line">            this.subs.push(watcher);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    removeSub (watcher) &#123;</div><div class="line">        this.subs.splice(this.subs.indexOf(watcher), 1);</div><div class="line">    &#125;</div><div class="line">    notify () &#123;</div><div class="line">        console.log(this.subs);</div><div class="line">        this.subs.forEach(sub =&gt; sub.update());</div><div class="line">    &#125;</div><div class="line">    depend () &#123;</div><div class="line">        /*</div><div class="line">         * 通过target，来建立Watcher和Dep之间的联系，将watcher添加到subs数组中去</div><div class="line">         */</div><div class="line">        if (Dep.target) &#123;</div><div class="line">            Dep.target.addDep(this);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">// 通过此属性，标示访问为watcher访问，用来收集依赖</div><div class="line">Dep.target = null</div><div class="line">class Watcher &#123;</div><div class="line">    /*</div><div class="line">     * 观察者，对某一目标主体感兴趣，在目标主体发生变化的时候会update</div><div class="line">     */</div><div class="line">    constructor (obj, expOrFn, cb) &#123;</div><div class="line">        /** expOrFn: a.b.c或者函数的情况 */</div><div class="line">        this.obj = obj;</div><div class="line">        this.getter = parsePath(expOrFn)</div><div class="line">        this.get();</div><div class="line">        this.cb = cb</div><div class="line">    &#125;</div><div class="line">    update () &#123;</div><div class="line">        if (this.cb) this.cb.call(this.obj, this.obj)</div><div class="line">    &#125;</div><div class="line">    addDep (dep) &#123;</div><div class="line">        dep.addSub(this);</div><div class="line">    &#125;</div><div class="line">    get () &#123;</div><div class="line">        Dep.target = this;</div><div class="line">        let val = this.getter.call(this.obj, this.obj)</div><div class="line">        Dep.target = null;</div><div class="line">        return val;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="模拟实现vue响应式"><a href="#模拟实现vue响应式" class="headerlink" title="模拟实现vue响应式"></a>模拟实现vue响应式</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div></pre></td><td class="code"><pre><div class="line">data = &#123;</div><div class="line">  name: &quot;hello, world&quot;,</div><div class="line">  obj: &#123;</div><div class="line">    name: &quot;obj&quot;,</div><div class="line">    message: &quot;msg&quot;</div><div class="line">  &#125;</div><div class="line">&#125;;</div><div class="line">// 定义重新定义get, set使对象变成响应式</div><div class="line">function defineReactive(obj, key, value) &#123;</div><div class="line">  if (typeof value == &quot;object&quot;)&#123;</div><div class="line">    observe(value)</div><div class="line">  &#125;</div><div class="line">  // 这样每一个数据都有自己的dep，当数据改动放的时候，就可以通知dep中的订阅者update</div><div class="line">  var dep = new Dep()</div><div class="line">  Object.defineProperty(obj, key, &#123;</div><div class="line">    enumerable: true,</div><div class="line">    configurable: true,</div><div class="line">    get: function () &#123;</div><div class="line">      console.log(Dep.target);</div><div class="line">      console.log(&quot;get&quot;);</div><div class="line">      // 存在target的时候是target调用，需要添加依赖</div><div class="line">      if (Dep.target) &#123;</div><div class="line">        // console.log(this);</div><div class="line">        // dep.addSub(Dep.target)</div><div class="line">        dep.depend()</div><div class="line">      &#125;</div><div class="line">      return value</div><div class="line">    &#125;,</div><div class="line">    set: function (newVal) &#123;</div><div class="line">      console.log(&apos;set&apos;);</div><div class="line">      if (value != newVal) &#123;</div><div class="line">        value = newVal;</div><div class="line">        dep.notify()</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;)</div><div class="line">&#125;</div><div class="line">function Observe(value) &#123;</div><div class="line">  var keys = Object.keys(value);</div><div class="line">  for(var i=0; i&lt;keys.length; i++)&#123;</div><div class="line">    defineReactive(value, keys[i], value[keys[i]])</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line">function observe(value) &#123;</div><div class="line">  return new Observe(value)</div><div class="line">&#125;</div><div class="line">// 收集数据的变化, 当数据变化的时候触发notify</div><div class="line">function Dep() &#123;</div><div class="line">  this.subs = [];</div><div class="line">  this.addSub = function (sub) &#123;</div><div class="line">    this.subs.push(sub)</div><div class="line">  &#125;;</div><div class="line">  this.notify = function () &#123;</div><div class="line">    this.subs.forEach(function (sub) &#123;</div><div class="line">      sub.update();</div><div class="line">    &#125;)</div><div class="line">  &#125;;</div><div class="line">  // target来确定是否存在watcher,普通的获取并不会添加依赖</div><div class="line">  this.target = null;</div><div class="line">  this.depend = function()&#123;</div><div class="line">    if (Dep.target) &#123;</div><div class="line">      // dep.depend在defineReactive中由dep调用，所以这里的this指向dep实例</div><div class="line">      // dep,target是Watcher实例，因此Watcher中就可以进一步判断，</div><div class="line">      // 并且在dep中添加watcher订阅</div><div class="line">      Dep.target.addDep(this)</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">&#125;</div><div class="line">// watcher</div><div class="line">function Watcher(obj,expression, cb) &#123;</div><div class="line">  // 由dep实例调用</div><div class="line">  this.addDep = function (dep) &#123;</div><div class="line">    dep.addSub(this)</div><div class="line">  &#125;;</div><div class="line">  this.get = function () &#123;</div><div class="line">    Dep.target = this;</div><div class="line">    var val = this.obj[expression]</div><div class="line">    Dep.target = null;</div><div class="line">    return val</div><div class="line">  &#125;;</div><div class="line"></div><div class="line">  // 触发一次get，将watcher添加到dep中</div><div class="line">  this.obj = obj;</div><div class="line">  this.value = this.get();</div><div class="line">  this.update = function () &#123;</div><div class="line">    console.log(&quot;updated&quot;);</div><div class="line">    cb.call(obj, obj)</div><div class="line">  &#125;;</div><div class="line"></div><div class="line">&#125;</div><div class="line">observe(data);</div><div class="line"></div><div class="line">function cb() &#123;</div><div class="line">  console.log(&quot;cb is called&quot;)</div><div class="line">&#125;</div><div class="line">function cb2() &#123;</div><div class="line">  console.log(&apos;cb2&apos;)</div><div class="line">&#125;</div><div class="line">// 会出现重复添加</div><div class="line">/*</div><div class="line">vue中的处理</div><div class="line">addDep (dep: Dep) &#123;</div><div class="line">   const id = dep.id</div><div class="line">  // 已经添加过就不会重复添加</div><div class="line">   if (!this.newDepIds.has(id)) &#123;</div><div class="line">     this.newDepIds.add(id)</div><div class="line">     this.newDeps.push(dep)</div><div class="line">     if (!this.depIds.has(id)) &#123;</div><div class="line">       dep.addSub(this)</div><div class="line">     &#125;</div><div class="line">   &#125;</div><div class="line">&#125;</div><div class="line">*/</div><div class="line"></div><div class="line">new Watcher(data, &apos;name&apos;, cb);</div><div class="line">new Watcher(data, &apos;name&apos;, cb);</div><div class="line">new Watcher(data.obj, &apos;name&apos;, cb2)</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/17/go语言day1-基础语法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="newbornhsir">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="我的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/04/17/go语言day1-基础语法/" itemprop="url">go语言day1-基础语法</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-17T21:30:47+08:00">
+                2019-04-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="go语言基础语法"><a href="#go语言基础语法" class="headerlink" title="go语言基础语法"></a>go语言基础语法</h2><h3 id="变量定义"><a href="#变量定义" class="headerlink" title="变量定义"></a>变量定义</h3><h3 id="内建变量类型"><a href="#内建变量类型" class="headerlink" title="内建变量类型"></a>内建变量类型</h3><h3 id="常量和枚举"><a href="#常量和枚举" class="headerlink" title="常量和枚举"></a>常量和枚举</h3><h3 id="条件语句"><a href="#条件语句" class="headerlink" title="条件语句"></a>条件语句</h3><h3 id="循环语句"><a href="#循环语句" class="headerlink" title="循环语句"></a>循环语句</h3><h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><h3 id="指针"><a href="#指针" class="headerlink" title="指针"></a>指针</h3>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/15/爬虫之xpath-md/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="newbornhsir">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="我的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/04/15/爬虫之xpath-md/" itemprop="url">爬虫之xpath.md</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-15T19:23:08+08:00">
+                2019-04-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>抓取网页之后需要解析html文本，提取出自己想要的数据。常用的有</p>
+<ul>
+<li>HTMLParser</li>
+<li>BeautifulSoup</li>
+<li>xpath</li>
+</ul>
+<h2 id="xpath"><a href="#xpath" class="headerlink" title="xpath"></a>xpath</h2><h2 id="python中使用xpath"><a href="#python中使用xpath" class="headerlink" title="python中使用xpath"></a>python中使用xpath</h2>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/03/webpack01-md/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -409,7 +754,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/25/observer-md/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/25/从发布订阅到观察者模式/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="newbornhsir">
@@ -428,7 +773,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/03/25/observer-md/" itemprop="url">observer.md</a></h1>
+                <a class="post-title-link" href="/2018/03/25/从发布订阅到观察者模式/" itemprop="url">observer.md</a></h1>
         
 
         <div class="post-meta">
@@ -523,7 +868,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/25/从发布订阅到观察者模式/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/25/observer-md/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="newbornhsir">
@@ -542,7 +887,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/03/25/从发布订阅到观察者模式/" itemprop="url">observer.md</a></h1>
+                <a class="post-title-link" href="/2018/03/25/observer-md/" itemprop="url">observer.md</a></h1>
         
 
         <div class="post-meta">
@@ -1186,536 +1531,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/08/vue笔记1-源码初步分析-md/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="newbornhsir">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="我的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/03/08/vue笔记1-源码初步分析-md/" itemprop="url">vue笔记1-源码初步分析.md</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-08T21:58:51+08:00">
-                2018-03-08
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/vue/" itemprop="url" rel="index">
-                    <span itemprop="name">vue</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="Vue-的初始化过程"><a href="#Vue-的初始化过程" class="headerlink" title="Vue 的初始化过程"></a>Vue 的初始化过程</h2><p>st=&gt;start: 开始<br>e=&gt;end: 结束<br>op1=&gt;operation: 新品开发流程<br>op2=&gt;operation: 产品需求提出<br>op3=&gt;operation: 产品试用 负责人：吴xx<br>op4=&gt;operation: 包装<br>op5=&gt;parallel: 继续讨论<br>op6=&gt;operation: 讨论<br>cond=&gt;condition: 确认？</p>
-<p>st-&gt;op1-&gt;op2-&gt;op3-&gt;cond<br>cond(yes)-&gt;op4-&gt;e<br>cond(no)-&gt;op6-&gt;e</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/23/virtualenv的使用-md/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="newbornhsir">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="我的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/11/23/virtualenv的使用-md/" itemprop="url">virtualenv的使用.md</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-23T17:30:10+08:00">
-                2017-11-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>virtualenv用来搭建python的开发环境</p>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p><code>pip install virtualenv</code></p>
-<h2 id="创建环境目录"><a href="#创建环境目录" class="headerlink" title="创建环境目录"></a>创建环境目录</h2><p><code>virtualenv ENV</code> </p>
-<p>ENV是虚拟开发环境的目录，命令的作用:</p>
-<ol>
-<li>创建<code>ENV/lib/</code> 和 <code>ENV/include/</code> 目录, 目录包含新的开发环境所支持的library. 开发环境下安装的包会放在 <code>ENV/lib/pythonX.X/site-packages/</code>目录。</li>
-<li><code>ENV/bin</code> is created, where executables live - noticeably a new python. Thus running a script with #! /path/to/ENV/bin/python would run that script under this virtualenv’s python.</li>
-<li>虚拟环境下安装了<code>pip</code> and <code>setuptools</code> . This associated pip can be run from ENV/bin/pip.</li>
-</ol>
-<h2 id="激活环境"><a href="#激活环境" class="headerlink" title="激活环境"></a>激活环境</h2><p><code>source bin/activate</code></p>
-<p>激活成功后，命令行提示符前出现目录名称</p>
-<h2 id="取消激活"><a href="#取消激活" class="headerlink" title="取消激活"></a>取消激活</h2><p><code>deactivate</code></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/02/react-navigation/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="newbornhsir">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="我的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/11/02/react-navigation/" itemprop="url">react-navigation的使用</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-02T14:57:50+08:00">
-                2017-11-02
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p><a href="https://reactnavigation.org/docs/navigators/stack" target="_blank" rel="external">官方文档</a></p>
-<h2 id="路由分类"><a href="#路由分类" class="headerlink" title="路由分类"></a>路由分类</h2><ul>
-<li><a href="#stack">StackNavigator</a></li>
-<li><a href="#tab">TabNavigator</a></li>
-<li><a href="#drawer">DrawerNavigator</a></li>
-</ul>
-<h3 id="statck">StackNavigatorConfig</h3>
-
-<p>使用</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div></pre></td><td class="code"><pre><div class="line">import &#123;StackNavigator&#125; from &apos;react-navigation&apos;;</div><div class="line"></div><div class="line">const App = StackNavigator(routerConfig,StackNavigatorConfig)</div><div class="line"></div><div class="line">// routerConfig</div><div class="line">&#123;</div><div class="line">    pathName: &#123;</div><div class="line">        screen: screenName,</div><div class="line">        path: &apos;&apos;,</div><div class="line">        navigationOptions: (&#123;navigator&#125;)=&gt;(&#123;</div><div class="line">                // navigationOptions config</div><div class="line">            &#125;)</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">//StackNavigatorConfig</div><div class="line"></div><div class="line">&#123;</div><div class="line">    // 路由配置</div><div class="line">    initialRouteName: &apos;&apos;,//默认显示的路由，不配置则默认为路由配置中的第一个</div><div class="line">    initialRouteParams: &#123;&#125;,</div><div class="line">    navigationOptions: (&#123;navigator&#125;)=&gt;(&#123;</div><div class="line">        title: &apos;headetitle&apos;,</div><div class="line">        // null/React Element/ function that given HeaderProps returns a React Element</div><div class="line">        header: null,</div><div class="line">        //react Element/ string</div><div class="line">        headerTitle: ,</div><div class="line">        headerLeft: ,//react element</div><div class="line">        headerStyle: &#123;&#125;,//style Obj</div><div class="line">        headerTitleStyle: &#123;&#125;, // style Obj for title component</div><div class="line">        headerTintColor: &apos;#ccc&apos;, // tint color</div><div class="line">        ....</div><div class="line">    &#125;),</div><div class="line">    path: ,//A mapping of overrides for the paths set in the route configs</div><div class="line">    // 视觉显示配置</div><div class="line">    mode: &apos;card&apos;,//card/modal, default is card</div><div class="line">    // 配置了一下headerMode,没看到太大差别，除了none的时候不现实header，文档说float在ios常见，screen在android常见</div><div class="line">    headerMode: &apos;float&apos;,// float/screen/none</div><div class="line">    cardStyle: ,//</div><div class="line">    // 函数：传递一下三个参数,transitionProps,prevtransitionProps,isModal,返回一个和默认过渡效果配置的对象</div><div class="line">    transitionConfig: ()=&gt;&#123;&#125;,</div><div class="line">    onTransitionStart: ()=&gt;&#123;&#125;,</div><div class="line">    onTransitionEnd; ()=&gt;&#123;&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"> // Navigator Props </div><div class="line">// StackNavigator创建的导航可以通过screenProps向子视图传递额外的数据</div><div class="line"></div><div class="line">const SomeStack = StackNavigator(&#123;</div><div class="line">  // config</div><div class="line">&#125;);</div><div class="line"></div><div class="line">&lt;SomeStack</div><div class="line">  screenProps=&#123;/* this prop will get passed to the screen components as this.props.screenProps */&#125;</div><div class="line">/&gt;</div></pre></td></tr></table></figure>
-<h3 id="tab">TabNavigator</h3>
-
-<p>API : TabNavigator(routerconfig,TabNavigatorConfig)</p>
-<h4 id="routerconfig"><a href="#routerconfig" class="headerlink" title="routerconfig"></a>routerconfig</h4><p>和StackNavigator一致</p>
-<h4 id="TabNavigatorConfig"><a href="#TabNavigatorConfig" class="headerlink" title="TabNavigatorConfig"></a>TabNavigatorConfig</h4><ul>
-<li>tabBarComponent: default: TabBarBottom in ios, TabBarTop in android</li>
-<li>tabBarPosition: ‘top’ or ‘bottom’</li>
-<li>swipeEnable: 是否可以滑动切换</li>
-<li>animationEnable: 切换是否有动画</li>
-<li>lazy: 是否lazy渲染</li>
-<li>initiallayout:</li>
-<li><p>tabBarOptions: 如下</p>
-<ol>
-<li>initialRouteName</li>
-<li>order</li>
-<li>paths</li>
-<li><p>backBehavior</p>
-<h5 id="tabBarBottom"><a href="#tabBarBottom" class="headerlink" title="tabBarBottom"></a>tabBarBottom</h5></li>
-<li><p>activeTintColor</p>
-</li>
-<li>activebackgroundColor</li>
-<li>inactiveTintColor</li>
-<li>inactiveBackgroundColor</li>
-<li>showLabel</li>
-<li>style</li>
-<li>backgroundColor</li>
-<li>labelStyle</li>
-<li>tabStyle</li>
-<li><p>allowFontScaling</p>
-<h5 id="tabBarTop"><a href="#tabBarTop" class="headerlink" title="tabBarTop"></a>tabBarTop</h5></li>
-<li><p>activeTintColor</p>
-</li>
-<li>inactiveTintColor</li>
-<li>showIcon</li>
-<li>showLabel</li>
-<li>upperCaseLabel</li>
-<li>pressColor</li>
-<li>pressOpacity</li>
-<li>scrollEnable</li>
-<li>tabStyle</li>
-<li>indicatorStyle</li>
-<li>labelStyle</li>
-<li>iconStyle</li>
-<li>style</li>
-<li>allowFontScaling</li>
-</ol>
-</li>
-<li><p>navigationOptions: 如下</p>
-<ol>
-<li>title</li>
-<li>tabBarVisible</li>
-<li>tabBaricon</li>
-<li>tabBarLabel</li>
-<li>tabBarOnPress</li>
-</ol>
-</li>
-</ul>
-<h3 id="drawer">Drawernavigator</h3>
-
-<p>目前未用到，用法见官方文档。</p>
-<h2 id="Screen-Navigation-Prop"><a href="#Screen-Navigation-Prop" class="headerlink" title="Screen Navigation Prop"></a>Screen Navigation Prop</h2><p>props.navigation 接受一下4个prop</p>
-<ol>
-<li>navigate(router,params,action)</li>
-</ol>
-<p>路径，参数，The sub-action to run in the child router, if the screen is a navigator</p>
-<ol>
-<li>state</li>
-</ol>
-<p>Object: {routeName:’’,key:’’,params:{}}</p>
-<ol>
-<li>setParams</li>
-</ol>
-<p>更改路由中参数</p>
-<ol>
-<li>goBack()</li>
-</ol>
-<p>goBack(“screen”||null)</p>
-<ol>
-<li>dispatch</li>
-</ol>
-<p>send an action to the router </p>
-<h2 id="Navigation-Action"><a href="#Navigation-Action" class="headerlink" title="Navigation Action"></a>Navigation Action</h2><h3 id="Navigate"><a href="#Navigate" class="headerlink" title="Navigate"></a>Navigate</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">import &#123; NavigationActions &#125; from &apos;react-navigation&apos;</div><div class="line"></div><div class="line">const navigateAction = NavigationActions.navigate(&#123;</div><div class="line"></div><div class="line">  routeName: &apos;Profile&apos;,// 在app中注册过的目标路由</div><div class="line"></div><div class="line">  params: &#123;&#125;, // Object, 传递到目标路由的参数</div><div class="line"></div><div class="line">  // Object: The sub-action to run in the child router, if the screen is a navigator</div><div class="line"></div><div class="line">  action: NavigationActions.navigate(&#123; routeName: &apos;SubProfileRoute&apos;&#125;)</div><div class="line">&#125;)</div><div class="line"></div><div class="line">this.props.navigation.dispatch(navigateAction)</div></pre></td></tr></table></figure>
-<h3 id="Reset"><a href="#Reset" class="headerlink" title="Reset"></a>Reset</h3><ul>
-<li>index - number - required - Index of the active route on routes array in navigation state.</li>
-<li>actions - array - required - Array of Navigation Actions that will replace the navigation state.</li>
-<li>key - string or null - optional - If set, the navigator with the given key will reset. If null, the root navigator will reset.</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">import &#123; NavigationActions &#125; from &apos;react-navigation&apos;</div><div class="line"></div><div class="line">const resetAction = NavigationActions.reset(&#123;</div><div class="line">  index: 0,</div><div class="line">  actions: [</div><div class="line">    NavigationActions.navigate(&#123; routeName: &apos;Profile&apos;&#125;)</div><div class="line">  ]</div><div class="line">&#125;)</div><div class="line">this.props.navigation.dispatch(resetAction)</div></pre></td></tr></table></figure>
-<h3 id="Back"><a href="#Back" class="headerlink" title="Back"></a>Back</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">import &#123; NavigationActions &#125; from &apos;react-navigation&apos;</div><div class="line"></div><div class="line">const backAction = NavigationActions.back(&#123;</div><div class="line">    //string or null - optional - If set, navigation will go back from the given key. If null, navigation will go back anywhere.</div><div class="line">  key: &apos;Profile&apos;</div><div class="line">&#125;)</div><div class="line">this.props.navigation.dispatch(backAction)</div></pre></td></tr></table></figure>
-<h3 id="SetParams"><a href="#SetParams" class="headerlink" title="SetParams"></a>SetParams</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">import &#123; NavigationActions &#125; from &apos;react-navigation&apos;</div><div class="line"></div><div class="line">const setParamsAction = NavigationActions.setParams(&#123;</div><div class="line">  params: &#123; title: &apos;Hello&apos; &#125;,//Object</div><div class="line">  key: &apos;screen-123&apos;,//string - required - Route key that should get the new params</div><div class="line"></div><div class="line">&#125;)</div><div class="line">this.props.navigation.dispatch(setParamsAction)</div></pre></td></tr></table></figure>
-<h2 id="Router"><a href="#Router" class="headerlink" title="Router"></a>Router</h2><p>routers 定义一个组件的navigation的state,允许开发者定义可处理的route和action.</p>
-<h3 id="build-in-routers"><a href="#build-in-routers" class="headerlink" title="build-in routers"></a>build-in routers</h3><ul>
-<li>StackRouter</li>
-</ul>
-<p>api: StackRouter(routerconfig,stackconfig)</p>
-<p>routerconfig:</p>
-<ol>
-<li><p>path; Specify the screen component or child navigator</p>
-</li>
-<li><p>screen: Specify the screen component or child navigator</p>
-</li>
-<li><p>getScreen(): Set a lazy getter for a screen component (but not navigators)</p>
-</li>
-</ol>
-<p>stackconfig</p>
-<ol>
-<li>initialRouteName</li>
-<li>initialRouteParams</li>
-<li>paths - 可更改routerconfig中的path</li>
-</ol>
-<ul>
-<li>TabRouter</li>
-</ul>
-<p>api: StackRouter(routerconfig,tabconfig)</p>
-<p>routerconfig:</p>
-<ol>
-<li><p>path; Specify the screen component or child navigator</p>
-</li>
-<li><p>screen: Specify the screen component or child navigator</p>
-</li>
-<li><p>getScreen(): Set a lazy getter for a screen component (but not navigators)</p>
-</li>
-</ol>
-<p>tabconfig</p>
-<ol>
-<li>initialRouteName</li>
-<li>order - Array of routeNames which defines the order of the tabs</li>
-<li>paths - 可更改routerconfig中的path</li>
-<li>backbehavior - Should the back button cause a tab switch to the initial tab? If yes, set to initialRoute, otherwise none. Defaults to initialRoute behavior.</li>
-</ol>
-<p>use</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">class MyNavigator extends React.Component &#123;</div><div class="line">    static router = StackRouter(routes, config);</div><div class="line">    ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="custom-router-API"><a href="#custom-router-API" class="headerlink" title="custom router API"></a>custom router API</h3><image src="https://reactnavigation.org/assets/routers-concept-map.png"> 
-
-<h4 id="getStateForAction-action-state"><a href="#getStateForAction-action-state" class="headerlink" title="getStateForAction(action, state)"></a>getStateForAction(action, state)</h4><p>定义所给action的state。函数在传入props.navigation.dispatch()的时候调用。返回</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    index: 0,</div><div class="line">    routers: [</div><div class="line">        &#123;</div><div class="line">            routerName: &apos;name&apos;,</div><div class="line">            ...</div><div class="line">        &#125;</div><div class="line">        ...</div><div class="line">    ]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h4 id="getComponentForRouteName-routename"><a href="#getComponentForRouteName-routename" class="headerlink" title="getComponentForRouteName(routename)"></a>getComponentForRouteName(routename)</h4><p>返回所给路由的子组件或者导航</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  index: 1,</div><div class="line">  routes: [</div><div class="line">    &#123; key: &apos;A&apos;, routeName: &apos;Foo&apos; &#125;,</div><div class="line">    &#123; key: &apos;B&apos;, routeName: &apos;Bar&apos; &#125;,</div><div class="line">  ],</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h4 id="getComponentForState-state"><a href="#getComponentForState-state" class="headerlink" title="getComponentForState(state)"></a>getComponentForState(state)</h4><p>Returns the active component for a deep navigation state.</p>
-<h4 id="getActionForPathAndParams-path-params"><a href="#getActionForPathAndParams-path-params" class="headerlink" title="getActionForPathAndParams(path, params)"></a>getActionForPathAndParams(path, params)</h4><p>Returns an optional navigation action that should be used when the user navigates to this path and provides optional query parameters.</p>
-<h4 id="getPathAndParamsForState-state"><a href="#getPathAndParamsForState-state" class="headerlink" title="getPathAndParamsForState(state)"></a>getPathAndParamsForState(state)</h4><p>Returns the path and params that can be put into the URL to link the user back to the same spot in the app.<br>The path/params that are output from this should form an action when passed back into the router’s getActionForPathAndParams. That action should take you to a similar state once passed through getStateForAction.</p>
-<h4 id="getScreenOptions-navigation-screenProps"><a href="#getScreenOptions-navigation-screenProps" class="headerlink" title="getScreenOptions(navigation, screenProps)"></a>getScreenOptions(navigation, screenProps)</h4><p>Used to retrieve the navigation options for a screen. Must provide the screen’s current navigation prop and optionally, other props that your navigation options may need to consume.</p>
-<ul>
-<li>navigation - This is the navigation prop that the screen will use, where the state refers to the screen’s route/state. Dispatch will trigger actions in the context of that screen.</li>
-<li>screenProps - Other props that your navigation options may need to consume</li>
-<li>navigationOptions - The previous set of options that are default or provided by the previous configurer<br>Inside an example view, perhaps you need to fetch the configured title:</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">// First, prepare a navigation prop for your child, or re-use one if already available.</div><div class="line">const screenNavigation = addNavigationHelpers(&#123;</div><div class="line">  // In this case we use navigation.state.index because we want the title for the active route.</div><div class="line">  state: navigation.state.routes[navigation.state.index],</div><div class="line">  dispatch: navigation.dispatch,</div><div class="line">&#125;);</div><div class="line">const options = this.props.router.getScreenOptions(screenNavigation, &#123;&#125;);</div><div class="line">const title = options.title;</div></pre></td></tr></table></figure>
-<h3 id="custom-navigation-actions"><a href="#custom-navigation-actions" class="headerlink" title="custom navigation actions"></a>custom navigation actions</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">const MyApp = StackNavigator(&#123;</div><div class="line">  Home: &#123; screen: HomeScreen &#125;,</div><div class="line">  Profile: &#123; screen: ProfileScreen &#125;,</div><div class="line">&#125;, &#123;</div><div class="line">  initialRouteName: &apos;Home&apos;,</div><div class="line">&#125;)</div><div class="line"></div><div class="line">const defaultGetStateForAction = MyApp.router.getStateForAction;</div><div class="line"></div><div class="line">MyApp.router.getStateForAction = (action, state) =&gt; &#123;</div><div class="line">  if (state &amp;&amp; action.type === &apos;PushTwoProfiles&apos;) &#123;</div><div class="line">    const routes = [</div><div class="line">      ...state.routes,</div><div class="line">      &#123;key: &apos;A&apos;, routeName: &apos;Profile&apos;, params: &#123; name: action.name1 &#125;&#125;,</div><div class="line">      &#123;key: &apos;B&apos;, routeName: &apos;Profile&apos;, params: &#123; name: action.name2 &#125;&#125;,</div><div class="line">    ];</div><div class="line">    return &#123;</div><div class="line">      ...state,</div><div class="line">      routes,</div><div class="line">      index: routes.length - 1,</div><div class="line">    &#125;;</div><div class="line">  &#125;</div><div class="line">  return defaultGetStateForAction(action, state);</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<h3 id="阻止-navigation-action"><a href="#阻止-navigation-action" class="headerlink" title="阻止 navigation action"></a>阻止 navigation action</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">import &#123; NavigationActions &#125; from &apos;react-navigation&apos;</div><div class="line"></div><div class="line">const MyStackRouter = StackRouter(&#123;</div><div class="line">  Home: &#123; screen: HomeScreen &#125;,</div><div class="line">  Profile: &#123; screen: ProfileScreen &#125;,</div><div class="line">&#125;, &#123;</div><div class="line">  initialRouteName: &apos;Home&apos;,</div><div class="line">&#125;)</div><div class="line"></div><div class="line">const defaultGetStateForAction = MyStackRouter.router.getStateForAction;</div><div class="line"></div><div class="line">MyStackRouter.router.getStateForAction = (action, state) =&gt; &#123;</div><div class="line">  if (</div><div class="line">    state &amp;&amp;</div><div class="line">    action.type === NavigationActions.BACK &amp;&amp;</div><div class="line">    state.routes[state.index].params.isEditing</div><div class="line">  ) &#123;</div><div class="line">    // Returning null from getStateForAction means that the action</div><div class="line">    // has been handled/blocked, but there is not a new state</div><div class="line">    return null;</div><div class="line">  &#125;</div><div class="line">  </div><div class="line">  return defaultGetStateForAction(action, state);</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<h3 id="Handling-Custom-URIs"><a href="#Handling-Custom-URIs" class="headerlink" title="Handling Custom URIs"></a>Handling Custom URIs</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">import &#123; NavigationActions &#125; from &apos;react-navigation&apos;</div><div class="line"></div><div class="line">const MyApp = StackNavigator(&#123;</div><div class="line">  Home: &#123; screen: HomeScreen &#125;,</div><div class="line">  Profile: &#123; screen: ProfileScreen &#125;,</div><div class="line">&#125;, &#123;</div><div class="line">  initialRouteName: &apos;Home&apos;,</div><div class="line">&#125;)</div><div class="line">const previousGetActionForPathAndParams = MyApp.router.getActionForPathAndParams;</div><div class="line"></div><div class="line">Object.assign(MyApp.router, &#123;</div><div class="line">  getActionForPathAndParams(path, params) &#123;</div><div class="line">    if (</div><div class="line">      path === &apos;my/custom/path&apos; &amp;&amp;</div><div class="line">      params.magic === &apos;yes&apos;</div><div class="line">    ) &#123;</div><div class="line">      // returns a profile navigate action for /my/custom/path?magic=yes</div><div class="line">      return NavigationActions.navigate(&#123;</div><div class="line">        routeName: &apos;Profile&apos;,</div><div class="line">        action: NavigationActions.navigate(&#123;</div><div class="line">          // This child action will get passed to the child router</div><div class="line">          // ProfileScreen.router.getStateForAction to get the child</div><div class="line">          // navigation state.</div><div class="line">          routeName: &apos;Friends&apos;,</div><div class="line">        &#125;),</div><div class="line">      &#125;);</div><div class="line">    &#125;</div><div class="line">    return previousGetActionForPathAndParams(path, params);</div><div class="line">  &#125;,</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-</image>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1765,7 +1580,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">32</span>
+                <span class="site-state-item-count">35</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1787,7 +1602,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">19</span>
+                <span class="site-state-item-count">21</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -1829,7 +1644,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2019</span>
+  <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
